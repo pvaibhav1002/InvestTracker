@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
             throw new DuplicateUser(user.getEmail() + " already exists.");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        System.out.println(user);
         return userRepo.save(user);
     }
 
