@@ -1,5 +1,14 @@
 package com.examly.springapp.repository;
 
-public interface FeedbackRepo {
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.examly.springapp.model.Feedback;
+
+@Repository
+public interface FeedbackRepo extends JpaRepository<Feedback,Long> {
+List<Feedback>findByUserId(Long userId);
+List<Feedback>findByInvestmentId(Long investmentId);
 }
