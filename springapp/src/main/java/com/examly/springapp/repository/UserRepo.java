@@ -1,5 +1,13 @@
 package com.examly.springapp.repository;
 
-public interface UserRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.examly.springapp.model.User;
+
+@Repository
+public interface UserRepo extends JpaRepository<User,Long> {
+    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
 
 }
