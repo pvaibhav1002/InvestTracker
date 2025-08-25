@@ -54,13 +54,13 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public List<Feedback> getFeedbacksByInvestmentId(Long investmentId) {
 
-        return feedbackRepo.findByInvestmentId(investmentId);
+        return feedbackRepo.findByInvestment_InvestmentId(investmentId);
     }
 
     @Override
     public List<Feedback> getFeedbacksByUserId(Long userId) {
 
-        return feedbackRepo.findByUserId(userId);
+        return feedbackRepo.findByUser_UserId(userId);
     }
 
 }

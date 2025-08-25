@@ -9,6 +9,6 @@ import com.examly.springapp.model.Feedback;
 
 @Repository
 public interface FeedbackRepo extends JpaRepository<Feedback,Long> {
-List<Feedback>findByUserId(Long userId);
-List<Feedback>findByInvestmentId(Long investmentId);
+List<Feedback>findByUser_UserId(Long userId);
+List<Feedback>findByInvestment_InvestmentId(Long investmentId);
 }
