@@ -1,1 +1,30 @@
-<p>user-add-inquiry works!</p>
+<div class="inquiry-container">
+    <h2>Submit Your Inquiry</h2>
+
+    <form (ngSubmit)="onSubmit()" #inquiryForm="ngForm">
+        <label for="investment">Investment</label>
+        <input type="text" id="investment" name="investment" ngModel placeholder="Enter investment">
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" ngModel placeholder="Enter your message here..."></textarea>
+
+        <label for="priority">Priority</label>
+        <select id="priority" name="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+
+        <button type="submit" [disabled]="!inquiryForm.form.valid">
+            Submit Inquiry
+        </button>
+    </form>
+
+
+    <div class="popup" *ngIf="showPopup">
+        <div class="popup-content">
+            <p>Inquiry submitted successfully!</p>
+            <button (click)="closePopup()">OK</button>
+        </div>
+    </div>
+</div>
