@@ -50,11 +50,8 @@ public class JwtUtils {
     }
 
     public String generateToken(String username, Map<String, Object> claims){
-        System.out.println("here");
-        String token = createToken(claims, username);
-        System.out.println(token);
-        return token;
-        // return createToken(claims, username);
+     
+         return createToken(claims, username);
     }
 
     private String createToken(Map<String, Object> claims, String username) {
