@@ -1,2 +1,4 @@
-export interface Login {
+class Login{
+    email:string;
+    password:str
 }
