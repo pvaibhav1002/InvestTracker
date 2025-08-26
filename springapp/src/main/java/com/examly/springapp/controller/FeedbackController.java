@@ -3,6 +3,7 @@ package com.examly.springapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.examly.springapp.model.Feedback;
@@ -22,6 +23,7 @@ public class FeedbackController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('User')")
     public ResponseEntity<Feedback> createFeedback(@RequestBody Feedback feedback) {
         Feedback createdFeedback = feedbackService.createFeedback(feedback);
         if (createdFeedback == null) {
@@ -40,6 +42,7 @@ public class FeedbackController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<List<Feedback>> getAllFeedback() {
         List<Feedback> feedbackList = feedbackService.getAllFeedbacks();
         if (feedbackList.isEmpty()) {
@@ -59,6 +62,7 @@ public class FeedbackController {
     }
 
     @GetMapping("/user/{userId}")
+    @PreAuthorize("hasRole('User')")
     public ResponseEntity<List<Feedback>> getFeedbackByUserId(@PathVariable Long userId) {
         List<Feedback> feedbackList = feedbackService.getFeedbacksByUserId(userId);
         if (feedbackList.isEmpty()) {
