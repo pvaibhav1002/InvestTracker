@@ -19,7 +19,7 @@ public class UserPrinciple implements UserDetails {
     public UserPrinciple(User user) {
         this.username = user.getEmail();
         this.password = user.getPassword();
-        this.authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getUserRole()));
+        this.authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+user.getUserRole()));
     }
 
     @Override
