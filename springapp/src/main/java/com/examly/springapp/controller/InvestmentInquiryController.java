@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ public class InvestmentInquiryController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('User')")
     public ResponseEntity<InvestmentInquiry> addInvestmentInquiry(@RequestBody InvestmentInquiry investmentinquiry) {
         InvestmentInquiry newInvest = investmentInquiryService.createInquiry(investmentinquiry);
         if (newInvest == null) {
@@ -45,12 +47,13 @@ public class InvestmentInquiryController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<InvestmentInquiry>> viewAllInvestments() {
+    @PreAuthorize("hasRole('Admin')")
+    public ResponseEntity<List<InvestmentInquiry>> viewAllInquiries() {
         List<InvestmentInquiry> newInvest = investmentInquiryService.getAllInquiries();
         if (newInvest == null) {
             return ResponseEntity.status(403).build();
         }
-        return ResponseEntity.status(201).body(newInvest);
+        return ResponseEntity.status(200).body(newInvest);
     }
 
     @GetMapping("/user/{userId}")
