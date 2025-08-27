@@ -7,3 +7,5 @@ karma/
 
 springapp/.mvn
 springapp/target
+
+angularapp/global.ts

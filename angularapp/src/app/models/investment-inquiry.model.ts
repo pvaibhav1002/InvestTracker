@@ -1,4 +1,5 @@
 import { Investment } from "./investment.model";
+import { User } from "./user.model";
 
 export interface InvestmentInquiry{
     inquiryId?:number;
