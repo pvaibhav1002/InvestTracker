@@ -1,1 +1,68 @@
-<p>signup works!</p>
+<form #registration="ngForm" (ngSubmit)="register(registration)">
+    <div class="form-group">
+        <input type="text" name="username" placeholder="Username" [(ngModel)]="user.username" required
+            #usernameField="ngModel" />
+        <div *ngIf="usernameField.invalid && usernameField.touched">
+            <small *ngIf="usernameField.errors?.required">Username is required.</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="email" name="email" placeholder="Email" [(ngModel)]="user.email" required email
+            #emailField="ngModel" />
+        <div *ngIf="emailField.invalid && emailField.touched">
+            <small *ngIf="emailField.errors?.required">Email is required.</small>
+            <small *ngIf="emailField.errors?.email">Invalid email format.</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="mobileNumber" placeholder="Mobile Number" [(ngModel)]="user.mobileNumber" required
+            pattern="^[0-9]{10}$" #mobileField="ngModel" />
+        <div *ngIf="mobileField.invalid && mobileField.touched">
+            <small *ngIf="mobileField.errors?.required">Mobile number is required.</small>
+            <small *ngIf="mobileField.errors?.pattern">Enter a valid 10-digit mobile number.</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="password" name="password" placeholder="Password" [(ngModel)]="user.password" required
+            pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" #passwordField="ngModel" />
+        <div *ngIf="passwordField.invalid && passwordField.touched">
+            <small *ngIf="passwordField.errors?.required">Password is required.</small>
+            <small *ngIf="passwordField.errors?.pattern">
+                Password must be at least 8 characters long and include uppercase, lowercase, number, and special
+                character.
+            </small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" [(ngModel)]="confirmPassword"
+            required #confirmPasswordField="ngModel" />
+        <div *ngIf="confirmPasswordField.invalid && confirmPasswordField.touched">
+            <small *ngIf="confirmPasswordField.errors?.required">Confirm password is required.</small>
+        </div>
+        <div *ngIf="user.password !== confirmPassword && confirmPasswordField.touched">
+            <small>Passwords do not match.</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <select name="userRole" [(ngModel)]="user.userRole" required #roleField="ngModel">
+            <option value="" disabled selected>Select Role</option>
+            <option value="ADMIN">Admin</option>
+            <option value="USER">User</option>
+        </select>
+        <div *ngIf="roleField.invalid && roleField.touched">
+            <small>Role is required.</small>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" >Signup</button>
+
+    <p>Already have an account? <a routerLink="/login">Login</a></p>
+
+    <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</form>
