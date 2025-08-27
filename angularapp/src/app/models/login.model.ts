@@ -1,4 +1,4 @@
 class Login{
     email:string;
-    password:str
+    password:string;
 }

@@ -1,1 +1,0 @@
-export const APP_URL="https://ide-abaecfcccbfebfaedaabcebeddbadd.premiumproject.examly.io/proxy/8080/api";
