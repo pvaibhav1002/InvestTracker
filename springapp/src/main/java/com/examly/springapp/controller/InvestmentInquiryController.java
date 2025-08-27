@@ -62,7 +62,7 @@ public class InvestmentInquiryController {
         if (newInvest == null) {
             return ResponseEntity.status(403).build();
         }
-        return ResponseEntity.status(201).body(newInvest);
+        return ResponseEntity.status(200).body(newInvest);
     }
 
     @PutMapping("/{inquiryId}")
