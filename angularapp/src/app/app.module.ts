@@ -20,8 +20,7 @@ import { UserViewFeedbackComponent } from './components/user-view-feedback/user-
 import { UserViewInquiryComponent } from './components/user-view-inquiry/user-view-inquiry.component';
 import { UserViewInvestmentComponent } from './components/user-view-investment/user-view-investment.component';
 import { UsernavComponent } from './components/usernav/usernav.component';
-import {HttpClientModule} from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,8 +44,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
