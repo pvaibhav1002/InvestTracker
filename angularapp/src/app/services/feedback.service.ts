@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Feedback } from '../models/feedback.model';
 import { Observable } from 'rxjs';
-import { APP_URL } from '../global';
-
+import { APP_URL } from 'src/global';
 
 @Injectable({
   providedIn: 'root'

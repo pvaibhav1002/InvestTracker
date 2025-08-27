@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { APP_URL } from 'global';
+import { APP_URL } from 'src/global';
 import { Investment } from '../models/investment.model';
 import { Observable } from 'rxjs';
 
