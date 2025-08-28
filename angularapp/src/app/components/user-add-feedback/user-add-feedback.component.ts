@@ -12,10 +12,10 @@ export class UserAddFeedbackComponent implements OnInit {
   
  feedbackForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private fs: FeedbackService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private feedbackService: FeedbackService, private router: Router) { }
 
   ngOnInit(): void {
-    this.feedbackForm = this.fb.group({
+    this.feedbackForm = this.formBuilder.group({
       message: ['', Validators.required],
       category: ['', Validators.required],
       investment: ['', Validators.required],
@@ -28,7 +28,7 @@ export class UserAddFeedbackComponent implements OnInit {
 
   submitFeedback(): void {
     if (this.feedbackForm.valid) {
-      this.fs.sendFeedback(this.feedbackForm.value).subscribe(() => {
+      this.feedbackService.sendFeedback(this.feedbackForm.value).subscribe(() => {
         alert('Feedback submitted Successfully!');
         this.router.navigate(['/user-dashboard']);
       });

@@ -17,13 +17,13 @@ export class AdminEditInvestmentComponent implements OnInit {
   investmentForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder, private ar: ActivatedRoute, private is: InvestmentService, private router: Router
+    private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private investmentService: InvestmentService, private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.investmentId = this.ar.snapshot.params['id'];
+    this.investmentId = this.activatedRoute.snapshot.params['id'];
 
-    this.investmentForm = this.fb.group({
+    this.investmentForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       type: ['', Validators.required],
@@ -38,7 +38,7 @@ export class AdminEditInvestmentComponent implements OnInit {
   }
 
   getInvestment() {
-    this.is.getInvestmentById(this.investmentId).subscribe((data) => {
+    this.investmentService.getInvestmentById(this.investmentId).subscribe((data) => {
       this.investment=data;
       this.investmentForm.patchValue(data);
     });
@@ -46,7 +46,7 @@ export class AdminEditInvestmentComponent implements OnInit {
 
   updateInvestment() {
     if (this.investmentForm.valid) {
-      this.is.updateInvestment(this.investmentId, this.investmentForm.value).subscribe(() => {
+      this.investmentService.updateInvestment(this.investmentId, this.investmentForm.value).subscribe(() => {
         alert('Investment updated successfully!');
         this.router.navigate(['/admin-view-investment']);
       });
