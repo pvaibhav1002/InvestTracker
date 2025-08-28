@@ -1,1 +1,19 @@
-<p>usernav works!</p>
+<nav class="navbar">
+
+    <div class="navbar-left">
+        <a routerLink="/" class="logo">InvestTrack</a>
+    </div>
+
+
+    <div class="navbar-center">
+        <a routerLink="/user">Your User</a> 
+        <a routerLink="/investments">View Investments</a>
+        <a routerLink="/inquiries">My inquiries</a>
+        <a routerLink="/feedback">Feedback</a>
+    </div>
+
+
+    <div class="navbar-right">
+        <button (click)="onLogout()">Logout</button>
+    </div>
+</nav>

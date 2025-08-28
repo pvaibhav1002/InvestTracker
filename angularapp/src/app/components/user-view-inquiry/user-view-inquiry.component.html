@@ -1,1 +1,28 @@
-<p>user-view-inquiry works!</p>
+<div class="container">
+    <h2>Yours Inquiries</h2>
+
+    <div *ngIf="invests.length < 0">You have not submitted any inquiries yet.</div>
+
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th>Investment</th>
+                <th>Message</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Admin Response</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let inquiry of invests">
+                <td>{{ inquiry.investment.name }}</td>
+                <td>{{ inquiry.message }}</td>
+                <td>{{ inquiry.priority }}</td>
+                <td>{{ inquiry.status }}</td>
+                <td>
+                    {{ inquiry.adminResponse ? inquiry.adminResponse : 'No response yet' }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

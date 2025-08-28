@@ -11,7 +11,6 @@ import { InvestmentService } from 'src/app/services/investment.service';
   styleUrls: ['./user-add-inquiry.component.css']
 })
 export class UserAddInquiryComponent implements OnInit {
-
   showPopup: boolean = false;
   investmentName: string;
   id:number=null;
@@ -38,7 +37,6 @@ export class UserAddInquiryComponent implements OnInit {
     contactDetails: ''
   };
 
-
   onSubmit(): void {
     this.investmentInquiryService.addInquiry(this.newInvest).subscribe({
       next: () => {
@@ -50,9 +48,10 @@ export class UserAddInquiryComponent implements OnInit {
       }
     });
   }
-
+ 
   closePopup(): void {
     this.showPopup = false;
     this.router.navigate(['/user-view-inquiries']);
   }
 }
+
