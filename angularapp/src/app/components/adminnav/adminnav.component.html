@@ -1,1 +1,18 @@
-<p>adminnav works!</p>
+<nav class="navbar">
+    <div class="logo">InvestTrack</div>
+  
+    <div class="nav-links">
+      <a routerLink="/home">Home</a>
+      <a routerLink="/admin-console">Admin Console</a>
+      <a routerLink="/view-investments">View Investments</a>
+      <a routerLink="/add-investment">Add Investment</a>
+      <a routerLink="/inquiries">Inquiries</a>
+      <a routerLink="/feedback">Feedback</a>
+    </div>
+  
+    <div class="user-section">
+      <span class="user-info">Admin</span>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+  

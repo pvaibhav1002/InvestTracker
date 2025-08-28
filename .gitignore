@@ -1,6 +1,7 @@
-
 angularapp/node_modules/
-
+angularapp/src/global.ts
+angularapp/package-lock.json
+angularapp/src/app/app.component.html
 
 junit/
 karma/
