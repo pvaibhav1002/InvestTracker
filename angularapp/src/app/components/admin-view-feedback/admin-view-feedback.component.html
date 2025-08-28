@@ -1,1 +1,70 @@
-<p>admin-view-feedback works!</p>
+<div class="container">
+    <h2>Feedback Received</h2>
+  
+    <table *ngIf="feedbacks.length>0" border="1">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Feedback ID</th>
+          <th>User</th>
+          <th>Investment</th>
+          <th>Category</th>
+          <th>Feedback Message</th>
+          <th>Posted Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feedback of feedbacks; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ feedback.id }}</td>
+          <td>{{ feedback.user.name }}</td>
+          <td>{{ feedback.investment.name }}</td>
+          <td>{{ feedback.category }}</td>
+          <td>{{ feedback.message }}</td>
+          <td>{{ feedback.postedDate | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <button class="btn btn-info" (click)="showUserDetails(feedback.user)">Show User Details</button>
+            <button class="btn btn-success" (click)="showInvestmentDetails(feedback.investment)">View Investment Info</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    
+      <p *ngIf="feedbacks.length==0">
+        No Feedback Found
+    </p>
+   
+
+    <div class="modal" *ngIf="selectedUser">
+      <div >
+        <h3>User Details</h3>
+        <p><strong>User ID:</strong>{{selectedUser.userId}}</p>
+        <p><strong>UserName:</strong> {{ selectedUser.username }}</p>
+        <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+        <p><strong>Role:</strong> {{ selectedUser.userRole }}</p>
+        <button  (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  
+   
+    <div class="modal" *ngIf="selectedInvestment">
+      <div >
+        <h3>Investment Info</h3>
+        <p><strong>Name:</strong> {{ selectedInvestment.name }}</p>
+        <p><strong>Type:</strong> {{ selectedInvestment.type }}</p>
+        <p><strong>Purchase Price:</strong>{{selectedInvestment.purchasePrice}}</p>
+        <p><strong>Current Price:</strong>{{selectedInvestment.currentPrice}}</p>
+        <p><strong>Quantity:</strong>{{selectedInvestment.quantity}}</p>
+        <p><strong>Purchase Date:</strong>{{selectedInvestment.purchaseDate}}</p>
+        <p><strong>Status</strong>{{selectedInvestment.status}}</p>
+        <button  (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+
+  
+ 
+  
