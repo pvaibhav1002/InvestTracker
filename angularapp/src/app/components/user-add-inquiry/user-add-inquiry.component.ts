@@ -4,20 +4,19 @@ import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
 import { InvestmentService } from 'src/app/services/investment.service';
- 
+
 @Component({
   selector: 'app-user-add-inquiry',
   templateUrl: './user-add-inquiry.component.html',
   styleUrls: ['./user-add-inquiry.component.css']
 })
 export class UserAddInquiryComponent implements OnInit {
- 
   showPopup: boolean = false;
   investmentName: string;
   id:number=null;
- 
+  
   constructor(private investmentInquiryService: InvestmentInquiryService,private authService : AuthService, private investmentService:InvestmentService, private router: Router, private activatedRoute:ActivatedRoute) { }
- 
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
       this.id=params['id'];
@@ -37,8 +36,7 @@ export class UserAddInquiryComponent implements OnInit {
     priority: '',
     contactDetails: ''
   };
- 
- 
+
   onSubmit(): void {
     this.investmentInquiryService.addInquiry(this.newInvest).subscribe({
       next: () => {
@@ -56,3 +54,4 @@ export class UserAddInquiryComponent implements OnInit {
     this.router.navigate(['/user-view-inquiries']);
   }
 }
+

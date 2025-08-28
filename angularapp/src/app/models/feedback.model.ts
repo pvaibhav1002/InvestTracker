@@ -3,9 +3,9 @@ import { User } from "./user.model";
 
 export interface Feedback{
     feedbackId?:number;
-    feedbackText:string;
-    date:string;
-    user:User;
-    investment:Investment;
-    category:string;
+    feedbackText?:string;
+    date?:string;
+    user?:User;
+    investment?:Investment;
+    category?:string;
 }
