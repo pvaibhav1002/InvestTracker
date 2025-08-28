@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
+import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
 
 @Component({
   selector: 'app-admin-view-inquiry',
@@ -7,9 +9,119 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminViewInquiryComponent implements OnInit {
 
-  constructor() { }
+  inquiries: InvestmentInquiry[] = [];
+  searchText: string = '';
+  selectedInquiryId: number | null = null;
+  responseText: string = '';
+  responseSubmitted: boolean = false;
+  showResForm:boolean=false;
+  filterStatus: string = '';
+  filterPriority: string = '';
+  originalInquiries: InvestmentInquiry[] = [];
 
-  ngOnInit(): void {
+
+  constructor(private inquiryService: InvestmentInquiryService) { }
+
+
+  loadDummyData(): void {
+    this.inquiries = [
+      {
+        inquiryId: 1,
+        user: { userId: 101, username: 'Khushbu', email: 'khushbu@example.com' },
+        investment: { investmentId: 201, name: 'Qatar Mutual Funds' },
+        message: 'Can I get info on these?',
+        status: 'Pending',
+        inquiryDate: '2025-08-25T10:00:00Z',
+        priority: 'High',
+        adminResponse: '',
+        contactDetails: '9876543210'
+      },
+    ]
   }
 
+  ngOnInit(): void {
+    this.loadDummyData();
+  }
+
+
+  updateStatus(inquiry: InvestmentInquiry): void {
+    this.inquiryService.updateInquiry(inquiry.inquiryId,inquiry).subscribe({
+      next: () => {
+        console.log('Status updated successfully');
+      },
+      error: (err) => {
+        console.error('Error updating status:', err);
+      }
+    });
+  }
+
+  fetchAllInquiries(): void {
+    this.inquiryService.getAllInquiries().subscribe({
+      next: (data) => {
+        this.inquiries = data;
+        this.originalInquiries=data;
+      },
+      error: (err) => {
+        console.error('Error fetching inquiries:', err);
+      }
+    });
+  }
+
+  filterText() {
+    this.inquiries = this.inquiries.filter((inquiry) => {
+      let a = inquiry.investment.name.toLowerCase().includes(this.searchText.toLowerCase());
+      let b = inquiry.message.toLowerCase().includes(this.searchText.toLowerCase());
+      let c = inquiry.user.username.toLowerCase().includes(this.searchText.toLowerCase());
+      return a || b || c;
+    })
+  }
+
+  showResponseForm(id: number): void {
+    this.showResForm =true;
+    this.selectedInquiryId = id;
+    const inquiry = this.inquiries.find(i => i.inquiryId === id);
+    this.responseText = inquiry?.adminResponse || '';
+  }
+
+  submitResponse(): void {
+    const inquiry = this.inquiries.find(i => i.inquiryId === this.selectedInquiryId);
+    if (inquiry) {
+      inquiry.adminResponse = this.responseText;
+      inquiry.status = 'Responded';
+      inquiry.responseDate = new Date().toISOString();
+
+      this.inquiryService.updateInquiry(inquiry.inquiryId, inquiry).subscribe({
+        next: () => {
+          this.responseSubmitted = true;
+          setTimeout(() => {
+            this.responseSubmitted = false;
+          }, 3000);
+        },
+        error: (err) => {
+          console.error('Error updating inquiry:', err);
+        }
+      });
+    }
+
+    this.selectedInquiryId = null;
+    this.responseText = '';
+  }
+
+  cancel(){
+    this.showResForm=false;
+  }
+
+
+  applyFilters(): void {
+    this.inquiries = this.originalInquiries.filter(inquiry => {
+      const statusMatch = this.filterStatus === '' || inquiry.status === this.filterStatus;
+      const priorityMatch = this.filterPriority === '' || inquiry.priority === this.filterPriority;
+      return statusMatch && priorityMatch;
+    });
+  }
+
+  deleteInquiry(id: number): void {
+    this.inquiryService.deleteInquiry(id).subscribe((data) => { });
+
+  }
 }

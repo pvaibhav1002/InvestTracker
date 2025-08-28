@@ -12,20 +12,20 @@ export class AdminnavComponent implements OnInit {
   isLoggedin = false;
   isAdmin = false;
   isOrganizer = false;
-  constructor(private router :Router, private authService:AuthService) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
-  
-      // this.isLoggedin = this.authService.isLoggedin();
-      // this.isAdmin = this.authService.isAdmin();
-      // this.isOrganizer = this.authService.isOrganizer();
+
+    this.isLoggedin = this.authService.isLoggedin();
+    this.isAdmin = this.authService.isAdmin();
+    this.isOrganizer = this.authService.isUser();
 
   }
 
   logout(): void {
-    // this.authService.logout();
-    // this.isLoggedin = this.isAdmin = this.isOrganizer = false;
-    // this.router.navigate(['/login']);
+    this.authService.logout();
+    this.isLoggedin = this.isAdmin = this.isOrganizer = false;
+    this.router.navigate(['/login']);
   }
 
 }
