@@ -3,23 +3,41 @@
 
     <form (ngSubmit)="onSubmit()" #inquiryForm="ngForm">
         <label for="investment">Investment</label>
-        <input type="text" id="investment" name="investment" ngModel placeholder="Enter investment">
+        <input type="text" id="investment" name="investment" [(ngModel)]="investmentName" required #investment="ngModel" placeholder="Enter investment" />
+        <div *ngIf="investment.invalid && investment.touched">
+            <small>Investment is required.</small>
+        </div>
 
         <label for="message">Message</label>
-        <textarea id="message" name="message" ngModel placeholder="Enter your message here..."></textarea>
+        <textarea id="message" name="message" [(ngModel)]="newInvest.message" required minlength="10" #message="ngModel"
+            placeholder="Enter your message here..."></textarea>
+        <div *ngIf="message.invalid && message.touched">
+            <small *ngIf="message.errors?.required">Message is required.</small>
+            <small *ngIf="message.errors?.minlength">Message must be at least 10 characters.</small>
+        </div>
 
         <label for="priority">Priority</label>
-        <select id="priority" name="priority">
+        <select id="priority" name="priority" [(ngModel)]="newInvest.priority" required #priority="ngModel">
+            <option value="">Select Priority</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
         </select>
+        <div *ngIf="priority.invalid && priority.touched">
+            <small>Priority is required.</small>
+        </div>
 
-        <button type="submit" [disabled]="!inquiryForm.form.valid">
+        <label for="contactDetails">Contact Details</label>
+        <input type="text" id="contactDetails" name="contactDetails" [(ngModel)]="newInvest.contactDetails" required
+            #contactDetails="ngModel" placeholder="Enter your contact details" />
+        <div *ngIf="contactDetails.invalid && contactDetails.touched">
+            <small>Contact details are required.</small>
+        </div>
+
+        <button type="submit" [disabled]="inquiryForm.invalid">
             Submit Inquiry
         </button>
     </form>
-
 
     <div class="popup" *ngIf="showPopup">
         <div class="popup-content">

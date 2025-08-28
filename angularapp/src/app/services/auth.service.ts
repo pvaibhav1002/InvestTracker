@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { Login } from '../models/login.model';
-import { JwtService } from './jwt.service';
 import { APP_URL } from 'src/global';
 
 
@@ -15,7 +14,7 @@ export const TOKEN = 'token';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private jwt :JwtService) { }
+  constructor(private http: HttpClient) { }
 
   register(user: User): Observable<any> {
     return this.http.post(`${APP_URL}/register`, user);
@@ -32,8 +31,47 @@ export class AuthService {
     );
   }
 
+  getAuthenticatedToken(): string | null {
+    const tokenWithBearer = localStorage.getItem(TOKEN);
+    return tokenWithBearer ? tokenWithBearer.replace('Bearer ', '') : null;
+  }
+
+  getDecodedToken(): any | null {
+    const token = this.getAuthenticatedToken();
+    if (!token) return null;
+
+    const payload = token.split('.')[1];
+    if (!payload) return null;
+
+    try {
+      const decodedPayload = atob(payload.replace(/-/g, '+').replace(/_/g, '/'));
+      return JSON.parse(decodedPayload);
+    } catch (error) {
+      console.error('Error decoding token', error);
+      return null;
+    }
+  }
+
+  getAuthenticatedUserId(): number | null {
+    return this.getDecodedToken()?.userId || null;
+  }
+
+  getAuthenticatedUsername(): string | null {
+    return this.getDecodedToken()?.username || null;
+  }
+
+  getAuthenticatedUserRole(): string | null {
+    return this.getDecodedToken()?.role || null;
+  }
+
+  isTokenExpired(): boolean {
+    const exp = this.getDecodedToken()?.exp;
+    if (!exp) return true;
+    return Date.now() >= exp * 1000;
+  }
+
   isLoggedin(): boolean {
-    let username = this.jwt.getAuthenticatedUsername();
+    let username = this.getAuthenticatedUsername();
     return !(username == null);
   }
 
@@ -44,11 +82,11 @@ export class AuthService {
 
 
   isAdmin(): boolean {
-    return this.jwt.getAuthenticatedUserRole() === 'ADMIN';
+    return this.getAuthenticatedUserRole() === 'ADMIN';
   }
 
 
   isUser(): boolean {
-    return this.jwt.getAuthenticatedUserRole() === 'USER';
+    return this.getAuthenticatedUserRole() === 'USER';
   }
 }

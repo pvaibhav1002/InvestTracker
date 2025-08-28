@@ -37,7 +37,6 @@ export class SignupComponent implements OnInit {
       this.errorMessage = "Passwords do not match.";
       return;
     }
-    console.log(this.user);
     this.authService.register(this.user).subscribe({
       next: (res) => {
         this.successMessage = 'Registration successful!';
