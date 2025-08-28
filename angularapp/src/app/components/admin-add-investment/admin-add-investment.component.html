@@ -23,7 +23,10 @@
         <option value="Stock4">Stock4</option>
         <option value="Stock5">Stock5</option>
 
-    </select>
+    </select>        
+    <div *ngIf="f.type.errors?.required">Type is mandatory</div>
+
+
     <!-- <div *ngIf="f.type.invalid ">
         <div *ngIf="f.type.errors?.required">Type is mandatory</div>
     </div> -->
@@ -69,6 +72,8 @@
         <option value="Status5">Status5</option>
 
     </select>    
+    <div *ngIf="f.status.errors?.required">Status is mandatory</div>
+
     <!-- <div *ngIf="f.status.invalid && (f.status.touched || f.status.dirty)">
         <div *ngIf="f.status.errors?.required">Status is mandatory</div>
     </div> -->
