@@ -1,0 +1,15 @@
+<h1>Explore Investments</h1>
+
+<div *ngFor="let investment of investments">
+    <h3>{{investment.name}}</h3>
+    <div>{{investment.description}}</div>
+    <div>Type: {{investment.type}}</div>
+    <div>Purchase Price: ${{investment.purchasePrice | number:'.2-5'}}</div>
+    <div>Current Price: ${{investment.currentPrice | number:'.2-5'}}</div>
+    <div>{{investment.quantity}}</div>
+    <div>{{investment.purchaseDate}}</div>
+    <div>{{investment.status}}</div>
+
+    <button [routerLink]="">Inquire</button>
+
+</div>

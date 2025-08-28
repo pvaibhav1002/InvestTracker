@@ -1,1 +1,49 @@
-<p>user-add-feedback works!</p>
+<h2>Add Feedback</h2>
+
+<form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
+ <div>
+  <label for="message">Feedback Message:</label>
+  <textarea id="message" formControlName="message"></textarea>
+  <div *ngIf="f.message.invalid && (f.message.touched || f.message.dirty)">
+    <div *ngIf="f.message.errors?.required">Message is required</div>
+  </div>
+
+</div>
+<div>
+  <label for="category">Feedback Category:</label>
+  <select id="category" formControlName="category">
+    <option value="">-- Select Category --</option>
+    <option value="Overall">Overall</option>
+    <option value="Portfolio">Portfolio</option>
+    <option value="Assets">Assets</option>
+    <option value="General">General</option>
+  </select>
+  <div *ngIf="f.category.invalid && (f.category.touched || f.category.dirty)">
+    <div *ngIf="f.category.errors?.required">Category is required</div>
+  </div>
+</div>
+<div>
+  <label for="investment">Select Investment:</label>
+  <select id="investment" formControlName="investment">
+    <option value=""> Select Investment</option>
+    <option value="Global Mutual Funds (AMJ Fund)">Global Mutual Funds (AMJ Fund)</option>
+    <option value="LIC Mutual (Stock)">LIC Mutual (Stock)</option>
+  </select>
+  <div *ngIf="f.investment.invalid && (f.investment.touched || f.investment.dirty)">
+    <div *ngIf="f.investment.errors?.required">Investment is required</div>
+  </div>
+</div>
+<div>
+  <label for="date">Date (dd-mm-yyyy):</label>
+  <input type="text" id="date" formControlName="date" />
+  <div *ngIf="f.date.invalid && (f.date.touched || f.date.dirty)">
+    <div *ngIf="f.date.errors?.required">Date is required</div>
+    <div *ngIf="f.date.errors?.pattern">Invalid date format</div>
+  </div>
+</div>
+<div>
+  <button type="submit" [disabled]="feedbackForm.invalid">Submit Feedback</button>
+</div>
+
+  <button type="button" (click)="cancel()">Cancel</button>
+</form>

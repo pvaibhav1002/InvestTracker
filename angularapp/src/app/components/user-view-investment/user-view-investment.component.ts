@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Investment } from 'src/app/models/investment.model';
+import { InvestmentService } from 'src/app/services/investment.service';
 
 
 
@@ -9,12 +11,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-view-investment.component.css']
 })
 export class UserViewInvestmentComponent implements OnInit {
+  investments: Investment[];
 
- 
+  getAllInvestments(){
+    this.investmentService.getAllInvestments().subscribe((data)=>{
+      this.investments=data;
+    })
+  }
 
-  constructor() { }
+  constructor(private investmentService: InvestmentService) { }
+
 
   ngOnInit(): void {
+    this.getAllInvestments();
   }
 
 }
