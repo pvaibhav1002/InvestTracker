@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 public class Investment {
     @Id
     @GeneratedValue
-    private long investmentId;
+    private Long investmentId;
     private String name;
     private String description;
     private String type;
@@ -29,7 +29,7 @@ public class Investment {
         this.status = "";
     }
 
-    public Investment(long investmentId, String name, String description, String type, double purchasePrice,
+    public Investment(Long investmentId, String name, String description, String type, double purchasePrice,
             double currentPrice, int quantity, String purchaseDate, String status) {
         this.investmentId = investmentId;
         this.name = name;
@@ -42,11 +42,11 @@ public class Investment {
         this.status = status;
     }
 
-    public long getInvestmentId() {
+    public Long getInvestmentId() {
         return investmentId;
     }
 
-    public void setInvestmentId(long investmentId) {
+    public void setInvestmentId(Long investmentId) {
         this.investmentId = investmentId;
     }
 
