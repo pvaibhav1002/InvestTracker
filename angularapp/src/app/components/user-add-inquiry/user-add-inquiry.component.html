@@ -1,8 +1,9 @@
 <div class="inquiry-container">
     <h2>Submit Your Inquiry</h2>
- 
+
     <form (ngSubmit)="onSubmit()" #inquiryForm="ngForm">
         <label for="investment">Investment</label>
+
         <input type="text" id="investment" name="investment" [(ngModel)]="investmentName" #investment="ngModel" placeholder="Enter investment" disabled/>
 
         <label for="message">Message</label>

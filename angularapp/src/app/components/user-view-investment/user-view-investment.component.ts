@@ -9,17 +9,18 @@ import { InvestmentService } from 'src/app/services/investment.service';
 })
 export class UserViewInvestmentComponent implements OnInit {
   investments: Investment[];
-
+ 
   getAllInvestments(){
     this.investmentService.getAllInvestments().subscribe((data)=>{
       this.investments=data;
     })
   }
-
+ 
   constructor(private investmentService: InvestmentService) { }
 
   ngOnInit(): void {
     this.getAllInvestments();
   }
-
+ 
 }
+ 

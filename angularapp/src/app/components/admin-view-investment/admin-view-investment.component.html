@@ -1,12 +1,12 @@
 <h1>Manage Investments</h1>
-
-
-
+ 
+ 
+ 
 <div>
     <label for="filterSearch">Search by Name</label>
     <input type="text" id="filterSearch" name="filterSearch" #search (input)="filterSearch(search.value)">
-
-
+ 
+ 
     <label for="filterCategory">Filter by Type:</label>
     <select name="filterCategory" id="filterCategory" #filter (change)="filterCategory(filter.value)">
         <option value="AllTypes">All Types</option>
@@ -17,8 +17,8 @@
         <option value="Stock5">Stock5</option>
     </select>
 </div>
-
-
+ 
+ 
 <table>
     <thead>
         <tr>
@@ -35,7 +35,7 @@
             <th>Actions</th>
         </tr>
     </thead>
-
+ 
     <tbody>
         <tr *ngFor="let investment of investments,index as i">
             <td>{{i+1}}</td>
@@ -54,8 +54,6 @@
 
             </td>
         </tr>
-
-
 
     </tbody>
 </table>

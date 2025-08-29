@@ -22,6 +22,7 @@ export class UserAddInquiryComponent implements OnInit {
     this.activatedRoute.params.subscribe(params=>{
       this.id=params['id'];
       this.investmentService.getInvestmentById(params['id']).subscribe(data=>{
+
         this.investmentName = data.name;
       })
     });
@@ -49,7 +50,7 @@ export class UserAddInquiryComponent implements OnInit {
       }
     });
   }
- 
+
   closePopup(): void {
     this.showPopup = false;
     this.router.navigate(['/user-view-inquiry']);

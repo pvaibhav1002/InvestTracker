@@ -32,11 +32,10 @@ export class UserAddFeedbackComponent implements OnInit {
 
   }
 
-
   get f() {
     return this.feedbackForm.controls;
   }
-
+ 
   submitFeedback(): void {
     let formData=this.feedbackForm.value;
     this.feedback.feedbackText=formData.message;

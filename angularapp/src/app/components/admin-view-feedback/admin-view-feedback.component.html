@@ -32,11 +32,9 @@
     </tbody>
   </table>
 
-
   <p *ngIf="feedbacks.length==0">
     No Feedback Found
   </p>
-
 
   <div class="modal" *ngIf="selectedUser">
     <div>
@@ -48,7 +46,6 @@
       <button (click)="closeModal()">Close</button>
     </div>
   </div>
-
 
   <div class="modal" *ngIf="selectedInvestment">
     <div>
