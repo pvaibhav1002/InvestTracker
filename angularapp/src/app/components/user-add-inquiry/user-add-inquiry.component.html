@@ -4,25 +4,42 @@
     <form (ngSubmit)="onSubmit()" #inquiryForm="ngForm">
         <label for="investment">Investment</label>
 
-        <input type="text" id="investment" name="investment" [(ngModel)]="investmentName" #investment="ngModel" placeholder="Enter investment" disabled/>
+        <input type="text" id="investment" name="investment" [(ngModel)]="investmentName" #investment="ngModel"
+            placeholder="Enter investment" disabled />
 
-        <label for="message">Message</label>
-        <textarea id="message" name="message" [(ngModel)]="newInvest.message" required minlength="10" #message="ngModel"
-            placeholder="Enter your message here..."></textarea>
-        <div *ngIf="message.invalid && message.touched">
-            <small *ngIf="message.errors?.required">Message is required.</small>
-            <small *ngIf="message.errors?.minlength">Message must be at least 10 characters.</small>
-        </div>
-
-        <label for="priority">Priority</label>
-        <select id="priority" name="priority" [(ngModel)]="newInvest.priority" required #priority="ngModel">
-            <option value="">Select Priority</option>
+        <label for="riskTolerance">Risk Tolerance</label>
+        <select id="riskTolerance" name="riskTolerance" [(ngModel)]="newInvest.riskTolerance" required
+            #riskTolerance="ngModel">
+            <option value="">Select Risk Tolerance</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
         </select>
-        <div *ngIf="priority.invalid && priority.touched">
-            <small>Priority is required.</small>
+        <div *ngIf="riskTolerance.invalid && riskTolerance.touched">
+            <small>Risk Tolerance is required.</small>
+        </div>
+
+        <label for="expectedReturn">Expected Return of Investment</label>
+        <input type="number" name="expectedReturn" id="expectedReturn" [(ngModel)]="newInvest.expectedReturn" required
+            #expectedReturn="ngModel">
+        <div *ngIf="expectedReturn.invalid && expectedReturn.touched">
+            <small>Expected Return is required.</small>
+        </div>
+
+        <label for="interest">Reason for Interest</label>
+        <textarea id="interest" name="interest" [(ngModel)]="newInvest.interest" required minlength="10"
+            #interest="ngModel" placeholder="Enter your reason here..."></textarea>
+        <div *ngIf="interest.invalid && interest.touched">
+            <small *ngIf="interest.errors?.required">Reason for Interest is required.</small>
+            <small *ngIf="interest.errors?.minlength">Reason for Interest must be at least 10 characters.</small>
+        </div>
+
+        <label for="questions">Any Specific Questions?</label>
+        <textarea id="questions" name="questions" [(ngModel)]="newInvest.questions" required #questions="ngModel"
+            placeholder="Enter your questions here..."></textarea>
+        <div *ngIf="questions.invalid && questions.touched">
+            <small *ngIf="questions.errors?.required">Atleast one question is required.</small>
+
         </div>
 
         <button type="submit" [disabled]="inquiryForm.invalid">
