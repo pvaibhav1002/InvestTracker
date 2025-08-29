@@ -70,9 +70,9 @@
  
   <button type="submit" [disabled]="investmentForm.invalid">Add Investment</button>
 </form>
-
+ 
 <div *ngIf="addedInvestment">
     <div>Investment added successfully!</div>
-    <button>CLOSE</button>
+    <button (click)="closeAddSuccessPage()">CLOSE</button>
 </div>
  

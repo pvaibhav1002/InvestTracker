@@ -1,5 +1,5 @@
 <h1>Explore Investments</h1>
-
+ 
 <div *ngFor="let investment of investments">
     <h3>{{investment.name}}</h3>
     <div>{{investment.description}}</div>
@@ -9,7 +9,7 @@
     <div>{{investment.quantity}}</div>
     <div>{{investment.purchaseDate}}</div>
     <div>{{investment.status}}</div>
-
-    <button [routerLink]="">Inquire</button>
-
+ 
+    <button [routerLink]="['/user-add-inquiry',investment.investmentId]">Inquire</button>
+ 
 </div>

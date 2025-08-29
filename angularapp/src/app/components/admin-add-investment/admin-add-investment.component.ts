@@ -31,7 +31,7 @@ export class AdminAddInvestmentComponent implements OnInit {
   }
   closeAddSuccessPage() {
     this.addedInvestment = false;
-    // this.router.navigate(['/']);
+    this.router.navigate(['/admin-view-investment']);
   }
   ngOnInit(): void {
   }
