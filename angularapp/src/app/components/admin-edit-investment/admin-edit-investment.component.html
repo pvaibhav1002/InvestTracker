@@ -70,8 +70,9 @@
  
   <button type="submit" [disabled]="investmentForm.invalid">Update Investment</button>
 </form>
- 
+
 <div *ngIf="updated">
     <div>Investment Updated successfully!</div>
     <button (click)="closeModal()">CLOSE</button>
 </div>
+

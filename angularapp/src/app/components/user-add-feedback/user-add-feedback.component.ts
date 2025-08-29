@@ -6,14 +6,14 @@ import { InvestmentService } from 'src/app/services/investment.service';
 import { Investment } from 'src/app/models/investment.model';
 import { Feedback } from 'src/app/models/feedback.model';
 import { AuthService } from 'src/app/services/auth.service';
- 
+
 @Component({
   selector: 'app-user-add-feedback',
   templateUrl: './user-add-feedback.component.html',
   styleUrls: ['./user-add-feedback.component.css']
 })
 export class UserAddFeedbackComponent implements OnInit {
- 
+
   feedbackForm: FormGroup;
   investments: Investment[] = [];
   feedback:Feedback={investment:{},user:{}};
@@ -24,15 +24,14 @@ export class UserAddFeedbackComponent implements OnInit {
       investmentId: ['', Validators.required]
     });
   }
- 
+
   ngOnInit(): void {
     this.investmentService.getAllInvestments().subscribe(data=>{
       this.investments=data;
     })
- 
+
   }
- 
- 
+
   get f() {
     return this.feedbackForm.controls;
   }
@@ -45,7 +44,7 @@ export class UserAddFeedbackComponent implements OnInit {
     let date=new Date();
     this.feedback.date=date.toDateString();
     this.feedback.user.userId=this.authService.getAuthenticatedUserId();
- 
+
     if (this.feedbackForm.valid) {
       this.fs.sendFeedback(this.feedback).subscribe(() => {
         console.log('Feedback submitted Successfully!');

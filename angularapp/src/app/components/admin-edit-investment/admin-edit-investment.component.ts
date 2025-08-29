@@ -28,7 +28,7 @@ export class AdminEditInvestmentComponent implements OnInit {
       status: ['', Validators.required]
     });
   }
- 
+
   ngOnInit(): void {
     this.investmentId = this.ar.snapshot.params['id'];
     this.is.getInvestmentById(this.investmentId).subscribe((data) => {
@@ -45,13 +45,13 @@ export class AdminEditInvestmentComponent implements OnInit {
       });
     }
   }
- 
+
   closeModal() {
     this.updated = false;
     this.router.navigate(['/admin-view-investment']);
- 
+
   }
- 
+
   get f() {
     return this.investmentForm.controls;
   }

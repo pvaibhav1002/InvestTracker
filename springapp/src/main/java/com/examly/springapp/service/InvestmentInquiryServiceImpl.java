@@ -40,6 +40,7 @@ public class InvestmentInquiryServiceImpl implements InvestmentInquiryService {
 
         if (user.isPresent() && investment.isPresent()) {
             investmentInquiry.setContactDetails(user.get().getMobileNumber());
+            System.out.println("impl"+investmentInquiry);
             return investmentInquiryRepo.save(investmentInquiry);
         }
         return null;

@@ -21,7 +21,7 @@ export class AdminViewInquiryComponent implements OnInit {
  
  
   constructor(private inquiryService: InvestmentInquiryService) { }
- 
+
   ngOnInit(): void {
     this.fetchAllInquiries();
   }

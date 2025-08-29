@@ -3,8 +3,8 @@
 
     <form (ngSubmit)="onSubmit()" #inquiryForm="ngForm">
         <label for="investment">Investment</label>
-        <input type="text" id="investment" name="investment" [(ngModel)]="investmentName" #investment="ngModel"
-            placeholder="Enter investment" disabled />
+
+        <input type="text" id="investment" name="investment" [(ngModel)]="investmentName" #investment="ngModel" placeholder="Enter investment" disabled/>
 
         <label for="message">Message</label>
         <textarea id="message" name="message" [(ngModel)]="newInvest.message" required minlength="10" #message="ngModel"

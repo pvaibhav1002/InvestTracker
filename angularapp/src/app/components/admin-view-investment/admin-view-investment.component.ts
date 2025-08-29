@@ -8,23 +8,24 @@ import { InvestmentService } from 'src/app/services/investment.service';
   styleUrls: ['./admin-view-investment.component.css']
 })
 export class AdminViewInvestmentComponent implements OnInit {
- 
+
   investments: Investment[];
   ogInvestments: Investment[];
   investment: Investment;
   constructor(private investmentService:InvestmentService) { }
- 
+
   ngOnInit(): void {
     this.getAllInvestments();
   }
- 
+
+
   getAllInvestments(){
     this.investmentService.getAllInvestments().subscribe((data)=>{
       this.investments=data;
       this.ogInvestments=data;
     })
   }
- 
+
   filterSearch(searchString: string){
     this.investments=this.ogInvestments.filter((data)=> {
       let name=data.name.toLowerCase().includes(searchString.toLowerCase());
@@ -47,7 +48,7 @@ export class AdminViewInvestmentComponent implements OnInit {
     return this.investments;
  
   }
- 
+
   deleteInvestment(investmentId: number){
     this.investmentService.deleteInvestment(investmentId).subscribe((data)=>{
       this.getAllInvestments()

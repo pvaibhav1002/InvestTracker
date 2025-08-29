@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Feedback Received</h2>
- 
+
   <table *ngIf="feedbacks.length>0" border="1">
     <thead>
       <tr>
@@ -31,13 +31,11 @@
       </tr>
     </tbody>
   </table>
- 
- 
+
   <p *ngIf="feedbacks.length==0">
     No Feedback Found
   </p>
- 
- 
+
   <div class="modal" *ngIf="selectedUser">
     <div>
       <h3>User Details</h3>
@@ -48,8 +46,7 @@
       <button (click)="closeModal()">Close</button>
     </div>
   </div>
- 
- 
+
   <div class="modal" *ngIf="selectedInvestment">
     <div>
       <h3>Investment Info</h3>

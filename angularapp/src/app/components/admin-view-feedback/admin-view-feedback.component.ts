@@ -16,9 +16,9 @@ export class AdminViewFeedbackComponent implements OnInit {
  
   ngOnInit(): void {
     this.getFeedbacks();
-   
+    
   }
- 
+
   getFeedbacks(): void {
     this.feedbackService.getFeedbacks().subscribe(
       (data) => {

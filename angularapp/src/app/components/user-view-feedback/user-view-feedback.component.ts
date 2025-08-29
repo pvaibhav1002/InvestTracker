@@ -15,8 +15,7 @@ export class UserViewFeedbackComponent implements OnInit {
   ngOnInit(): void {
     this.getUserFeedbacks();
   }
- 
- 
+
   getUserFeedbacks(): void {
     this.feedbackService.getAllFeedbacksByUserId(this.authService.getAuthenticatedUserId()).subscribe(
       (data) => {
@@ -28,8 +27,4 @@ export class UserViewFeedbackComponent implements OnInit {
     );
   }
  
- 
 }
- 
- 
- 
