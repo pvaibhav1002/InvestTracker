@@ -21,10 +21,8 @@ export class AdminEditInvestmentComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       type: ['', Validators.required],
-      purchasePrice: [0, [Validators.required, Validators.min(0)]],
-      currentPrice: [0, [Validators.required, Validators.min(0)]],
+      price: [0, [Validators.required, Validators.min(0)]],
       quantity: [0, [Validators.required, Validators.min(0)]],
-      purchaseDate: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]],
       status: ['', Validators.required]
     });
   }
