@@ -1,46 +1,43 @@
 <h1>Add Investment</h1>
- 
+
 <form [formGroup]="investmentForm" (ngSubmit)="addNewInvestment(investmentForm)">
+  
   <label for="name">Name:</label>
   <input type="text" id="name" formControlName="name">
   <div *ngIf="f.name.touched && f.name.invalid">
     <div *ngIf="f.name.errors?.required">Name is required.</div>
     <div *ngIf="f.name.errors?.minlength">Name must be at least 5 characters.</div>
   </div>
- 
+
   <label for="description">Description:</label>
   <textarea id="description" formControlName="description" cols="30" rows="10"></textarea>
   <div *ngIf="f.description.touched && f.description.invalid">
     <div *ngIf="f.description.errors?.required">Description is required.</div>
     <div *ngIf="f.description.errors?.minlength">Description must be at least 15 characters.</div>
   </div>
+
  
   <label for="type">Type:</label>
   <select id="type" formControlName="type">
     <option value="">Select Type</option>
-    <option value="Stock1">Stock1</option>
-    <option value="Stock2">Stock2</option>
-    <option value="Stock3">Stock3</option>
-    <option value="Stock4">Stock4</option>
-    <option value="Stock5">Stock5</option>
+    <option value="Equity">Equity</option>
+    <option value="Mutual Fund">Mutual Fund</option>
+    <option value="Stocks">Stocks</option>
+    <option value="Real Estate">Real Estate</option>
+    <option value="Crypto">Crypto</option>
   </select>
   <div *ngIf="f.type.touched && f.type.invalid">
     <div *ngIf="f.type.errors?.required">Type is required.</div>
   </div>
- 
-  <label for="purchasePrice">Purchase Price:</label>
-  <input type="number" id="purchasePrice" formControlName="purchasePrice">
-  <div *ngIf="f.purchasePrice.touched && f.purchasePrice.invalid">
-    <div *ngIf="f.purchasePrice.errors?.required">Purchase Price is required.</div>
-    <div *ngIf="f.purchasePrice.errors?.min">Must be a positive number.</div>
+
+  
+  <label for="price">Price:</label>
+  <input type="number" id="price" formControlName="price">
+  <div *ngIf="f.price.touched && f.price.invalid">
+    <div *ngIf="f.price.errors?.required">Price is required.</div>
+    <div *ngIf="f.price.errors?.min">Must be a positive number.</div>
   </div>
- 
-  <label for="currentPrice">Current Price:</label>
-  <input type="number" id="currentPrice" formControlName="currentPrice">
-  <div *ngIf="f.currentPrice.touched && f.currentPrice.invalid">
-    <div *ngIf="f.currentPrice.errors?.required">Current Price is required.</div>
-    <div *ngIf="f.currentPrice.errors?.min">Must be a positive number.</div>
-  </div>
+
  
   <label for="quantity">Quantity:</label>
   <input type="number" id="quantity" formControlName="quantity">
@@ -48,31 +45,13 @@
     <div *ngIf="f.quantity.errors?.required">Quantity is required.</div>
     <div *ngIf="f.quantity.errors?.min">Must be a positive number.</div>
   </div>
- 
-  <label for="purchaseDate">Purchased Date:</label>
-  <input type="date" id="purchaseDate" formControlName="purchaseDate">
-  <div *ngIf="f.purchaseDate.touched && f.purchaseDate.invalid">
-    <div *ngIf="f.purchaseDate.errors?.required">Purchase Date is required.</div>
-  </div>
- 
-  <label for="status">Status:</label>
-  <select id="status" formControlName="status">
-    <option value="">Select Status</option>
-    <option value="Status1">Status1</option>
-    <option value="Status2">Status2</option>
-    <option value="Status3">Status3</option>
-    <option value="Status4">Status4</option>
-    <option value="Status5">Status5</option>
-  </select>
-  <div *ngIf="f.status.touched && f.status.invalid">
-    <div *ngIf="f.status.errors?.required">Status is required.</div>
-  </div>
+
  
   <button type="submit" [disabled]="investmentForm.invalid">Add Investment</button>
 </form>
- 
+
+
 <div *ngIf="addedInvestment">
-    <div>Investment added successfully!</div>
-    <button (click)="closeAddSuccessPage()">CLOSE</button>
+  <div>Investment added successfully!</div>
+  <button (click)="closeAddSuccessPage()">CLOSE</button>
 </div>
- 
