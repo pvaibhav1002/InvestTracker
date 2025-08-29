@@ -38,7 +38,7 @@
 
     <tbody>
         <tr *ngFor="let investment of investments,index as i">
-            <td >{{i+1}}</td>
+            <td>{{i+1}}</td>
             <td>{{investment.investmentId}}</td>
             <td>{{investment.name}}</td>
             <td>{{investment.description}}</td>
@@ -49,13 +49,13 @@
             <td>{{investment.purchaseDate}}</td>
             <td>{{investment.status}}</td>
             <td>
-                <button (click)="editInvestment">Edit</button>
-                <button (click)="deleteInvestment">Delete</button>
+                <button [routerLink]="['/edit-investment',investment.investmentId]">Edit</button>
+                <button (click)="deleteInvestment(investment.investmentId)">Delete</button>
 
             </td>
         </tr>
 
-        
+
 
     </tbody>
 </table>

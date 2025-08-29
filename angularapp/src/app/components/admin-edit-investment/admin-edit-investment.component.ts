@@ -12,17 +12,11 @@ import { InvestmentService } from 'src/app/services/investment.service';
   styleUrls: ['./admin-edit-investment.component.css']
 })
 export class AdminEditInvestmentComponent implements OnInit {
-  investment:Investment;
+  investment: Investment;
   investmentId: number;
   investmentForm: FormGroup;
-
-  constructor(
-    private fb: FormBuilder, private ar: ActivatedRoute, private is: InvestmentService, private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.investmentId = this.ar.snapshot.params['id'];
-
+  updated: boolean = false;
+  constructor(private fb: FormBuilder, private ar: ActivatedRoute, private is: InvestmentService, private router: Router) {
     this.investmentForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -33,13 +27,12 @@ export class AdminEditInvestmentComponent implements OnInit {
       purchaseDate: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]],
       status: ['', Validators.required]
     });
-
-    this.getInvestment();
   }
 
-  getInvestment() {
+  ngOnInit(): void {
+    this.investmentId = this.ar.snapshot.params['id'];
     this.is.getInvestmentById(this.investmentId).subscribe((data) => {
-      this.investment=data;
+      this.investment = data;
       this.investmentForm.patchValue(data);
     });
   }
@@ -47,10 +40,16 @@ export class AdminEditInvestmentComponent implements OnInit {
   updateInvestment() {
     if (this.investmentForm.valid) {
       this.is.updateInvestment(this.investmentId, this.investmentForm.value).subscribe(() => {
-        alert('Investment updated successfully!');
-        this.router.navigate(['/admin-view-investment']);
+        console.log('Investment updated successfully!');
+        this.updated = true;
       });
     }
+  }
+
+  closeModal() {
+    this.updated = false;
+    this.router.navigate(['/admin-view-investment']);
+
   }
 
   get f() {

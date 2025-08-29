@@ -28,7 +28,7 @@ public class InvestmentController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<Investment> addInvestment(@RequestBody Investment investment) {
         Investment newInvestment = investmentService.addInvestment(investment);
         if (newInvestment == null) {

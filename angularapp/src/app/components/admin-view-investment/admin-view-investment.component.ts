@@ -8,18 +8,22 @@ import { InvestmentService } from 'src/app/services/investment.service';
   styleUrls: ['./admin-view-investment.component.css']
 })
 export class AdminViewInvestmentComponent implements OnInit {
-
+  
   investments: Investment[];
   ogInvestments: Investment[];
   investment: Investment;
+  constructor(private investmentService:InvestmentService) { }
+
+  ngOnInit(): void {
+    this.getAllInvestments();
+  }
 
   getAllInvestments(){
-    this.is.getAllInvestments().subscribe((data)=>{
+    this.investmentService.getAllInvestments().subscribe((data)=>{
       this.investments=data;
       this.ogInvestments=data;
     })
   }
-
 
   filterSearch(searchString: string){
     this.investments=this.ogInvestments.filter((data)=> {
@@ -37,38 +41,17 @@ export class AdminViewInvestmentComponent implements OnInit {
   filterCategory(option: string){
     if(option=="AllTypes"){
       this.investments=this.ogInvestments;
+    }else{
+      this.investments=this.ogInvestments.filter((data)=> data.type==option);
     }
-
-    else if(option=="Stock1"){
-      this.investments=this.ogInvestments.filter((data)=> data.type=="Stock1");
-    }
-
-    else if(option=="Stock2"){
-      this.investments=this.ogInvestments.filter((data)=> data.type=="Stock2");
-    }
-
-    else if(option=="Stock3"){
-      this.investments=this.ogInvestments.filter((data)=> data.type=="Stock3");
-    }
-
-    else if(option=="Stock4"){
-      this.investments=this.ogInvestments.filter((data)=> data.type=="Stock4");
-    }
-
-    else if(option=="Stock5"){
-      this.investments=this.ogInvestments.filter((data)=> data.type=="Stock5");
-    }
-
     return this.investments;
 
   }
 
-
-
-  constructor(private is:InvestmentService) { }
-
-  ngOnInit(): void {
-    this.getAllInvestments();
+  deleteInvestment(investmentId: number){
+    this.investmentService.deleteInvestment(investmentId).subscribe((data)=>{
+      this.getAllInvestments()
+    });
   }
 
 }

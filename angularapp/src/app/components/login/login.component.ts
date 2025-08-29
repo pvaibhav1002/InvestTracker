@@ -23,13 +23,7 @@ export class LoginComponent implements OnInit {
         this.errorMessage = "Invalid credentials or role mismatch.";
         return;
       }
-      // if (res.user == 'ADMIN') {
-      //   this.router.navigate(['/admin']);
-      // }
-      // else if (res.role == 'USER')
-      //   this.router.navigate(['/user']);
-      // else
-      //   this.router.navigate(['/']);
+      this.router.navigate(['/']);
     });
   }
 

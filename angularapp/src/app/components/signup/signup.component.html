@@ -51,8 +51,8 @@
     <div class="form-group">
         <select name="userRole" [(ngModel)]="user.userRole" required #roleField="ngModel">
             <option value="" disabled selected>Select Role</option>
-            <option value="ADMIN">Admin</option>
-            <option value="USER">User</option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
         </select>
         <div *ngIf="roleField.invalid && roleField.touched">
             <small>Role is required.</small>

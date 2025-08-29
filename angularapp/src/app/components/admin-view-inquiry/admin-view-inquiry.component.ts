@@ -22,25 +22,8 @@ export class AdminViewInquiryComponent implements OnInit {
 
   constructor(private inquiryService: InvestmentInquiryService) { }
 
-
-  loadDummyData(): void {
-    this.inquiries = [
-      {
-        inquiryId: 1,
-        user: { userId: 101, username: 'Khushbu', email: 'khushbu@example.com' },
-        investment: { investmentId: 201, name: 'Qatar Mutual Funds' },
-        message: 'Can I get info on these?',
-        status: 'Pending',
-        inquiryDate: '2025-08-25T10:00:00Z',
-        priority: 'High',
-        adminResponse: '',
-        contactDetails: '9876543210'
-      },
-    ]
-  }
-
   ngOnInit(): void {
-    this.loadDummyData();
+    this.fetchAllInquiries();
   }
 
 

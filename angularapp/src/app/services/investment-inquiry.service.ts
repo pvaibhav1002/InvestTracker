@@ -19,8 +19,8 @@ export class InvestmentInquiryService {
     return this.httpClient.get<InvestmentInquiry[]>(`${APP_URL}/inquiries`);
   }
 
-  getInquiriesByUserId(userId:number):Observable<InvestmentInquiry>{
-    return this.httpClient.get<InvestmentInquiry>(`${APP_URL}/inquiries/user/${userId}`);
+  getInquiriesByUserId(userId:number):Observable<InvestmentInquiry[]>{
+    return this.httpClient.get<InvestmentInquiry[]>(`${APP_URL}/inquiries/user/${userId}`);
   }
 
   updateInquiry(inquiryId:number, inquiry:InvestmentInquiry):Observable<InvestmentInquiry>{
@@ -30,8 +30,4 @@ export class InvestmentInquiryService {
   deleteInquiry(inquiryId:number):Observable<void>{
     return this.httpClient.delete<void>(`${APP_URL}/inquiries/${inquiryId}`);
   }
-
-  
-
-
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { JwtService } from 'src/app/services/jwt.service';
 
 @Component({
   selector: 'app-usernav',
@@ -13,33 +12,19 @@ export class UsernavComponent implements OnInit {
   username: string = '';
   userRole: string = '';
 
-  constructor(private authService: AuthService, private jwtService: JwtService,private router:Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
 
     if (this.authService.isLoggedin()) {
-      this.username = this.jwtService.getAuthenticatedUsername();
-      this.userRole = this.jwtService.getAuthenticatedUserRole();
+      this.username = this.authService.getAuthenticatedUsername();
+      this.userRole = this.authService.getAuthenticatedUserRole();
     }
 
   }
-
 
   onLogout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -82,11 +82,11 @@ export class AuthService {
 
 
   isAdmin(): boolean {
-    return this.getAuthenticatedUserRole() === 'ADMIN';
+    return this.getAuthenticatedUserRole() === 'Admin';
   }
 
 
   isUser(): boolean {
-    return this.getAuthenticatedUserRole() === 'USER';
+    return this.getAuthenticatedUserRole() === 'User';
   }
 }

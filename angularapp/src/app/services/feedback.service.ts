@@ -16,8 +16,8 @@ export class FeedbackService {
     return this.httptClient.post<Feedback>(`${APP_URL}/feedback`,feedback);
   }
 
-  getAllFeedbacksByUserId(userId:number):Observable<Feedback>{
-    return this.httptClient.get<Feedback>(`${APP_URL}/feedback/user/${userId}`);
+  getAllFeedbacksByUserId(userId:number):Observable<Feedback[]>{
+    return this.httptClient.get<Feedback[]>(`${APP_URL}/feedback/user/${userId}`);
   }
 
   deleteFeedback(feedbackId:number):Observable<void>{
