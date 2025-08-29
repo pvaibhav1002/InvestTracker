@@ -1,12 +1,10 @@
 <div class="inquiry-container">
     <h2>Submit Your Inquiry</h2>
- 
+
     <form (ngSubmit)="onSubmit()" #inquiryForm="ngForm">
         <label for="investment">Investment</label>
-        <input type="text" id="investment" name="investment" [(ngModel)]="investmentName" required #investment="ngModel" placeholder="Enter investment" />
-        <div *ngIf="investment.invalid && investment.touched">
-            <small>Investment is required.</small>
-        </div>
+        <input type="text" id="investment" name="investment" [(ngModel)]="investmentName" #investment="ngModel"
+            placeholder="Enter investment" disabled />
 
         <label for="message">Message</label>
         <textarea id="message" name="message" [(ngModel)]="newInvest.message" required minlength="10" #message="ngModel"
@@ -25,13 +23,6 @@
         </select>
         <div *ngIf="priority.invalid && priority.touched">
             <small>Priority is required.</small>
-        </div>
-
-        <label for="contactDetails">Contact Details</label>
-        <input type="text" id="contactDetails" name="contactDetails" [(ngModel)]="newInvest.contactDetails" required
-            #contactDetails="ngModel" placeholder="Enter your contact details" />
-        <div *ngIf="contactDetails.invalid && contactDetails.touched">
-            <small>Contact details are required.</small>
         </div>
 
         <button type="submit" [disabled]="inquiryForm.invalid">
