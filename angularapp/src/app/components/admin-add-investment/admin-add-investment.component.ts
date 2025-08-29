@@ -10,21 +10,33 @@ import { InvestmentService } from 'src/app/services/investment.service';
 export class AdminAddInvestmentComponent implements OnInit {
   investmentForm: FormGroup;
   addedInvestment: boolean = false;
+  investmentData: any;
+  date:Date=new Date();
   constructor(private investmentService: InvestmentService, private fb: FormBuilder, private router: Router) {
     this.investmentForm = fb.group({
-      name: ['', [Validators.required,Validators.minLength(5)]],
+
+      name: ['', [Validators.required, Validators.minLength(5)]],
       description: ['', [Validators.required, Validators.minLength(15)]],
       type: ['', Validators.required],
-      purchasePrice: ['', [Validators.required, Validators.min(0.1)]],
-      currentPrice: ['', [Validators.required, Validators.min(0.1)]],
-      quantity: ['', [Validators.required, Validators.min(1)]],
-      purchaseDate: ['', Validators.required],
-      status: ['', Validators.required],
+      price: ['', [Validators.required, Validators.min(0)]],
+      quantity: ['', [Validators.required, Validators.min(1)]]
+
     })
   }
- 
-  addNewInvestment(form:FormGroup) {
-    this.investmentService.addInvestment(form.value).subscribe((data) => {
+
+  addNewInvestment(form: FormGroup) {
+
+    this.investmentData = {
+      name: form.value.name,
+      description: form.value.description,
+      type: form.value.type,
+      price: form.value.price,
+      quantity: form.value.quantity,
+      postedDate: this.date.toDateString(),
+      status: 'Active'
+    };
+
+    this.investmentService.addInvestment(this.investmentData).subscribe((data) => {
       this.addedInvestment = true;
       console.log("Added investment");
     })
