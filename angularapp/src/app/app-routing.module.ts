@@ -15,23 +15,24 @@ import { UserViewInquiryComponent } from './components/user-view-inquiry/user-vi
 import { UserViewInvestmentComponent } from './components/user-view-investment/user-view-investment.component';
 import { AdminAddInvestmentComponent } from './components/admin-add-investment/admin-add-investment.component';
 import { AdminEditInvestmentComponent } from './components/admin-edit-investment/admin-edit-investment.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {path:'',component:HomePageComponent},
   {path:'home',component:HomePageComponent},
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent},
-  {path:'add-investment',component:AdminAddInvestmentComponent},
-  {path:'admin-console',component:AdminConsoleComponent},
-  {path:'edit-investment/:id',component:AdminEditInvestmentComponent},
-  {path:'admin-feedback',component:AdminViewFeedbackComponent},
-  {path:'admin-inquiry',component:AdminViewInquiryComponent},
-  {path:'admin-view-investment',component:AdminViewInvestmentComponent},
-  {path:'user-add-feedback',component:UserAddFeedbackComponent},
-  {path:'user-add-inquiry/:id',component:UserAddInquiryComponent},
-  {path:'user-view-feedback',component:UserViewFeedbackComponent},
-  {path:'user-view-inquiry',component:UserViewInquiryComponent},
-  {path:'user-view-investment',component:UserViewInvestmentComponent},
+  {path:'add-investment',component:AdminAddInvestmentComponent,canActivate: [AuthGuard], data: { role: 'Admin' } },
+  {path:'admin-console',component:AdminConsoleComponent,canActivate: [AuthGuard], data: { role: 'Admin' } },
+  {path:'edit-investment/:id',component:AdminEditInvestmentComponent,canActivate: [AuthGuard], data: { role: 'Admin' } },
+  {path:'admin-feedback',component:AdminViewFeedbackComponent,canActivate: [AuthGuard], data: { role: 'Admin' } },
+  {path:'admin-inquiry',component:AdminViewInquiryComponent,canActivate: [AuthGuard], data: { role: 'Admin' } },
+  {path:'admin-view-investment',component:AdminViewInvestmentComponent,canActivate: [AuthGuard], data: { role: 'Admin' } },
+  {path:'user-add-feedback',component:UserAddFeedbackComponent,canActivate: [AuthGuard], data: { role: 'User' } },
+  {path:'user-add-inquiry/:id',component:UserAddInquiryComponent,canActivate: [AuthGuard], data: { role: 'User' } },
+  {path:'user-view-feedback',component:UserViewFeedbackComponent,canActivate: [AuthGuard], data: { role: 'User' } },
+  {path:'user-view-inquiry',component:UserViewInquiryComponent,canActivate: [AuthGuard], data: { role: 'User' } },
+  {path:'user-view-investment',component:UserViewInvestmentComponent,canActivate: [AuthGuard], data: { role: 'User' } },
   {path:'error',component:ErrorComponent},
   {path:'**',component:ErrorComponent}
 ];
