@@ -25,7 +25,7 @@ public class InvestmentServiceImpl implements InvestmentService {
         if (investmentRepo.existsByName(investment.getName())) {
             throw new DuplicateInvestmentException("Investment already exists");
         }
-        if (investment.getCurrentPrice() < 0 || investment.getPurchasePrice() < 0) {
+        if (investment.getPrice() < 0) {
             throw new InvestmentException("Price can't be negative");
         }
         if (investment.getQuantity() < 0) {
@@ -81,11 +81,10 @@ public class InvestmentServiceImpl implements InvestmentService {
         Optional<Investment> optInvest = investmentRepo.findById(investmentId);
         if (optInvest.isPresent()) {
             Investment invest = optInvest.get();
-            invest.setCurrentPrice(updatedInvestment.getCurrentPrice());
             invest.setDescription(updatedInvestment.getDescription());
             invest.setName(updatedInvestment.getName());
-            invest.setPurchaseDate(updatedInvestment.getPurchaseDate());
-            invest.setPurchasePrice(updatedInvestment.getPurchasePrice());
+            invest.setPostedDate(updatedInvestment.getPostedDate());
+            invest.setPrice(updatedInvestment.getPrice());
             invest.setQuantity(updatedInvestment.getQuantity());
             invest.setStatus(updatedInvestment.getStatus());
             invest.setType(updatedInvestment.getType());

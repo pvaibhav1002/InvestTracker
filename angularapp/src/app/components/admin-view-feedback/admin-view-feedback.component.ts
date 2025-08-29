@@ -9,20 +9,23 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 export class AdminViewFeedbackComponent implements OnInit {
 
   feedbacks = [];
+  filterFeedbacks = [];
   selectedUser: any = null;
   selectedInvestment: any = null;
 
-  constructor(private feedbackService: FeedbackService) {}
+
+  constructor(private feedbackService: FeedbackService) { }
 
   ngOnInit(): void {
     this.getFeedbacks();
-    
+
   }
 
   getFeedbacks(): void {
     this.feedbackService.getFeedbacks().subscribe(
       (data) => {
         this.feedbacks = data;
+        this.filterFeedbacks = data;
       },
       (error) => {
         console.error('Error fetching feedback', error);
@@ -42,6 +45,44 @@ export class AdminViewFeedbackComponent implements OnInit {
     this.selectedUser = null;
     this.selectedInvestment = null;
   }
-}
 
+  filterByCategory(option: string) {
+    if (option == 'All') {
+      this.filterFeedbacks = this.feedbacks;
+    }
+    else {
+      this.filterFeedbacks = this.feedbacks.filter((feedback) => {
+        feedback.category == option
+      });
+    }
+  }
+
+
+  ascDate: boolean = true;
+
+  sortByDate() {
+    if (this.ascDate)
+      this.feedbacks.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    else
+      this.feedbacks.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    this.ascDate = !this.ascDate;
+  }
+
+  searchByText:string='';
+
+  searchBasedOnText() {
+    this.filterFeedbacks = this.feedbacks;
+    this.filterFeedbacks = this.feedbacks.filter((feed) => {
+      let a = feed.user.username.toLowerCase().includes(this.searchByText.toLowerCase()) || feed.investment.name.toLowerCase().includes(this.searchByText.toLowerCase()) ||
+        feed.category.toLowerCase().includes(this.searchByText.toLowerCase())||feed.feedbackText.toLowerCase().includes(this.searchByText.toLowerCase());
+      return a;
+    });
+  }
+
+
+
+
+
+
+}
 

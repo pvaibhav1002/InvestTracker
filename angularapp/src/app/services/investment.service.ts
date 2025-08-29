@@ -33,7 +33,4 @@ export class InvestmentService {
   deleteInvestment(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${APP_URL}/investments/${id}`);
   }
-
-
-
 }

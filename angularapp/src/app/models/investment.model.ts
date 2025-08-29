@@ -3,9 +3,8 @@ export interface Investment{
     name?:string;
     description?:string;
     type?:string;
-    purchasePrice?:number;
-    currentPrice?:number;
+    price?:number;
     quantity?:number;
-    purchaseDate?:string;
+    postedDate?:string;
     status?:string;
 }

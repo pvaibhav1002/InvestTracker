@@ -1,14 +1,37 @@
 <div class="container">
     <h2>Yours Inquiries</h2>
 
+    <input [(ngModel)]="searchText" class="form-control mb-3" placeholder="Search..." (input)="filterText()">
+
+
+    <div>
+        <select [(ngModel)]="filterTolerance" class="form-select" (change)="applyFilters()">
+            <option value="">Risk Tolerance</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
+    </div>
+
+
+    <div>
+        <select [(ngModel)]="filterStatus" class="form-select" (change)="applyFilters()">
+            <option value="">All Status</option>
+            <option value="Pending">Pending</option>
+            <option value="Resolved">Resolved</option>
+        </select>
+    </div>
+
     <div *ngIf="invests.length < 0">You have not submitted any inquiries yet.</div>
 
     <table class="table" border="1">
         <thead>
             <tr>
                 <th>Investment</th>
-                <th>Message</th>
-                <th>Priority</th>
+                <th>Risk Tolerance</th>
+                <th>Expected Return of Investment</th>
+                <th>Reason for Interest</th>
+                <th>Questions</th>
                 <th>Status</th>
                 <th>Admin Response</th>
             </tr>
@@ -16,8 +39,10 @@
         <tbody>
             <tr *ngFor="let inquiry of invests">
                 <td>{{ inquiry.investment.name }}</td>
-                <td>{{ inquiry.message }}</td>
-                <td>{{ inquiry.priority }}</td>
+                <td>{{ inquiry.riskTolerance }}</td>
+                <td>{{ inquiry.expectedReturn }}</td>
+                <td>{{ inquiry.interest }}</td>
+                <td>{{ inquiry.questions }}</td>
                 <td>{{ inquiry.status }}</td>
                 <td>
                     {{ inquiry.adminResponse ? inquiry.adminResponse : 'No response yet' }}

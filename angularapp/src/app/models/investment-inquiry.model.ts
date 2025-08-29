@@ -12,4 +12,8 @@ export interface InvestmentInquiry{
     adminResponse?:string;
     priority:string;
     contactDetails?:string;
+    riskTolerance:string;
+    interest:string;
+    expectedReturn:number;
+    questions:string;
 }

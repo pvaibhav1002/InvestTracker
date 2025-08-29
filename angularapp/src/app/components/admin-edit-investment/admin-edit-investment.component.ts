@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Investment } from 'src/app/models/investment.model';
-
-
+ 
+ 
 import { InvestmentService } from 'src/app/services/investment.service';
-
+ 
 @Component({
   selector: 'app-admin-edit-investment',
   templateUrl: './admin-edit-investment.component.html',
@@ -21,10 +21,8 @@ export class AdminEditInvestmentComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       type: ['', Validators.required],
-      purchasePrice: [0, [Validators.required, Validators.min(0)]],
-      currentPrice: [0, [Validators.required, Validators.min(0)]],
+      price: [0, [Validators.required, Validators.min(0)]],
       quantity: [0, [Validators.required, Validators.min(0)]],
-      purchaseDate: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]],
       status: ['', Validators.required]
     });
   }
@@ -36,7 +34,7 @@ export class AdminEditInvestmentComponent implements OnInit {
       this.investmentForm.patchValue(data);
     });
   }
-
+ 
   updateInvestment() {
     if (this.investmentForm.valid) {
       this.is.updateInvestment(this.investmentId, this.investmentForm.value).subscribe(() => {

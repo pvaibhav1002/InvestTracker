@@ -12,16 +12,17 @@ import { InvestmentService } from 'src/app/services/investment.service';
 })
 export class UserAddInquiryComponent implements OnInit {
   showPopup: boolean = false;
-  investmentName: string="";
-  id:number=null;
+  investmentName: string = "";
+  id: number = null;
   newInvest: InvestmentInquiry;
-  
-  constructor(private investmentInquiryService: InvestmentInquiryService,private authService : AuthService, private investmentService:InvestmentService, private router: Router, private activatedRoute:ActivatedRoute) { }
-  
+
+  constructor(private investmentInquiryService: InvestmentInquiryService, private authService: AuthService, private investmentService: InvestmentService, private router: Router, private activatedRoute: ActivatedRoute) { }
+
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params=>{
-      this.id=params['id'];
-      this.investmentService.getInvestmentById(params['id']).subscribe(data=>{
+    this.activatedRoute.params.subscribe(params => {
+      this.id = params['id'];
+      this.investmentService.getInvestmentById(params['id']).subscribe(data => {
+
         this.investmentName = data.name;
       })
     });
@@ -34,7 +35,11 @@ export class UserAddInquiryComponent implements OnInit {
       responseDate: '',
       adminResponse: '',
       priority: '',
-      contactDetails: ''
+      contactDetails: '',
+      riskTolerance: '',
+      interest: '',
+      expectedReturn: 0,
+      questions:''
     };
   }
 
@@ -49,7 +54,7 @@ export class UserAddInquiryComponent implements OnInit {
       }
     });
   }
- 
+
   closePopup(): void {
     this.showPopup = false;
     this.router.navigate(['/user-view-inquiry']);

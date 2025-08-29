@@ -12,33 +12,30 @@ public class Investment {
     private String name;
     private String description;
     private String type;
-    private double purchasePrice;
-    private double currentPrice;
+    private double price;
     private int quantity;
-    private String purchaseDate;
+    private String postedDate;
     private String status;
 
     public Investment() {
         this.name = "";
         this.description = "";
         this.type = "";
-        this.purchasePrice = 0;
-        this.currentPrice = 0;
+        this.price = 0;
         this.quantity = 0;
-        this.purchaseDate = "";
+        this.postedDate = "";
         this.status = "";
     }
 
-    public Investment(Long investmentId, String name, String description, String type, double purchasePrice,
-            double currentPrice, int quantity, String purchaseDate, String status) {
+    public Investment(Long investmentId, String name, String description, String type, 
+            double price, int quantity, String postedDate, String status) {
         this.investmentId = investmentId;
         this.name = name;
         this.description = description;
         this.type = type;
-        this.purchasePrice = purchasePrice;
-        this.currentPrice = currentPrice;
+        this.price = price;
         this.quantity = quantity;
-        this.purchaseDate = purchaseDate;
+        this.postedDate = postedDate;
         this.status = status;
     }
 
@@ -74,20 +71,12 @@ public class Investment {
         this.type = type;
     }
 
-    public double getPurchasePrice() {
-        return purchasePrice;
+    public double getPrice() {
+        return price;
     }
 
-    public void setPurchasePrice(double purchasePrice) {
-        this.purchasePrice = purchasePrice;
-    }
-
-    public double getCurrentPrice() {
-        return currentPrice;
-    }
-
-    public void setCurrentPrice(double currentPrice) {
-        this.currentPrice = currentPrice;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getQuantity() {
@@ -98,12 +87,12 @@ public class Investment {
         this.quantity = quantity;
     }
 
-    public String getPurchaseDate() {
-        return purchaseDate;
+    public String getPostedDate() {
+        return postedDate;
     }
 
-    public void setPurchaseDate(String purchaseDate) {
-        this.purchaseDate = purchaseDate;
+    public void setPostedDate(String postedDate) {
+        this.postedDate = postedDate;
     }
 
     public String getStatus() {
@@ -113,5 +102,7 @@ public class Investment {
     public void setStatus(String status) {
         this.status = status;
     }
+
+   
 
 }
