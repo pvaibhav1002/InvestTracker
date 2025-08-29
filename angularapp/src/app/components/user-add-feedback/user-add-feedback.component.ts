@@ -53,7 +53,7 @@ export class UserAddFeedbackComponent implements OnInit {
       });
     }
   }
- 
+
   cancel(): void {
     this.router.navigate(['/']);
   }
