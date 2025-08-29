@@ -1,8 +1,8 @@
 <div class="container">
   <h2>Admin Inquiry Panel</h2>
-
+ 
   <input [(ngModel)]="searchText" class="form-control mb-3" placeholder="Search inquiries..." (input)="filterText()">
-
+ 
   <div class="row mb-3">
     <div class="col-md-4">
       <select [(ngModel)]="filterStatus" class="form-select" (change)="applyFilters()">
@@ -20,7 +20,7 @@
       </select>
     </div>
   </div>
-
+ 
   <table border="1" *ngIf="inquiries.length > 0; else noInquiries" class="table table-bordered">
     <thead>
       <tr>
@@ -60,11 +60,11 @@
       </tr>
     </tbody>
   </table>
-
+ 
   <ng-template #noInquiries>
     <p>No inquiries found.</p>
   </ng-template>
-
+ 
   <div *ngIf="showResForm" class="mt-4">
     <h4>Add Admin Response</h4>
     <textarea [(ngModel)]="responseText" rows="3" class="form-control" placeholder="Enter your response"></textarea>
@@ -74,5 +74,5 @@
       Response submitted successfully!
     </div>
   </div>
-  
+ 
 </div>

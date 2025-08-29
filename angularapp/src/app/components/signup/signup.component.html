@@ -6,7 +6,7 @@
             <small *ngIf="usernameField.errors?.required">Username is required.</small>
         </div>
     </div>
-
+ 
     <div class="form-group">
         <input type="email" name="email" placeholder="Email" [(ngModel)]="user.email" required email
             #emailField="ngModel" />
@@ -15,7 +15,7 @@
             <small *ngIf="emailField.errors?.email">Invalid email format.</small>
         </div>
     </div>
-
+ 
     <div class="form-group">
         <input type="text" name="mobileNumber" placeholder="Mobile Number" [(ngModel)]="user.mobileNumber" required
             pattern="^[0-9]{10}$" #mobileField="ngModel" />
@@ -24,7 +24,7 @@
             <small *ngIf="mobileField.errors?.pattern">Enter a valid 10-digit mobile number.</small>
         </div>
     </div>
-
+ 
     <div class="form-group">
         <input type="password" name="password" placeholder="Password" [(ngModel)]="user.password" required
             pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" #passwordField="ngModel" />
@@ -36,7 +36,7 @@
             </small>
         </div>
     </div>
-
+ 
     <div class="form-group">
         <input type="password" name="confirmPassword" placeholder="Confirm Password" [(ngModel)]="confirmPassword"
             required #confirmPasswordField="ngModel" />
@@ -47,22 +47,23 @@
             <small>Passwords do not match.</small>
         </div>
     </div>
-
+ 
     <div class="form-group">
         <select name="userRole" [(ngModel)]="user.userRole" required #roleField="ngModel">
             <option value="" disabled selected>Select Role</option>
-            <option value="ADMIN">Admin</option>
-            <option value="USER">User</option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
         </select>
         <div *ngIf="roleField.invalid && roleField.touched">
             <small>Role is required.</small>
         </div>
     </div>
-
+ 
     <button type="submit" class="btn btn-success" >Signup</button>
-
+ 
     <p>Already have an account? <a routerLink="/login">Login</a></p>
-
+ 
     <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 </form>
+ 
