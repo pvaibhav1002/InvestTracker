@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { FeedbackService } from 'src/app/services/feedback.service';
-
+ 
 @Component({
   selector: 'app-user-view-feedback',
   templateUrl: './user-view-feedback.component.html',
@@ -8,53 +9,27 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 })
 export class UserViewFeedbackComponent implements OnInit {
   userFeedbacks: any[] = [];
-  noFeedbackFound = false;
-
-  constructor(private feedbackService: FeedbackService) {}
-
+ 
+  constructor(private feedbackService: FeedbackService, private authService:AuthService) { }
+ 
   ngOnInit(): void {
-    // this.getUserFeedbacks();
-    this.loadSampleFeedbacks();
+    this.getUserFeedbacks();
   }
-
-
-  loadSampleFeedbacks(): void {
-    this.userFeedbacks = [
-      {
-        feedbackText: 'Excellent service and timely updates.',
-        date: '2025-08-01',
-        category: 'Service',
-        investment: {
-          name: 'Growth Equity Fund'
-        }
+ 
+ 
+  getUserFeedbacks(): void {
+    this.feedbackService.getAllFeedbacksByUserId(this.authService.getAuthenticatedUserId()).subscribe(
+      (data) => {
+        this.userFeedbacks = data;
       },
-      {
-        feedbackText: 'Returns are lower than expected.',
-        date: '2025-07-15',
-        category: 'Returns',
-        investment: {
-          name: 'Balanced Portfolio'
-        }
+      (error) => {
+        console.error('Error fetching user feedbacks:', error);
       }
-    ];
-
-    this.noFeedbackFound = this.userFeedbacks.length === 0;
+    );
   }
+ 
+ 
 }
-
-
-  // getUserFeedbacks(): void {
-  //   this.feedbackService.getFeedbacks().subscribe(
-  //     (data) => {
-  //       this.userFeedbacks = data;
-  //       this.noFeedbackFound = data.length === 0;
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching user feedbacks:', error);
-  //       this.noFeedbackFound = true;
-  //     }
-  //   );
-  // }
-
-
-
+ 
+ 
+ 
