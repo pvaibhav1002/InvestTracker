@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
 import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
-
+ 
 @Component({
   selector: 'app-admin-view-inquiry',
   templateUrl: './admin-view-inquiry.component.html',
   styleUrls: ['./admin-view-inquiry.component.css']
 })
 export class AdminViewInquiryComponent implements OnInit {
-
+ 
   inquiries: InvestmentInquiry[] = [];
   searchText: string = '';
   selectedInquiryId: number | null = null;
@@ -18,32 +18,15 @@ export class AdminViewInquiryComponent implements OnInit {
   filterStatus: string = '';
   filterPriority: string = '';
   originalInquiries: InvestmentInquiry[] = [];
-
-
+ 
+ 
   constructor(private inquiryService: InvestmentInquiryService) { }
-
-
-  loadDummyData(): void {
-    this.inquiries = [
-      {
-        inquiryId: 1,
-        user: { userId: 101, username: 'Khushbu', email: 'khushbu@example.com' },
-        investment: { investmentId: 201, name: 'Qatar Mutual Funds' },
-        message: 'Can I get info on these?',
-        status: 'Pending',
-        inquiryDate: '2025-08-25T10:00:00Z',
-        priority: 'High',
-        adminResponse: '',
-        contactDetails: '9876543210'
-      },
-    ]
-  }
-
+ 
   ngOnInit(): void {
-    this.loadDummyData();
+    this.fetchAllInquiries();
   }
-
-
+ 
+ 
   updateStatus(inquiry: InvestmentInquiry): void {
     this.inquiryService.updateInquiry(inquiry.inquiryId,inquiry).subscribe({
       next: () => {
@@ -54,7 +37,7 @@ export class AdminViewInquiryComponent implements OnInit {
       }
     });
   }
-
+ 
   fetchAllInquiries(): void {
     this.inquiryService.getAllInquiries().subscribe({
       next: (data) => {
@@ -66,7 +49,7 @@ export class AdminViewInquiryComponent implements OnInit {
       }
     });
   }
-
+ 
   filterText() {
     this.inquiries = this.inquiries.filter((inquiry) => {
       let a = inquiry.investment.name.toLowerCase().includes(this.searchText.toLowerCase());
@@ -75,21 +58,21 @@ export class AdminViewInquiryComponent implements OnInit {
       return a || b || c;
     })
   }
-
+ 
   showResponseForm(id: number): void {
     this.showResForm =true;
     this.selectedInquiryId = id;
     const inquiry = this.inquiries.find(i => i.inquiryId === id);
     this.responseText = inquiry?.adminResponse || '';
   }
-
+ 
   submitResponse(): void {
     const inquiry = this.inquiries.find(i => i.inquiryId === this.selectedInquiryId);
     if (inquiry) {
       inquiry.adminResponse = this.responseText;
       inquiry.status = 'Responded';
       inquiry.responseDate = new Date().toISOString();
-
+ 
       this.inquiryService.updateInquiry(inquiry.inquiryId, inquiry).subscribe({
         next: () => {
           this.responseSubmitted = true;
@@ -102,16 +85,16 @@ export class AdminViewInquiryComponent implements OnInit {
         }
       });
     }
-
+ 
     this.selectedInquiryId = null;
     this.responseText = '';
   }
-
+ 
   cancel(){
     this.showResForm=false;
   }
-
-
+ 
+ 
   applyFilters(): void {
     this.inquiries = this.originalInquiries.filter(inquiry => {
       const statusMatch = this.filterStatus === '' || inquiry.status === this.filterStatus;
@@ -119,9 +102,9 @@ export class AdminViewInquiryComponent implements OnInit {
       return statusMatch && priorityMatch;
     });
   }
-
+ 
   deleteInquiry(id: number): void {
     this.inquiryService.deleteInquiry(id).subscribe((data) => { });
-
+ 
   }
 }
