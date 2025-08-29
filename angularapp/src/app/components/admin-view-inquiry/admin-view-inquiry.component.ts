@@ -51,6 +51,7 @@ export class AdminViewInquiryComponent implements OnInit {
   }
  
   filterText() {
+    this.inquiries=this.originalInquiries;
     this.inquiries = this.inquiries.filter((inquiry) => {
       let a = inquiry.investment.name.toLowerCase().includes(this.searchText.toLowerCase());
       let b = inquiry.message.toLowerCase().includes(this.searchText.toLowerCase());
@@ -92,6 +93,10 @@ export class AdminViewInquiryComponent implements OnInit {
  
   cancel(){
     this.showResForm=false;
+  }
+
+  sortByDate(){
+    this.inquiries= this.originalInquiries.sort((inquiry1,inquiry2)=> inquiry1.inquiryDate.localeCompare(inquiry2.inquiryDate));
   }
  
  

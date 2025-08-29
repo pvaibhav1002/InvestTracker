@@ -1,17 +1,21 @@
 <div class="container">
   <h2>Admin Inquiry Panel</h2>
  
-  <input [(ngModel)]="searchText" class="form-control mb-3" placeholder="Search inquiries..." (input)="filterText()">
+  <label for="searchText">Search: </label>
+  <input [(ngModel)]="searchText" class="form-control mb-3" placeholder="Search inquiries..."  (input)="filterText()">
  
   <div class="row mb-3">
     <div class="col-md-4">
+      <label for="filterStatus">Filter by Status: </label>
       <select [(ngModel)]="filterStatus" class="form-select" (change)="applyFilters()">
         <option value="">All Status</option>
         <option value="Pending">Pending</option>
         <option value="Responded">Responded</option>
       </select>
     </div>
+
     <div class="col-md-4">
+      <label for="filterPriority">Filter by Priority: </label>
       <select [(ngModel)]="filterPriority" class="form-select" (change)="applyFilters()">
         <option value="">All Priorities</option>
         <option value="High">High</option>
@@ -42,13 +46,13 @@
         <td>{{ inquiry.user.username }}</td>
         <td>{{ inquiry.investment.name }}</td>
         <td>{{ inquiry.message }}</td>
-        <td>
-          <select [(ngModel)]="inquiry.status" (change)="updateStatus(inquiry)" class="form-select form-select-sm">
+        <td>{{inquiry.status}}</td>
+          <!-- <select [(ngModel)]="inquiry.status" (change)="updateStatus(inquiry)" class="form-select form-select-sm">
             <option value="Pending">Pending</option>
             <option value="Responded">Responded</option>
             <option value="Closed">Closed</option>
-          </select>
-        </td>
+          </select> -->
+        
         <td>{{ inquiry.priority }}</td>
         <td>{{ inquiry.inquiryDate | date:'short' }}</td>
         <td>{{ inquiry.responseDate ? (inquiry.responseDate | date:'short') : 'N/A' }}</td>
