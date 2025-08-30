@@ -3,6 +3,8 @@ package com.examly.springapp.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Investment {
@@ -15,7 +17,13 @@ public class Investment {
     private double price;
     private int quantity;
     private String postedDate;
+    private String capSize;
+    private String sector;
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Investment() {
         this.name = "";
@@ -24,11 +32,14 @@ public class Investment {
         this.price = 0;
         this.quantity = 0;
         this.postedDate = "";
+        this.capSize="";
+        this.sector="";
         this.status = "";
+        this.user = new User();
     }
 
-    public Investment(Long investmentId, String name, String description, String type, 
-            double price, int quantity, String postedDate, String status) {
+    public Investment(Long investmentId, String name, String description, String type, double price, int quantity,
+            String postedDate, String capSize, String sector, String status, User user) {
         this.investmentId = investmentId;
         this.name = name;
         this.description = description;
@@ -36,7 +47,10 @@ public class Investment {
         this.price = price;
         this.quantity = quantity;
         this.postedDate = postedDate;
+        this.capSize = capSize;
+        this.sector = sector;
         this.status = status;
+        this.user = user;
     }
 
     public Long getInvestmentId() {
@@ -95,6 +109,22 @@ public class Investment {
         this.postedDate = postedDate;
     }
 
+    public String getCapSize() {
+        return capSize;
+    }
+
+    public void setCapSize(String capSize) {
+        this.capSize = capSize;
+    }
+
+    public String getSector() {
+        return sector;
+    }
+
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -103,6 +133,13 @@ public class Investment {
         this.status = status;
     }
 
-   
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    
 }

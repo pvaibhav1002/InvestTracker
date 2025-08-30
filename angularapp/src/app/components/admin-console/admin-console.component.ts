@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { BaseChartDirective, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-admin-console',
@@ -9,15 +11,25 @@ export class AdminConsoleComponent implements OnInit {
 
   constructor() { }
 
-
-  totalFeedbacks: number = 0;
-  totalInquiries: number = 0;
-  totalInvestments: number = 0;
-  unresolvedInquiries: number = 0;
-  highPriorityInquiries: number = 0;
-
-
   ngOnInit(): void {
   }
+  @ViewChild('doughnutChart', { static: false }) doughnutChart: BaseChartDirective;
+
+  public doughnutChartLabels: Label[] = ['Download', 'In-Store', 'Mail-Order'];
+  public doughnutChartData: number[] = [350, 450, 100];
+  public doughnutChartType: ChartType = 'doughnut';
+
+  
+
+  // // Export the line chart as PNG
+  // exportLineChartAsPNG() {
+  //   // Chart.js exposes toBase64Image() on the chart instance
+  //   const base64 = this.lineChart.chart.toBase64Image();
+  //   const link = document.createElement('a');
+  //   link.href = base64;
+  //   link.download = 'line-chart.png';
+  //   link.click();
+  // }
+
 
 }

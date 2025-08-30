@@ -1,25 +1,25 @@
-import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpHandler, HttpInterceptor, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
-@Injectable({
-    providedIn: 'root'
-})
+import { Observable } from 'rxjs';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class HttpInterceptorService implements HttpInterceptor {
 
-    constructor(private auth :AuthService) { }
+  constructor(private authService: AuthService) { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler) {
-
-        let basicAuthHeaderString = localStorage.getItem('token');
-        let username = this.auth.getAuthenticatedUsername();
-        if (basicAuthHeaderString && username) {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let token = this.authService.getAuthenticatedToken();
+        let username = this.authService.getAuthenticatedUsername();
+        if (token && username) {
             request = request.clone({
                 setHeaders: {
-                    Authorization: basicAuthHeaderString
+                  Authorization: `Bearer ${token.trim()}`
                 }
             })
         }
         return next.handle(request);
-    }
+  }
 }

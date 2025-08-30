@@ -1,28 +1,21 @@
-<div class="admin-console">
-    <h2>Admin Console</h2>
+<!-- src/app/chart-dashboard/chart-dashboard.component.html -->
 
-    <div class="stat-card">
-        <label for="feedback">Total Feedbacks</label>
-        <span>{{ totalFeedbacks }}</span>
+<div class="dashboard">
+
+
+    <div class="card">
+
+        <h3>Doughnut — Sales Split</h3>
+
+        <div class="card-body">
+
+            <canvas baseChart #doughnutChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
+                [chartType]="doughnutChartType">
+
+            </canvas>
+
+        </div>
+
     </div>
 
-    <div class="stat-card">
-        <label for="inquiries">Total Inquiries</label>
-        <span>{{ totalInquiries }}</span>
-    </div>
-
-    <div class="stat-card">
-        <label for="unresolved">Total Investments</label>
-        <span>{{ totalInvestments }}</span>
-    </div>
-
-    <div class="stat-card">
-        <label for="unresolved">Unresolved Inquiries:</label>
-        <span>{{ unresolvedInquiries }}</span>
-    </div>
-
-    <div class="stat-card">
-        <label for="unresolved">High Priority Inquiries:</label>
-        <span>{{ highPriorityInquiries }}</span>
-    </div>
 </div>

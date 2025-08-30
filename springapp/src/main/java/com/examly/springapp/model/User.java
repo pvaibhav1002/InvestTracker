@@ -1,5 +1,8 @@
 package com.examly.springapp.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +15,10 @@ public class User {
     private String username;
     private String mobileNumber;
     private String userRole;
+    private boolean accountActiveStatus;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Investment> investments;
 
     public User() {
         this.email = "";
@@ -19,15 +26,20 @@ public class User {
         this.username = "";
         this.mobileNumber = "";
         this.userRole = "";
+        this.accountActiveStatus = false;
+        this.investments = new ArrayList<>();
     }
 
-    public User(Long userId, String email, String password, String username, String mobileNumber, String userRole) {
+    public User(Long userId, String email, String password, String username, String mobileNumber, String userRole,
+            boolean accountActiveStatus, List<Investment> investments) {
         this.userId = userId;
         this.email = email;
         this.password = password;
         this.username = username;
         this.mobileNumber = mobileNumber;
         this.userRole = userRole;
+        this.accountActiveStatus = accountActiveStatus;
+        this.investments = investments;
     }
 
     public Long getUserId() {
@@ -77,4 +89,22 @@ public class User {
     public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
+
+    public boolean isAccountActiveStatus() {
+        return accountActiveStatus;
+    }
+
+    public void setAccountActiveStatus(boolean accountActiveStatus) {
+        this.accountActiveStatus = accountActiveStatus;
+    }
+
+    public List<Investment> getInvestments() {
+        return investments;
+    }
+
+    public void setInvestments(List<Investment> investments) {
+        this.investments = investments;
+    }
+
+    
 }
