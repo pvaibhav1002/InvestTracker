@@ -1,0 +1,71 @@
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #e0f7ff; 
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+ 
+  .container h2 {
+    text-align: center;
+    color: #0288d1;
+    margin-bottom: 30px;
+  }
+  
+  input.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #81d4fa;
+    border-radius: 6px;
+    background-color: #f1faff;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  
+  select.form-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #81d4fa;
+    border-radius: 6px;
+    background-color: #f1faff;
+    font-size: 14px;
+  }
+  
+  
+  table.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  table.table th,
+  table.table td {
+    padding: 12px 15px;
+    border: 1px solid #b3e5fc;
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  table.table th {
+    background-color: #b3e5fc;
+    color: #01579b;
+    font-weight: bold;
+  }
+  
+  table.table td {
+    color: #333;
+  }
+  
+
+  .container div[ngIf] {
+    text-align: center;
+    color: #d32f2f;
+    font-size: 15px;
+    margin-top: 20px;
+  }
