@@ -23,7 +23,7 @@
         <input type="number" name="expectedReturn" id="expectedReturn" [(ngModel)]="newInvest.expectedReturn" required
             #expectedReturn="ngModel">
         <div *ngIf="expectedReturn.invalid && expectedReturn.touched">
-            <small>Expected Return is required.</small>
+            <small *ngIf="interest.errors?.required">Expected Return is required.</small>
         </div>
 
         <label for="interest">Reason for Interest</label>
