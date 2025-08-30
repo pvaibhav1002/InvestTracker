@@ -1,43 +1,69 @@
-<div class="header-fixed">
-    <h1>Invest Wise</h1>
-    <nav class="navbar">
-        <ul class="nav-links">
-            <li><a href="#about-us">About Us</a></li>
-            <li><a href="#contact-us">Contact Us</a></li>
-        </ul>
-    </nav>
-</div>
-
-<div class="scrollable-content">
-    <div class="button-group">
-        <a routerLink="/login" class="btn">Login</a>
-        <a routerLink="/signup" class="btn">Register</a>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-container">
+        <h1 class="logo">Investment Tracker</h1>
+        <div class="nav-links">
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact Us</a>
+        </div>
     </div>
-    <div>
-        InvestWise is your smart companion for navigating the world of investments. Whether you're a seasoned
-        investor or just starting out, our platform empowers you to explore, track, and manage investments with
-        ease. Admins can manage company portfolios and stock fluctuations, while users can browse, wishlist, and
-        invest in opportunities that align with their financial goals.
-    </div>
-    
-</div>
 
-<section id="about-us" class="info-section">
-    <h2>About Us</h2>
-    <p>
-        We are a passionate team of developers and financial enthusiasts committed to building tools that empower
-        users to take control of their financial future.
+    <div class="auth-buttons">
+        <button [routerLink]="['/login']" class="login-btn">Login</button>
+        <button [routerLink]="['/signup']" class="signup-btn">Signup</button>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero reveal zoom">
+    <h1 class="hero-title">Track & Invest with Ease</h1>
+    <p class="hero-desc">
+        Our platform allows admins to add stocks and users to buy or invest seamlessly.
+        Stay on top of your investments with real-time tracking.
     </p>
+    <button class="cta-btn">Get Started</button>
 </section>
 
-<section id="contact-us" class="info-section">
+<!-- About Us Section -->
+<section id="about" class="about reveal slide-left">
+    <div class="about-image">
+        <img src="https://cdn-icons-png.flaticon.com/512/2331/2331943.png" alt="Investment">
+    </div>
+    <div class="about-text reveal">
+        <h2>About Us</h2>
+        <p>
+            We are committed to empowering users by making investment tracking simple,
+            intuitive, and powerful. Our platform bridges the gap between administrators
+            and users, providing a seamless way to manage and grow your portfolio.
+        </p>
+    </div>
+</section>
+
+<!-- Contact Us Section -->
+<section id="contact" class="contact reveal slide-up">
     <h2>Contact Us</h2>
-    <p>Email: mailto:support.comsupport.com</p>
-    <p>Phone: +91-9876543210</p>
-    <p>Address: Mahape, Navi Mumbai</p>
+    <p>Have questions? Reach out to us anytime and we’ll be happy to assist you in your investment journey.</p>
+    <form>
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Your Email">
+        <textarea rows="4" placeholder="Your Message"></textarea>
+        <button type="submit">Send</button>
+    </form>
 </section>
 
-<div class="footer-fixed">
-    <!-- Your fixed footer content (optional) -->
-    <p>&copy; 2025 My App</p>
-</div>
+<!-- Footer -->
+<footer class="footer reveal fade">
+    <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </div>
+    <div class="footer-map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0199447273443!2d-122.41941508468146!3d37.77492977975971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064d46c54f1%3A0x5e5a9c7b7a7f1c63!2sSan%20Francisco!5e0!3m2!1sen!2sus!4v1679911111111"
+            allowfullscreen loading="lazy"></iframe>
+    </div>
+    <p>© 2025 Investment Tracker. All rights reserved.</p>
+</footer>
