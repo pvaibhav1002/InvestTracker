@@ -16,6 +16,7 @@ import { UserViewInvestmentComponent } from './components/user-view-investment/u
 import { AdminAddInvestmentComponent } from './components/admin-add-investment/admin-add-investment.component';
 import { AdminEditInvestmentComponent } from './components/admin-edit-investment/admin-edit-investment.component';
 import { AuthGuard } from './guards/auth.guard';
+import { UserWatchlistComponent } from './components/user-watchlist/user-watchlist.component';
 
 const routes: Routes = [
   {path:'',component:HomePageComponent},
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path:'user-view-feedback',component:UserViewFeedbackComponent,canActivate: [AuthGuard], data: { role: 'User' } },
   {path:'user-view-inquiry',component:UserViewInquiryComponent,canActivate: [AuthGuard], data: { role: 'User' } },
   {path:'user-view-investment',component:UserViewInvestmentComponent,canActivate: [AuthGuard], data: { role: 'User' } },
+  {path:'user-view-watchlist',component:UserWatchlistComponent,canActivate: [AuthGuard], data: { role: 'User' } },
   {path:'error',component:ErrorComponent},
   {path:'**',component:ErrorComponent}
 ];

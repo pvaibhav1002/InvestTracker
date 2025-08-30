@@ -1,0 +1,6 @@
+<h2>Your Watchlist</h2>
+<div *ngIf="investments.length>0">
+    <div *ngFor="let investment of investments">
+        {{investment.name}} - {{investment.price}}
+    </div>
+</div>

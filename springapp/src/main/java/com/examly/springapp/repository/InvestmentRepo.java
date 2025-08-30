@@ -17,5 +17,6 @@ public interface InvestmentRepo extends JpaRepository<Investment, Long> {
 
     List<Investment> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrTypeContainingIgnoreCase(
             String name, String description,String type);
+            
 
 }

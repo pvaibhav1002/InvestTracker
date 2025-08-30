@@ -16,34 +16,45 @@ export class UserAddFeedbackComponent implements OnInit {
 
   feedbackForm: FormGroup;
   investments: Investment[] = [];
-  feedback:Feedback={investment:{},user:{}};
-  constructor(private fb: FormBuilder, private fs: FeedbackService, private router: Router, private investmentService: InvestmentService,private authService:AuthService) {
+  feedback: Feedback = { investment: {}, user: {} };
+  constructor(private fb: FormBuilder, private fs: FeedbackService, private router: Router, private investmentService: InvestmentService, private authService: AuthService) {
     this.feedbackForm = this.fb.group({
       message: ['', Validators.required],
       category: ['', Validators.required],
-      investmentId: ['', Validators.required]
+      investmentId: [null, Validators.required]
     });
   }
 
   ngOnInit(): void {
-    this.investmentService.getAllInvestments().subscribe(data=>{
-      this.investments=data;
+    this.investmentService.getAllInvestments().subscribe(data => {
+      this.investments = data;
     })
+
+    this.feedbackForm.get('category')?.valueChanges.subscribe(category => {
+      const investmentControl = this.feedbackForm.get('investmentId');
+      if (category === 'Assets') {
+        investmentControl?.setValidators([Validators.required]);
+      } else {
+        investmentControl?.clearValidators();
+        investmentControl?.setValue(null);
+      }
+      investmentControl?.updateValueAndValidity();
+    });
 
   }
 
   get f() {
     return this.feedbackForm.controls;
   }
- 
+
   submitFeedback(): void {
-    let formData=this.feedbackForm.value;
-    this.feedback.feedbackText=formData.message;
-    this.feedback.category=formData.category;
-    this.feedback.investment.investmentId=formData.investmentId;
-    let date=new Date();
-    this.feedback.date=date.toDateString();
-    this.feedback.user.userId=this.authService.getAuthenticatedUserId();
+    let formData = this.feedbackForm.value;
+    this.feedback.feedbackText = formData.message;
+    this.feedback.category = formData.category;
+    this.feedback.investment.investmentId = formData.investmentId;
+    let date = new Date();
+    this.feedback.date = date.toDateString();
+    this.feedback.user.userId = this.authService.getAuthenticatedUserId();
 
     if (this.feedbackForm.valid) {
       this.fs.sendFeedback(this.feedback).subscribe(() => {
