@@ -1,20 +1,20 @@
 <div class="container">
   <h2>My Feedback</h2>
 
-<div>
-  <label for="categoryFilter">Filter by Category:</label>
-  <select id="categoryFilter"  #category (change)="applyCategoryFilter(category.value)">
-    <option value="All">All</option>
-    <option *ngFor="let feedback of userFeedbacks" [value]="feedback.category">
-      {{ feedback.category }}
-    </option>
-  </select>
-</div>
+  <div>
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter" #category (change)="applyCategoryFilter(category.value)">
+      <option value="All">All</option>
+      <option *ngFor="let feedback of userFeedbacks" [value]="feedback.category">
+        {{ feedback.category }}
+      </option>
+    </select>
+  </div>
 
-<div>
-  <label for="searchText">searchByText:</label>
-  <input type="text" name="searchText" id="searchText"  [(ngModel)]="searchText" (input)="searchBasedOnText()">
-</div>
+  <div>
+    <label for="searchText">searchByText:</label>
+    <input type="text" name="searchText" id="searchText" [(ngModel)]="searchText" (input)="searchBasedOnText()">
+  </div>
 
   <table *ngIf="userFeedbacks.length > 0" border="1">
     <thead>
@@ -35,11 +35,11 @@
         <td>{{feedback.investment?.name}}</td>
       </tr>
     </tbody>
-  </table> 
- 
-    <p *ngIf="userFeedbacks.length==0">
- 
-      No feedback submitted yet.
-    </p>
- 
+  </table>
+
+  <p *ngIf="userFeedbacks.length==0">
+
+    No feedback submitted yet.
+  </p>
+
 </div>
