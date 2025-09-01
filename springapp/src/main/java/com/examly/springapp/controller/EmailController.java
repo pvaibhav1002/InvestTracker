@@ -1,5 +1,7 @@
 package com.examly.springapp.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +26,6 @@ public class EmailController {
  
     @PostMapping("/otp")
     public ResponseEntity<String> sendEmailOtp(@RequestBody String to) {
- 
         String otp = emailService.sendSimpleOtp(to);
         if (otp == null) {
             return ResponseEntity.status(500).build();
@@ -33,12 +34,10 @@ public class EmailController {
  
     }
     @PutMapping("/verified/{userId}")
-    public ResponseEntity<String> otpVerified(@PathVariable Long userId) {
+    public ResponseEntity<Map<String, String>> otpVerified(@PathVariable Long userId) {
         if (!emailService.activateAccount(userId)) {
-            return ResponseEntity.status(500).build();
+            return ResponseEntity.status(500).body(Map.of("status", "Activation Failed"));
         }
-        return ResponseEntity.status(200).body("Account Activated");
- 
-    }
- 
+        return ResponseEntity.ok(Map.of("status", "Account Activated"));
+    }    
 }

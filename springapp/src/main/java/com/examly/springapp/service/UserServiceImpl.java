@@ -35,7 +35,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-        System.out.println(user.getUsername()+user.getEmail());
         if (userRepo.existsByUsername(user.getUsername())) {
             throw new DuplicateUser(user.getUsername() + " already exists.");
         }
@@ -43,7 +42,6 @@ public class UserServiceImpl implements UserService {
             throw new DuplicateUser(user.getEmail() + " already exists.");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        System.out.println(user.getUsername());
         return userRepo.save(user);
     }
 
@@ -51,9 +49,12 @@ public class UserServiceImpl implements UserService {
     public LoginDTO loginUser(User user) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+        User newUser = userRepo.findByEmail(user.getEmail());
+        if (!newUser.isAccountStatus()) {
+            throw new RuntimeException("Account Inactive");
+        }
         if (authentication.isAuthenticated()) {
             Map<String, Object> claims = new HashMap<>();
-            User newUser = userRepo.findByEmail(user.getEmail());
             claims.put("userId", newUser.getUserId());
             claims.put("role", newUser.getUserRole());
             claims.put("username", newUser.getUsername());
@@ -61,5 +62,4 @@ public class UserServiceImpl implements UserService {
         }
         throw new RuntimeException("Invalid Credentials");
     }
-
 }
