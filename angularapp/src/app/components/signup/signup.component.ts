@@ -57,6 +57,7 @@ export class SignupComponent implements OnInit {
         this.userid = res.userId;
         this.authService.otp(this.useremail).subscribe({
           next: (otpData: string) => {
+            console.log(otpData);
             this.expectedOtp = otpData;
           },
           error: () => {

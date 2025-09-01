@@ -47,7 +47,7 @@ public class ChartServiceImpl implements ChartService {
             AdminConsoleDTO.UserInvestmentSummary summary = new AdminConsoleDTO.UserInvestmentSummary();
             summary.setUserId(user.getUserId());
             summary.setUsername(user.getUsername());
-            summary.setActive(user.isAccountActiveStatus());
+            summary.setActive(user.isAccountStatus());
             dto.setDistributionByType(convertToMap(investmentRepo.getTypeDistribution()));
             dto.setDistributionBySector(convertToMap(investmentRepo.getSectorDistribution()));
             dto.setDistributionByCapSize(convertToMap(investmentRepo.getCapSizeDistribution()));

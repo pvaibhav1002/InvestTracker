@@ -92,5 +92,4 @@ public class User {
     public void setAccountStatus(boolean accountStatus) {
         this.accountStatus = accountStatus;
     }
- 
 }

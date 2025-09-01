@@ -11,6 +11,6 @@ export class ChartService {
   constructor(private httptClient:HttpClient) { }
 
   getAdminConsoleData():Observable<any>{
-    return this.httptClient.get<any>(`${APP_URL}/api/admin/console`);
+    return this.httptClient.get<any>(`${APP_URL}/admin/console`);
   }
 }
