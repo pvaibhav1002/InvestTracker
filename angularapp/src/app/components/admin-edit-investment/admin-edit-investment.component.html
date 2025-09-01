@@ -5,16 +5,16 @@
   <label for="name">Name:</label>
   <input type="text" id="name" formControlName="name" disabled>
   <div *ngIf="f.name.touched && f.name.invalid">
-    <div *ngIf="f.name.errors?.required">Name is required.</div>
-    <div *ngIf="f.name.errors?.minlength">Name must be at least 5 characters.</div>
+    <div *ngIf="f.name.errors?.required" style="color: red;">Name is required.</div>
+    <div *ngIf="f.name.errors?.minlength" style="color: red;">Name must be at least 5 characters.</div>
   </div>
 
  
   <label for="description">Description:</label>
   <textarea id="description" formControlName="description" cols="30" rows="10"></textarea>
   <div *ngIf="f.description.touched && f.description.invalid">
-    <div *ngIf="f.description.errors?.required">Description is required.</div>
-    <div *ngIf="f.description.errors?.minlength">Description must be at least 15 characters.</div>
+    <div *ngIf="f.description.errors?.required" style="color: red;">Description is required.</div>
+    <div *ngIf="f.description.errors?.minlength" style="color: red;">Description must be at least 15 characters.</div>
   </div>
 
  
@@ -32,16 +32,16 @@
   <label for="price">Price:</label>
   <input type="number" id="price" formControlName="price">
   <div *ngIf="f.price.touched && f.price.invalid">
-    <div *ngIf="f.price.errors?.required">Price is required.</div>
-    <div *ngIf="f.price.errors?.min">Must be a positive number.</div>
+    <div *ngIf="f.price.errors?.required" style="color: red;">Price is required.</div>
+    <div *ngIf="f.price.errors?.min" style="color: red;">Must be a positive number.</div>
   </div>
 
  
   <label for="quantity">Quantity:</label>
   <input type="number" id="quantity" formControlName="quantity" disabled>
   <div *ngIf="f.quantity.touched && f.quantity.invalid">
-    <div *ngIf="f.quantity.errors?.required">Quantity is required.</div>
-    <div *ngIf="f.quantity.errors?.min">Must be a positive number.</div>
+    <div *ngIf="f.quantity.errors?.required" style="color: red;">Quantity is required.</div>
+    <div *ngIf="f.quantity.errors?.min" style="color: red;">Must be a positive number.</div>
   </div>
 
   
@@ -53,7 +53,7 @@
     
   </select>
   <div *ngIf="f.status.touched && f.status.invalid">
-    <div *ngIf="f.status.errors?.required">Status is required.</div>
+    <div *ngIf="f.status.errors?.required" style="color: red;">Status is required.</div>
   </div>
 
  

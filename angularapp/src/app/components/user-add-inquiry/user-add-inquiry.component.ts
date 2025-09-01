@@ -26,20 +26,19 @@ export class UserAddInquiryComponent implements OnInit {
         this.investmentName = data.name;
       })
     });
+
     this.newInvest = {
       user: { userId: this.authService.getAuthenticatedUserId() },
       investment: { investmentId: this.id },
-      message: '',
-      status: 'Pending',
+      questions: '',
+      reasonOfInterest: '',
       inquiryDate: new Date().toISOString(),
+      riskTolerance: '',
+      expectedReturn: 0,
+      status: 'Pending',
       responseDate: '',
       adminResponse: '',
-      priority: '',
       contactDetails: '',
-      riskTolerance: '',
-      interest: '',
-      expectedReturn: 0,
-      questions:''
     };
   }
 

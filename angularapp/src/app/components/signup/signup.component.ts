@@ -11,25 +11,41 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignupComponent implements OnInit {
  
-  registrtion: NgForm;
- 
+  formSubmitted = false;
   successMessage = '';
   errorMessage = '';
   confirmPassword = '';
- 
-  user: User = { username: '', email: '', password: '', mobileNumber: '', userRole: '' };
+  expectedOtp = '';  
+  submittedOtp = '';
+  useremail="";
+  userid:number;
+  user: User = {
+    username: '',
+    email: '',
+    password: '',
+    mobileNumber: '',
+    userRole: '',
+    accountStatus:false
+  };
  
   constructor(private authService: AuthService, private router: Router) { }
  
+  ngOnInit(): void {
+    this.formSubmitted = false;
+  }
+ 
   register(form: NgForm) {
     if (form.invalid) {
-      this.errorMessage = "All fields are required."
+      this.errorMessage = "All fields are required.";
       return;
     }
  
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+ 
     if (!passwordRegex.test(this.user.password)) {
-      this.errorMessage = "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.";
+      this.errorMessage =
+        "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.";
       return;
     }
  
@@ -37,20 +53,52 @@ export class SignupComponent implements OnInit {
       this.errorMessage = "Passwords do not match.";
       return;
     }
+
+ 
     this.authService.register(this.user).subscribe({
       next: (res) => {
-        this.successMessage = 'Registration successful!';
-        setTimeout(() => this.router.navigate(['/login']), 1500);
+        this.formSubmitted = true;
+        this.useremail = res.email;
+        this.userid=res.userId;
+        this.authService.otp(this.useremail).subscribe({
+          next: (otpData: string) => {
+            this.expectedOtp = otpData;
+            console.log("OTP:", otpData);
+          },
+          error: () => {
+            this.errorMessage = "Failed to send OTP.";
+          }
+        });
       },
-      error: (err) => {
+      error: () => {
         this.errorMessage = 'Registration failed. Please try again.';
       }
     });
   }
- 
-  ngOnInit(): void {
+  resendOTP(){
+    this.authService.otp(this.useremail).subscribe({
+          next: (otpData: string) => {
+            this.expectedOtp = otpData;
+            console.log("OTP:", otpData);
+          },
+          error: () => {
+            this.errorMessage = "Failed to send OTP.";
+          }
+        });
   }
  
+  verifyOtp() {
+  if (String(this.submittedOtp).trim() === String(this.expectedOtp).trim()) {
+    this.successMessage = "OTP verified successfully!";
+    this.authService.otpVerified(this.userid).subscribe((res)=>{
+      setTimeout(()=>{
+        this.router.navigate(['/login']);
+      },2000);
+    });
+ 
+  } else {
+    this.errorMessage = "Invalid OTP. Please try again.";
+  }
 }
  
- 
+}
