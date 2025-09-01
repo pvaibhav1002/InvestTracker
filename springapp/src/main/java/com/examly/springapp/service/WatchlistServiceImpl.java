@@ -2,10 +2,8 @@ package com.examly.springapp.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.examly.springapp.model.Investment;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.Watchlist;
@@ -24,16 +22,9 @@ public class WatchlistServiceImpl implements WatchlistService {
 
     @Override
     public Watchlist addToWatchlist(Watchlist watchlist) {
-        if (watchlist.getUser().getUserId()==null||watchlist.getInvestment().getInvestmentId()==null) {
+        if (watchlist.getUser_id() == 0L || watchlist.getInvestment().getInvestmentId() == null) {
             return null;
         }
-        // System.out.println(userId+" "+investmentId);
-        // User user = new User();
-        // user.setUserId(userId);
-        // Investment investment = new Investment();
-        // investment.setInvestmentId(investmentId);
-        // System.out.println(user+" "+investment);
-        // Watchlist watchlist = new Watchlist(user, investment);
         return watchlistRepo.save(watchlist);
     }
 
