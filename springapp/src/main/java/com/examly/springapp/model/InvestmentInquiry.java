@@ -13,106 +13,149 @@ public class InvestmentInquiry {
     @Id
     @GeneratedValue
     Long inquiryId;
- 
-    @ManyToOne
-    @JoinColumn(name = "investmentId",nullable = false)
-    Investment investment;
- 
-    @ManyToOne
-    @JoinColumn(name = "userId",nullable = false)
-    User user;
- 
-
-    String message;
-    String status;
-    String priority;
+    String reasonOfInterest;
+    String questions;
     LocalDateTime inquiryDate;
+    String riskTolerance;
+    String expectedReturn;
+    String status;
     LocalDateTime responseDate;
     String adminResponse;
     String contactDetails;
-    
+ 
+    @ManyToOne
+    @JoinColumn(name = "investmentId", nullable = false)
+    Investment investment;
+ 
+    @ManyToOne
+    @JoinColumn(name = "userId", nullable = false)
+    User user;
+ 
     public InvestmentInquiry() {
-        this.message = "";
-        this.status = "";
-        this.priority = "";
+        this.reasonOfInterest = "";
+        this.questions = "";
         this.inquiryDate = LocalDateTime.now();
+        this.riskTolerance = "";
+        this.expectedReturn = "";
+        this.status = "";
         this.responseDate = LocalDateTime.now();
         this.adminResponse = "";
         this.contactDetails = "";
+        this.investment = new Investment();
+        this.user = new User();
     }
-    public InvestmentInquiry(Long inquiryId, Investment investment,User user, String message, String status, String priority,
-            LocalDateTime inquiryDate, LocalDateTime responseDate, String adminResponse, String contactDetails) {
+ 
+    public InvestmentInquiry(Long inquiryId, String reasonOfInterest, String questions, LocalDateTime inquiryDate,
+            String riskTolerance, String expectedReturn, String status, LocalDateTime responseDate,
+            String adminResponse, String contactDetails, Investment investment, User user) {
         this.inquiryId = inquiryId;
-        this.investment = investment;
-        this.user = user;
-        this.message = message;
-        this.status = status;
-        this.priority = priority;
+        this.reasonOfInterest = reasonOfInterest;
+        this.questions = questions;
         this.inquiryDate = inquiryDate;
+        this.riskTolerance = riskTolerance;
+        this.expectedReturn = expectedReturn;
+        this.status = status;
         this.responseDate = responseDate;
         this.adminResponse = adminResponse;
         this.contactDetails = contactDetails;
+        this.investment = investment;
+        this.user = user;
     }
-    
+ 
     public Long getInquiryId() {
         return inquiryId;
     }
+ 
     public void setInquiryId(Long inquiryId) {
         this.inquiryId = inquiryId;
     }
-    public Investment getInvestment() {
-        return investment;
+ 
+    public String getReasonOfInterest() {
+        return reasonOfInterest;
     }
-    public void setInvestment(Investment investment) {
-        this.investment = investment;
+ 
+    public void setReasonOfInterest(String reasonOfInterest) {
+        this.reasonOfInterest = reasonOfInterest;
     }
-    public String getMessage() {
-        return message;
+ 
+    public String getQuestions() {
+        return questions;
     }
-    public void setMessage(String message) {
-        this.message = message;
+ 
+    public void setQuestions(String questions) {
+        this.questions = questions;
     }
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public String getPriority() {
-        return priority;
-    }
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
+ 
     public LocalDateTime getInquiryDate() {
         return inquiryDate;
     }
+ 
     public void setInquiryDate(LocalDateTime inquiryDate) {
         this.inquiryDate = inquiryDate;
     }
+ 
+    public String getRiskTolerance() {
+        return riskTolerance;
+    }
+ 
+    public void setRiskTolerance(String riskTolerance) {
+        this.riskTolerance = riskTolerance;
+    }
+ 
+    public String getExpectedReturn() {
+        return expectedReturn;
+    }
+ 
+    public void setExpectedReturn(String expectedReturn) {
+        this.expectedReturn = expectedReturn;
+    }
+ 
+    public String getStatus() {
+        return status;
+    }
+ 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+ 
     public LocalDateTime getResponseDate() {
         return responseDate;
     }
+ 
     public void setResponseDate(LocalDateTime responseDate) {
         this.responseDate = responseDate;
     }
+ 
     public String getAdminResponse() {
         return adminResponse;
     }
+ 
     public void setAdminResponse(String adminResponse) {
         this.adminResponse = adminResponse;
     }
+ 
     public String getContactDetails() {
         return contactDetails;
     }
+ 
     public void setContactDetails(String contactDetails) {
         this.contactDetails = contactDetails;
     }
+ 
+    public Investment getInvestment() {
+        return investment;
+    }
+ 
+    public void setInvestment(Investment investment) {
+        this.investment = investment;
+    }
+ 
     public User getUser() {
         return user;
     }
+ 
     public void setUser(User user) {
         this.user = user;
-    }  
-   
+    }
+ 
 }

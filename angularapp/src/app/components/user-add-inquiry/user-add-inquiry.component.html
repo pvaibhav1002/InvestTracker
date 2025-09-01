@@ -27,7 +27,7 @@
         </div>
 
         <label for="interest">Reason for Interest</label>
-        <textarea id="interest" name="interest" [(ngModel)]="newInvest.interest" required minlength="10"
+        <textarea id="interest" name="interest" [(ngModel)]="newInvest.reasonOfInterest" required minlength="10"
             #interest="ngModel" placeholder="Enter your reason here..."></textarea>
         <div *ngIf="interest.invalid && interest.touched">
             <small *ngIf="interest.errors?.required">Reason for Interest is required.</small>
