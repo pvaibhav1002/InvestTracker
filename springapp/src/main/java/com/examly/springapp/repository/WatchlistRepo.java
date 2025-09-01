@@ -13,7 +13,7 @@ import com.examly.springapp.model.Watchlist;
 @Repository
 public interface WatchlistRepo extends JpaRepository<Watchlist, Long> {
 
-    @Query("SELECT w.investment FROM Watchlist w WHERE w.user.userId = :userId")
+    @Query("SELECT w.investment FROM Watchlist w WHERE w.user_id = :userId")
     List<Investment> findInvestmentsByUserId(Long userId);
 
 }
