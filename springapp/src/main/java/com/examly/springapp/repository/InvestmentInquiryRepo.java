@@ -9,8 +9,6 @@ import com.examly.springapp.model.InvestmentInquiry;
 @Repository
 public interface InvestmentInquiryRepo extends JpaRepository<InvestmentInquiry, Long> {
     List<InvestmentInquiry> findByUser_UserId(Long userId);
-
     List<InvestmentInquiry> findByStatus(String status);
-
     Optional<List<InvestmentInquiry>> findByInvestment_InvestmentId(Long investmentId);
 }

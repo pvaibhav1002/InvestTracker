@@ -27,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let feedback of userFeedbacks; let i = index">
+      <tr *ngFor="let feedback of filteredFeedbacks; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ feedback.feedbackText}}</td>
         <td>{{ feedback.date}}</td>
