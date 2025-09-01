@@ -47,12 +47,6 @@
         <td>{{ inquiry.investment.name }}</td>
         <td>{{ inquiry.message }}</td>
         <td>{{inquiry.status}}</td>
-          <!-- <select [(ngModel)]="inquiry.status" (change)="updateStatus(inquiry)" class="form-select form-select-sm">
-            <option value="Pending">Pending</option>
-            <option value="Responded">Responded</option>
-            <option value="Closed">Closed</option>
-          </select> -->
-        
         <td>{{ inquiry.priority }}</td>
         <td>{{ inquiry.inquiryDate | date:'short' }}</td>
         <td>{{ inquiry.responseDate ? (inquiry.responseDate | date:'short') : 'N/A' }}</td>
