@@ -1,19 +1,42 @@
 <nav class="navbar">
 
-    <div class="logo">InvestTrack</div>
-  
-    <div class="nav-links">
-      <a routerLink="/home">Home</a>
-      <a routerLink="/admin-console">Admin Console</a>
-      <a routerLink="/admin-view-investment">View Investments</a>
-      <a routerLink="/add-investment">Add Investment</a>
-      <a routerLink="/admin-inquiry">Inquiries</a>
-      <a routerLink="/admin-feedback">Feedback</a>
+  <div class="navbar-left">
+    <a routerLink="/" class="logo">InvestTrack</a>
+  </div>
+
+  <div class="navbar-center">
+    <a routerLink="/home">Home</a>
+    <a routerLink="/admin-console">Admin Console</a>
+    <a routerLink="/admin-view-investment">View Investments</a>
+    <a routerLink="/add-investment">Add Investment</a>
+    <a routerLink="/admin-inquiry">Inquiries</a>
+    <a routerLink="/admin-feedback">Feedback</a>
+  </div>
+
+  <div class="navbar-right">
+    <button (click)="logout()">Logout</button>
+</div>
+</nav>
+
+
+<!-- 
+  <nav class="navbar">
+
+    <div class="navbar-left">
+        <a routerLink="/" class="logo">InvestTrack</a>
     </div>
-  
-    <div class="user-section">
-      <span class="user-info">Admin</span>
-      <button class="logout-btn" (click)="logout()">Logout</button>
+
+
+    <div class="navbar-center">
+        <a routerLink="/user-view-investment">View Investments</a>
+        <a routerLink="/user-add-feedback">Give Feedback</a>
+        <a routerLink="/user-view-inquiry">My inquiries</a>
+        <a routerLink="/user-view-feedback">My Feedback</a>
+        <a routerLink="/user-view-watchlist">My Watchlist</a>
     </div>
-  </nav>
-  
+
+
+    <div class="navbar-right">
+        <button (click)="onLogout()">Logout</button>
+    </div>
+</nav> -->
