@@ -35,8 +35,8 @@ export class AuthService {
     return this.http.post<string>(`${APP_URL}/email/otp`,to);
   }
  
-  otpVerified(id:number):Observable<string>{
-    return this.http.put<string>(`${APP_URL}/email/verified/${id}`,{});
+  otpVerified(id:number):Observable<any>{
+    return this.http.put<any>(`${APP_URL}/email/verified/${id}`,{});;
   }
  
   getAuthenticatedToken(): string | null {
