@@ -1,0 +1,85 @@
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #e0f7ff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+
+}
+
+
+.container h2 {
+    text-align: center;
+    color: #0288d1;
+    margin-bottom: 30px;
+}
+
+
+label {
+    font-weight: bold;
+    color: #0277bd;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+select,
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #81d4fa;
+    border-radius: 6px;
+    background-color: #f1faff;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+select,
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #81d4fa;
+    border-radius: 6px;
+    background-color: #f1faff;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+select,
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #81d4fa;
+    border-radius: 6px;
+    background-color: #f1faff;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+
+
+.button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.button .btn {
+    margin-bottom: 10px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #42a5f5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

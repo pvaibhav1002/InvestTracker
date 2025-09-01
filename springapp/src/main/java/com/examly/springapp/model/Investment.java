@@ -11,11 +11,11 @@ public class Investment {
     private Long investmentId;
     private String name;
     private String description;
-    private String type;
+    private String type;   //stock , mutual funds
     private double price;
     private int quantity;
     private String postedDate;
-    private String status;
+    private String status;  //active or not active
 
     public Investment() {
         this.name = "";
