@@ -1,82 +1,76 @@
 <div class="container">
   <h2>Admin Inquiry Panel</h2>
- 
   <label for="searchText">Search: </label>
   <input [(ngModel)]="searchText" class="form-control mb-3" placeholder="Search inquiries..."  (input)="filterText()">
- 
   <div class="row mb-3">
-    <div class="col-md-4">
-      <label for="filterStatus">Filter by Status: </label>
-      <select [(ngModel)]="filterStatus" class="form-select" (change)="applyFilters()">
-        <option value="">All Status</option>
-        <option value="Pending">Pending</option>
-        <option value="Responded">Responded</option>
-      </select>
-    </div>
-
-    <div class="col-md-4">
-      <label for="filterPriority">Filter by Priority: </label>
-      <select [(ngModel)]="filterPriority" class="form-select" (change)="applyFilters()">
-        <option value="">All Priorities</option>
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-      </select>
-    </div>
+  <div class="col-md-4">
+  <label for="filterStatus">Filter by Status: </label>
+  <select [(ngModel)]="filterStatus" class="form-select" (change)="applyFilters()">
+  <option value="">All Status</option>
+  <option value="Pending">Pending</option>
+  <option value="Responded">Responded</option>
+  </select>
   </div>
- 
+   
+      <div class="col-md-4">
+  <label for="filterRisk">Filter by Risk Tolerance: </label>
+  <select [(ngModel)]="filterRisk" class="form-select" (change)="applyFilters()">
+  <option value="">All</option>
+  <option value="High">High</option>
+  <option value="Medium">Medium</option>
+  <option value="Low">Low</option>
+  </select>
+  </div>
+  </div>
   <table border="1" *ngIf="inquiries.length > 0; else noInquiries" class="table table-bordered">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>User</th>
-        <th>Investment</th>
-        <th>Message</th>
-        <th>Status</th>
-        <th>Priority</th>
-        <th>Inquiry Date</th>
-        <th>Response Date</th>
-        <th>Admin Response</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let inquiry of inquiries">
-        <td>{{ inquiry.inquiryId }}</td>
-        <td>{{ inquiry.user.username }}</td>
-        <td>{{ inquiry.investment.name }}</td>
-        <td>{{ inquiry.message }}</td>
-        <td>{{inquiry.status}}</td>
-          <!-- <select [(ngModel)]="inquiry.status" (change)="updateStatus(inquiry)" class="form-select form-select-sm">
-            <option value="Pending">Pending</option>
-            <option value="Responded">Responded</option>
-            <option value="Closed">Closed</option>
-          </select> -->
-        
-        <td>{{ inquiry.priority }}</td>
-        <td>{{ inquiry.inquiryDate | date:'short' }}</td>
-        <td>{{ inquiry.responseDate ? (inquiry.responseDate | date:'short') : 'N/A' }}</td>
-        <td>{{ inquiry.adminResponse }}</td>
-        <td>
-          <button (click)="showResponseForm(inquiry.inquiryId!)" class="btn btn-primary btn-sm">Add Response</button>
-          <button (click)="deleteInquiry(inquiry.inquiryId!)" class="btn btn-danger btn-sm">Delete</button>
-        </td>
-      </tr>
-    </tbody>
+  <thead>
+  <tr>
+  <th>ID</th>
+  <th>User</th>
+  <th>User Contact Details</th>
+  <th>Investment</th>
+  <th>Message</th>
+  <th>Reason of Interest</th>
+  <th>Inquiry Date</th>
+  <th>Risk Tolerance</th>
+  <th>Expected ROI</th>
+  <th>Status</th>
+  <th>Response Date</th>
+  <th>Admin Response</th>
+  <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let inquiry of inquiries">
+  <td>{{ inquiry.inquiryId }}</td>
+  <td>{{ inquiry.user.username }}</td>
+  <td>{{ inquiry. contactDetails}}</td>
+  <td>{{ inquiry.investment.name }}</td>
+  <td>{{ inquiry.questions }}</td>
+  <td>{{ inquiry.reasonOfInterest }}</td>
+  <td>{{ inquiry.inquiryDate | date:'short' }}</td>
+  <td>{{inquiry.riskTolerance}}</td>        
+  <td>{{inquiry.expectedReturn}}</td>        
+  <td>{{inquiry.status}}</td>        
+  <td>{{ inquiry.responseDate ? (inquiry.responseDate | date:'short') : 'N/A' }}</td>
+  <td>{{ inquiry.adminResponse }}</td>
+  <td>
+  <button (click)="showResponseForm(inquiry.inquiryId!)" class="btn btn-primary btn-sm">Add Response</button>
+  <button (click)="deleteInquiry(inquiry.inquiryId!)" class="btn btn-danger btn-sm">Delete</button>
+  </td>
+  </tr>
+  </tbody>
   </table>
- 
   <ng-template #noInquiries>
-    <p>No inquiries found.</p>
+  <p>No inquiries found.</p>
   </ng-template>
- 
   <div *ngIf="showResForm" class="mt-4">
-    <h4>Add Admin Response</h4>
-    <textarea [(ngModel)]="responseText" rows="3" class="form-control" placeholder="Enter your response"></textarea>
-    <button (click)="submitResponse()" class="btn btn-success mt-2">Submit Response</button>
-    <button (click)="cancel()" class="btn btn-secondary mt-2">Cancel</button>
-    <div *ngIf="responseSubmitted" class="alert alert-success mt-2">
-      Response submitted successfully!
-    </div>
+  <h4>Add Admin Response</h4>
+  <textarea [(ngModel)]="responseText" rows="3" class="form-control" placeholder="Enter your response"></textarea>
+  <button (click)="submitResponse()" class="btn btn-success mt-2">Submit Response</button>
+  <button (click)="cancel()" class="btn btn-secondary mt-2">Cancel</button>
+  <div *ngIf="responseSubmitted" class="alert alert-success mt-2">
+        Response submitted successfully!
   </div>
- 
-</div>
+  </div>
+  </div>
