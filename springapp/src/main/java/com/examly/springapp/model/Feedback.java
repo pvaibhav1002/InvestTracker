@@ -16,7 +16,8 @@ public class Feedback {
     @ManyToOne
     @JoinColumn(name = "userId",nullable = false)
     private User user;
-    @ManyToOne
+
+    @ManyToOne(optional = true)
     @JoinColumn(name = "investmentId",nullable = true)
     private Investment investment;
     private String category;
@@ -69,6 +70,11 @@ public class Feedback {
     }
     public void setCategory(String category) {
         this.category = category;
+    }
+    @Override
+    public String toString() {
+        return "Feedback [feedbackId=" + feedbackId + ", feedbackText=" + feedbackText + ", date=" + date + ", user="
+                + user + ", investment=" + investment + ", category=" + category + "]";
     }
 
 

@@ -103,6 +103,11 @@ public class Investment {
         this.status = status;
     }
 
-   
+    @Override
+    public String toString() {
+        return "Investment [investmentId=" + investmentId + ", name=" + name + ", description=" + description
+                + ", type=" + type + ", price=" + price + ", quantity=" + quantity + ", postedDate=" + postedDate
+                + ", status=" + status + "]";
+    }
 
 }

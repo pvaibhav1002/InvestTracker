@@ -1,19 +1,17 @@
 import { Investment } from "./investment.model";
 import { User } from "./user.model";
 
-export interface InvestmentInquiry{
-    inquiryId?:number;
-    user:User;
-    investment:Investment;
-    message:string;
-    status?:string;
-    inquiryDate?:string
-    responseDate?:string;
-    adminResponse?:string;
-    priority:string;
-    contactDetails?:string;
-    riskTolerance:string;
-    interest:string;
-    expectedReturn:number;
-    questions:string;
+export interface InvestmentInquiry {
+    inquiryId?: number;
+    questions?: string;
+    reasonOfInterest?: string;
+    inquiryDate?: string
+    riskTolerance?: string;
+    expectedReturn?: number;
+    status?: string;
+    responseDate?: string;
+    adminResponse?: string;
+    contactDetails?: string;
+    user: User;
+    investment: Investment;
 }

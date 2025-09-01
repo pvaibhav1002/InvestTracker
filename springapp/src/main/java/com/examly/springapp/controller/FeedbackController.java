@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.examly.springapp.model.Feedback;
+import com.examly.springapp.model.Investment;
 import com.examly.springapp.service.FeedbackService;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 public class FeedbackController {
 
     FeedbackService feedbackService;
+
     @Autowired
     public FeedbackController(FeedbackService feedbackService) {
         this.feedbackService = feedbackService;
@@ -25,6 +27,12 @@ public class FeedbackController {
     @PostMapping
     @PreAuthorize("hasRole('User')")
     public ResponseEntity<Feedback> createFeedback(@RequestBody Feedback feedback) {
+        System.out.println(feedback);
+
+        if (!"Assets".equalsIgnoreCase(feedback.getCategory())) {
+            feedback.setInvestment(null);
+        }
+
         Feedback createdFeedback = feedbackService.createFeedback(feedback);
         if (createdFeedback == null) {
             return ResponseEntity.status(403).build();

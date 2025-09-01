@@ -1,0 +1,29 @@
+<h1>Explore Investments</h1>
+<input placeholder="Search in Name and Type..." type="text" name="searchText" id="searchText" [(ngModel)]="searchText"
+    (input)="filterByNameAndType()"><br><br>
+
+Filter By Type:
+<select #type (change)="filterByType(type.value)">
+    <option *ngFor="let type of types" [value]="type">
+        {{type}}
+    </option>
+</select><br><br>
+
+<button (click)="sortByPrice()">Sort By Price</button><br><br>
+
+<button (click)="sortByQuantity()">Sort By Quantity</button>
+
+
+<div *ngFor="let investment of investments">
+    <h4>Name: {{investment.name}}</h4>
+    <div>Description: {{investment.description}}</div>
+    <div>Type: {{investment.type}}</div>
+    <div>Price: ${{investment.price | number:'.2-5'}}</div>
+    <div>Quantity: {{investment.quantity}}</div>
+    <div>Posted Date: {{investment.postedDate}}</div>
+    <div>Status: {{investment.status}}</div>
+    
+    <button (click)="addToWatchlist(investment.investmentId)"  >Add to watchList</button><br>
+    <button [routerLink]="['/user-add-inquiry',investment.investmentId]">Inquire</button>
+
+</div>

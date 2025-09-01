@@ -1,7 +1,6 @@
 <h1>Add Investment</h1>
 
 <form [formGroup]="investmentForm" (ngSubmit)="addNewInvestment(investmentForm)">
-  
   <label for="name">Name:</label>
   <input type="text" id="name" formControlName="name">
   <div *ngIf="f.name.touched && f.name.invalid">
@@ -16,7 +15,7 @@
     <div *ngIf="f.description.errors?.minlength" style="color: red;">Description must be at least 15 characters.</div>
   </div>
 
- 
+
   <label for="type">Type:</label>
   <select id="type" formControlName="type">
     <option value="">Select Type</option>
@@ -30,7 +29,7 @@
     <div *ngIf="f.type.errors?.required" style="color: red;">Type is required.</div>
   </div>
 
-  
+
   <label for="price">Price:</label>
   <input type="number" id="price" formControlName="price">
   <div *ngIf="f.price.touched && f.price.invalid">
@@ -38,7 +37,7 @@
     <div *ngIf="f.price.errors?.min" style="color: red;">Must be a positive number.</div>
   </div>
 
- 
+
   <label for="quantity">Quantity:</label>
   <input type="number" id="quantity" formControlName="quantity">
   <div *ngIf="f.quantity.touched && f.quantity.invalid">
@@ -46,7 +45,7 @@
     <div *ngIf="f.quantity.errors?.min" style="color: red;">Must be a positive number.</div>
   </div>
 
- 
+
   <button type="submit" [disabled]="investmentForm.invalid">Add Investment</button>
 </form>
 
