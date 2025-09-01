@@ -1,7 +1,7 @@
 <h1>Edit Investment</h1>
-
-<form [formGroup]="investmentForm" (ngSubmit)="updateInvestment()">
  
+<form [formGroup]="investmentForm" (ngSubmit)="updateInvestment()">
+
   <label for="name">Name:</label>
   <input type="text" id="name" formControlName="name" disabled>
   <div *ngIf="f.name.touched && f.name.invalid">
@@ -9,7 +9,7 @@
     <div *ngIf="f.name.errors?.minlength" style="color: red;">Name must be at least 5 characters.</div>
   </div>
 
- 
+
   <label for="description">Description:</label>
   <textarea id="description" formControlName="description" cols="30" rows="10"></textarea>
   <div *ngIf="f.description.touched && f.description.invalid">
@@ -17,19 +17,19 @@
     <div *ngIf="f.description.errors?.minlength" style="color: red;">Description must be at least 15 characters.</div>
   </div>
 
+<label for="type">Type:</label>
+<select id="type" formControlName="type" disabled>
+<option value="">Select Type</option>
+<option value="Equity">Equity</option>
+<option value="Mutual Fund">Mutual Fund</option>
+<option value="Bond">Bond</option>
+<option value="ETF">ETF</option>
+<option value="Real Estate">Real Estate</option>
+</select>
  
-  <label for="type">Type:</label>
-  <select id="type" formControlName="type" disabled>
-    <option value="">Select Type</option>
-    <option value="Equity">Equity</option>
-    <option value="Mutual Fund">Mutual Fund</option>
-    <option value="Bond">Bond</option>
-    <option value="ETF">ETF</option>
-    <option value="Real Estate">Real Estate</option>
-  </select>
-
-
+ 
   <label for="price">Price:</label>
+
   <input type="number" id="price" formControlName="price">
   <div *ngIf="f.price.touched && f.price.invalid">
     <div *ngIf="f.price.errors?.required" style="color: red;">Price is required.</div>
@@ -45,6 +45,7 @@
   </div>
 
   
+
   <label for="status">Status:</label>
   <select id="status" formControlName="status">
     <option value="">Select Status</option>
@@ -56,12 +57,11 @@
     <div *ngIf="f.status.errors?.required" style="color: red;">Status is required.</div>
   </div>
 
- 
-  <button type="submit" [disabled]="investmentForm.invalid">Update Investment</button>
+<button type="submit" [disabled]="investmentForm.invalid">Update Investment</button>
 </form>
-
-
+ 
+ 
 <div *ngIf="updated">
-  <div>Investment Updated successfully!</div>
-  <button (click)="closeModal()">CLOSE</button>
+<div>Investment Updated successfully!</div>
+<button (click)="closeModal()">CLOSE</button>
 </div>
