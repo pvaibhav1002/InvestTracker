@@ -10,11 +10,8 @@ import com.examly.springapp.model.Investment;
 @Repository
 public interface InvestmentRepo extends JpaRepository<Investment, Long> {
     List<Investment> findByStatus(String status);
-
     List<Investment> findByType(String type);
-
     boolean existsByName(String name);
-
     List<Investment> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrTypeContainingIgnoreCase(
             String name, String description,String type);
             
