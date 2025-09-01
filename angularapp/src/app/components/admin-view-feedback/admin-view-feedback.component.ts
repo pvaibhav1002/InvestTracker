@@ -38,6 +38,7 @@ export class AdminViewFeedbackComponent implements OnInit {
   }
 
   showInvestmentDetails(investment: any): void {
+    console.log(investment);
     this.selectedInvestment = investment;
   }
 
@@ -51,8 +52,9 @@ export class AdminViewFeedbackComponent implements OnInit {
       this.filterFeedbacks = this.feedbacks;
     }
     else {
-      this.filterFeedbacks = this.feedbacks.filter((feedback) => {
-        feedback.category == option
+      this.filterFeedbacks = this.feedbacks;
+      this.filterFeedbacks = this.filterFeedbacks.filter((feedback) => {
+        return feedback.category == option;
       });
     }
   }
@@ -73,7 +75,7 @@ export class AdminViewFeedbackComponent implements OnInit {
   searchBasedOnText() {
     this.filterFeedbacks = this.feedbacks;
     this.filterFeedbacks = this.feedbacks.filter((feed) => {
-      let a = feed.user.username.toLowerCase().includes(this.searchByText.toLowerCase()) || feed.investment.name.toLowerCase().includes(this.searchByText.toLowerCase()) ||
+      let a = feed.user.username.toLowerCase().includes(this.searchByText.toLowerCase()) || feed.investment?.name.toLowerCase().includes(this.searchByText.toLowerCase()) ||
         feed.category.toLowerCase().includes(this.searchByText.toLowerCase())||feed.feedbackText.toLowerCase().includes(this.searchByText.toLowerCase());
       return a;
     });
