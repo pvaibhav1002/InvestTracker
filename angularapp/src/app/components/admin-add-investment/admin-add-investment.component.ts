@@ -11,7 +11,7 @@ export class AdminAddInvestmentComponent implements OnInit {
   investmentForm: FormGroup;
   addedInvestment: boolean = false;
   investmentData: any;
-  date:Date=new Date();
+  date: Date = new Date();
   constructor(private investmentService: InvestmentService, private fb: FormBuilder, private router: Router) {
     this.investmentForm = fb.group({
 

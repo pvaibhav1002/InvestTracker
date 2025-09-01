@@ -24,6 +24,7 @@ import { UsernavComponent } from './components/usernav/usernav.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorService } from './services/http-interceptor.service';
+import { UserWatchlistComponent } from './components/user-watchlist/user-watchlist.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
     UserViewFeedbackComponent,
     UserViewInquiryComponent,
     UserViewInvestmentComponent,
-    UsernavComponent
+    UsernavComponent,
+    UserWatchlistComponent
   ],
   imports: [
     BrowserModule,
@@ -58,8 +60,7 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
     provide: HTTP_INTERCEPTORS,
     useClass: HttpInterceptorService,
     multi: true
-  }
-  ],
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
