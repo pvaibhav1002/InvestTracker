@@ -1,7 +1,7 @@
 package com.examly.springapp.service;
 
+import java.security.SecureRandom;
 import java.util.Optional;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -12,14 +12,14 @@ import com.examly.springapp.model.User;
 import com.examly.springapp.repository.UserRepo;
 
 @Service
-public class EmailserviceImpl implements Emailservice {
+public class EmailServiceImpl implements Emailservice {
 
-    private JavaMailSender emailSender;
+   private JavaMailSender emailSender;
     private UserRepo userRepo;
-    private static final Random RANDOM = new Random();
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     @Autowired
-    public EmailserviceImpl(JavaMailSender emailSender, UserRepo userRepo) {
+    public EmailServiceImpl(JavaMailSender emailSender, UserRepo userRepo) {
         this.emailSender = emailSender;
         this.userRepo = userRepo;
     }
@@ -34,7 +34,7 @@ public class EmailserviceImpl implements Emailservice {
     }
 
     public String sendSimpleOtp(String to) {
-        
+
         try {
             int randnum = 100000 + RANDOM.nextInt(900000);
             String otp = String.valueOf(randnum);
