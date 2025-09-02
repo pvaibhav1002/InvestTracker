@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-md-4">
+    <div class="card text-white bg-primary mb-3">
+    <div class="card-header">Total Users</div>
+    <div class="card-body">
+    <h5 class="card-title">{{ totalUsers }}</h5>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4">
+    <div class="card text-white bg-success mb-3">
+    <div class="card-header">Total Investments</div>
+    <div class="card-body">
+    <h5 class="card-title">{{ totalInvestments }}</h5>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4">
+    <div class="card text-white bg-info mb-3">
+    <div class="card-header">Total Invested Amount</div>
+    <div class="card-body">
+    <h5 class="card-title">₹{{ totalInvestedAmount | number:'1.2-2' }}</h5>
+    </div>
+    </div>
+    </div>
+    </div>
+     
+    <div class="dashboard">
+    <div class="card">
+    <h3>Doughnut — Distribution by Type</h3>
+    <div class="card-body">
+    <canvas baseChart [data]="TypeData" [labels]="TypeLabels" [chartType]="doughnutChartType" [colors]="generateColors(TypeLabels.length)">
+    </canvas>
+    </div>
+    </div>
+    <div class="card">
+    <h3>Doughnut — Distribution by Sector</h3>
+    <div class="card-body">
+    <canvas baseChart [data]="SectorData" [labels]="SectorLabels" [chartType]="doughnutChartType">
+    </canvas>
+    </div>
+    </div>
+    <div class="card">
+    <h3>Doughnut — Distribution by Cap Size</h3>
+    <div class="card-body">
+    <canvas baseChart [data]="CapSizeData" [labels]="CapSizeLabels" [chartType]="doughnutChartType">
+    </canvas>
+    </div>
+    </div>
+    </div>
+     
+    <div class="user-summaries">
+    <div class="card" *ngFor="let user of userSummaries">
+    <div class="card-header">{{ user.username }}</div>
+    <div class="card-body">
+    <p><strong>Total Invested:</strong> ₹{{ user.totalInvested | number:'1.2-2' }}</p>
+    <p><strong>Current Investment:</strong> ₹{{ user.currentInvestment | number:'1.2-2' }}</p>
+    <p><strong>Current Profit:</strong> ₹{{ user.currentProfit | number:'1.2-2' }}</p>
+    </div>
+    </div>
+    </div>
+     
