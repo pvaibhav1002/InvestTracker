@@ -44,10 +44,9 @@ export class UserViewFeedbackComponent implements OnInit {
   }
 
   searchBasedOnText() {
-    this.filteredFeedbacks = this.userFeedbacks;
     this.filteredFeedbacks = this.userFeedbacks.filter((feed) => {
       let a = feed.feedbackText.toLowerCase().includes(this.searchText.toLowerCase()) || feed.category.toLowerCase().includes(this.searchText.toLowerCase()) ||
-        feed.investment.name.toLowerCase().includes(this.searchText.toLowerCase());
+        feed.investment?.name.toLowerCase().includes(this.searchText.toLowerCase());
       return a;
     });
   }

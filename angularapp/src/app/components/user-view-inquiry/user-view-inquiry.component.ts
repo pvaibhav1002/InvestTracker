@@ -27,12 +27,13 @@ export class UserViewInquiryComponent implements OnInit {
     this.userId = this.authService.getAuthenticatedUserId();
     this.investInquiryService.getInquiriesByUserId(this.userId).subscribe((data) => {
       this.invests = data;
+      this.originalInvests=data;
     });
  
   }
  
   filterText() {
-    this.invests = this.invests.filter((inquiry) => {
+    this.invests = this.originalInvests.filter((inquiry) => {
       let a = inquiry.investment.name.toLowerCase().includes(this.searchText.toLowerCase());
       let b = inquiry.questions.toLowerCase().includes(this.searchText.toLowerCase());
       let c = inquiry.adminResponse.toLowerCase().includes(this.searchText.toLowerCase());
