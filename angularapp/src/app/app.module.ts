@@ -25,6 +25,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { UserWatchlistComponent } from './components/user-watchlist/user-watchlist.component';
+import { ChartsModule } from 'ng2-charts';
+import { UserPortfolioComponent } from './components/user-portfolio/user-portfolio.component';
+
+
 
 @NgModule({
   declarations: [
@@ -46,7 +50,8 @@ import { UserWatchlistComponent } from './components/user-watchlist/user-watchli
     UserViewInquiryComponent,
     UserViewInvestmentComponent,
     UsernavComponent,
-    UserWatchlistComponent
+    UserWatchlistComponent,
+    UserPortfolioComponent
   ],
   imports: [
     BrowserModule,
