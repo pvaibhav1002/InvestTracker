@@ -3,13 +3,13 @@ angularapp/node_modules/
 angularapp/package-lock.json
 angularapp/src/global.ts
 angularapp/src/app/app.component.html
-
+ 
 # Spring
 springapp/.mvn/
 springapp/target/
-
+ 
 # Test folders
 junit/
 karma/
-
+ 
 springapp/src/main/resources/application-local.properties

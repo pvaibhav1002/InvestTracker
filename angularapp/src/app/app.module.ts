@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminAddInvestmentComponent } from './components/admin-add-investment/admin-add-investment.component';
@@ -25,7 +26,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { UserWatchlistComponent } from './components/user-watchlist/user-watchlist.component';
-import { ChartsModule } from 'ng2-charts';
 import { UserPortfolioComponent } from './components/user-portfolio/user-portfolio.component';
 
 
@@ -59,7 +59,6 @@ import { UserPortfolioComponent } from './components/user-portfolio/user-portfol
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-
     ChartsModule     
 
   ],

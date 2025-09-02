@@ -1,0 +1,121 @@
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+ 
+  .container {
+    background: linear-gradient(to bottom right, #e3f2fd, #0d47a1);
+    padding: 30px;
+    border-radius: 12px;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    animation: fadeIn 1s ease-in-out;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  h2, h4 {
+    color: #ffffff;
+    text-shadow: 1px 1px 3px #0d47a1;
+    margin-bottom: 20px;
+    animation: fadeIn 1.2s ease-in-out;
+  }
+  
+ 
+  label {
+    color: #bbdefb;
+    font-weight: 600;
+  }
+  
+  
+  input.form-control,
+  select.form-select,
+  textarea.form-control {
+    background-color: #e3f2fd;
+    border: 1px solid #1976d2;
+    color: #0d47a1;
+    transition: all 0.3s ease;
+  }
+  
+  input.form-control:focus,
+  select.form-select:focus,
+  textarea.form-control:focus {
+    border-color: #0d47a1;
+    box-shadow: 0 0 5px #1976d2;
+  }
+  
+ 
+  input::placeholder,
+  textarea::placeholder {
+    color: #1565c0;
+  }
+  
+
+  .btn {
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary {
+    background-color: #1976d2;
+    border-color: #1565c0;
+    color: #fff;
+  }
+  
+  .btn-danger {
+    background-color: #d32f2f;
+    border-color: #b71c1c;
+  }
+  
+  .btn-success {
+    background-color: #388e3c;
+    border-color: #2e7d32;
+  }
+  
+  .btn-secondary {
+    background-color: #546e7a;
+    border-color: #455a64;
+  }
+  
+  .btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  
+
+  .table {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  .table th {
+    background-color: #1976d2;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  .table td {
+    background-color: #bbdefb;
+    vertical-align: middle;
+  }
+  
+ 
+  .alert-success {
+    background-color: #c8e6c9;
+    color: #2e7d32;
+    border: 1px solid #2e7d32;
+    animation: fadeIn 0.8s ease-in-out;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+  
+    .table th, .table td {
+      font-size: 14px;
+    }
+  }
+  

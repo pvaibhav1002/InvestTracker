@@ -13,17 +13,24 @@ export class UserPortfolioComponent implements OnInit {
   currentValue: number = 0;
   profitOrLossAmount: number = 0;
   profitOrLossLabel: string = '';
- 
   TypeLabels: string[] = [];
   TypeData: number[] = [];
   SectorLabels: string[] = [];
   SectorData: number[] = [];
   CapSizeLabels: string[] = [];
   CapSizeData: number[] = [];
- 
+
+
+  investments: {
+    name: string;
+    invested: number;
+    currentValue: number;
+  }[] = [];
+
+
   doughnutChartType: ChartType = 'doughnut';
- 
-  constructor(private chartService: ChartService) {}
+
+  constructor(private chartService: ChartService) { }
 
   ngOnInit(): void {
     const userId = 1; // Replace with dynamic user ID
@@ -32,13 +39,13 @@ export class UserPortfolioComponent implements OnInit {
       this.currentValue = data.currentValue;
       this.profitOrLossAmount = data.profitOrLossAmount;
       this.profitOrLossLabel = data.profitOrLossLabel;
- 
       this.TypeLabels = Object.keys(data.distributionByType);
       this.TypeData = Object.values(data.distributionByType);
       this.SectorLabels = Object.keys(data.distributionBySector);
       this.SectorData = Object.values(data.distributionBySector);
       this.CapSizeLabels = Object.keys(data.distributionByCapSize);
       this.CapSizeData = Object.values(data.distributionByCapSize);
+      this.investments = data.investments;
     });
   }
 

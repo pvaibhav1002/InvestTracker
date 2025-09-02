@@ -75,7 +75,7 @@ export class AdminViewFeedbackComponent implements OnInit {
     this.filterFeedbacks = this.feedbacks;
     this.filterFeedbacks = this.feedbacks.filter((feed) => {
       let a = feed.user.username.toLowerCase().includes(this.searchByText.toLowerCase()) || feed.investment?.name.toLowerCase().includes(this.searchByText.toLowerCase()) ||
-        feed.category.toLowerCase().includes(this.searchByText.toLowerCase()) || feed.feedbackText.toLowerCase().includes(this.searchByText.toLowerCase());
+        feed.category.toLowerCase().includes(this.searchByText.toLowerCase())||feed.feedbackText.toLowerCase().includes(this.searchByText.toLowerCase());
       return a;
     });
   }

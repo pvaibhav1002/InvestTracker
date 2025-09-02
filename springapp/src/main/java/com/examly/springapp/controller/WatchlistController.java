@@ -22,7 +22,6 @@ public class WatchlistController {
     public WatchlistController(WatchlistService watchlistService) {
         this.watchlistService = watchlistService;
     }
-
     @PostMapping()
     public ResponseEntity<Watchlist> addToWatchlist(@RequestBody Watchlist watchlist) {
         Watchlist newWatchlist = watchlistService.addToWatchlist(watchlist);
@@ -31,7 +30,6 @@ public class WatchlistController {
         }
         return ResponseEntity.status(201).body(newWatchlist);
     }
-
     @GetMapping("/{userId}")
     public ResponseEntity<List<Investment>> getWatchlist(@PathVariable Long userId) {
         List<Investment> watchlist = watchlistService.getUserWatchlist(userId);

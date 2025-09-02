@@ -1,6 +1,14 @@
 <h1>Edit Investment</h1>
  
 <form [formGroup]="investmentForm" (ngSubmit)="updateInvestment()">
+<label for="name">Name:</label>
+<input type="text" id="name" formControlName="name" disabled>
+<div *ngIf="f.name.touched && f.name.invalid">
+<div *ngIf="f.name.errors?.required" style="color: red;">Name is required.</div>
+<div *ngIf="f.name.errors?.minlength" style="color: red;">Name must be at least 5 characters.</div>
+</div>
+ 
+<form [formGroup]="investmentForm" (ngSubmit)="updateInvestment()">
 
   <label for="name">Name:</label>
   <input type="text" id="name" formControlName="name" disabled>
@@ -9,7 +17,13 @@
     <div *ngIf="f.name.errors?.minlength" style="color: red;">Name must be at least 5 characters.</div>
   </div>
 
-
+<label for="description">Description:</label>
+<textarea id="description" formControlName="description" cols="30" rows="10"></textarea>
+<div *ngIf="f.description.touched && f.description.invalid">
+<div *ngIf="f.description.errors?.required" style="color: red;">Description is required.</div>
+<div *ngIf="f.description.errors?.minlength" style="color: red;">Description must be at least 15 characters.</div>
+</div>
+ 
   <label for="description">Description:</label>
   <textarea id="description" formControlName="description" cols="30" rows="10"></textarea>
   <div *ngIf="f.description.touched && f.description.invalid">
@@ -43,8 +57,6 @@
     <div *ngIf="f.quantity.errors?.required" style="color: red;">Quantity is required.</div>
     <div *ngIf="f.quantity.errors?.min" style="color: red;">Must be a positive number.</div>
   </div>
-
-  
 
   <label for="status">Status:</label>
   <select id="status" formControlName="status">
