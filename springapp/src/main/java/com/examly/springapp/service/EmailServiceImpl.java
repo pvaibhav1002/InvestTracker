@@ -14,9 +14,10 @@ import com.examly.springapp.repository.UserRepo;
 @Service
 public class EmailServiceImpl implements Emailservice {
 
-   private JavaMailSender emailSender;
+    private JavaMailSender emailSender;
     private UserRepo userRepo;
     private static final SecureRandom RANDOM = new SecureRandom();
+    private String from = "do.not.reply.investtrack@gmail.com";
 
     @Autowired
     public EmailServiceImpl(JavaMailSender emailSender, UserRepo userRepo) {
@@ -26,7 +27,7 @@ public class EmailServiceImpl implements Emailservice {
 
     public void sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("do.not.reply.investtrack@gmail.com");
+        message.setFrom(from);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
@@ -40,7 +41,7 @@ public class EmailServiceImpl implements Emailservice {
             String otp = String.valueOf(randnum);
 
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("do.not.reply.investtrack@gmail.com");
+            message.setFrom(from);
             message.setTo(to);
             message.setSubject("Verify your email address");
             message.setText("Your OTP is " + otp);
@@ -64,10 +65,11 @@ public class EmailServiceImpl implements Emailservice {
 
     public void sendInquiryConfirmation(String to, String userName) {
         String subject = "Inquiry Submitted Successfully";
-        String text = "Dear " + userName + ",\n\nThank you for your inquiry. We have received your request and will get back to you shortly.\n\nBest regards,\nInvestTrack Team";
-    
+        String text = "Dear " + userName
+                + ",\n\nThank you for your inquiry. We have received your request and will get back to you shortly.\n\nBest regards,\nInvestTrack Team";
+
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("do.not.reply.investtrack@gmail.com");
+        message.setFrom(from);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
