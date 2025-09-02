@@ -17,6 +17,8 @@ export class UserViewInvestmentComponent implements OnInit {
   ascQuantity: boolean = true;
   types = ['All', 'Equity', 'Mutual Fund', 'Stocks', 'Crypto', 'Real Estate'];
   searchText: string = '';
+  showQuantityModal: boolean = false;
+
 
   getAllInvestments() {
     this.investmentService.getAllInvestments().subscribe((data) => {
@@ -29,8 +31,42 @@ export class UserViewInvestmentComponent implements OnInit {
 
   addToWatchlist(investmentId: number) {
     this.userwatchlistservice.addToWatchlist(investmentId, this.authservice.getAuthenticatedUserId()).subscribe((data) => {
-      alert('Investment Added to Watchlist!');
+      console.log('Investment Added to Watchlist!');
     })
+  }
+
+  userController = {
+    "user": {
+      "userId": this.authservice.getAuthenticatedUserId()
+    },
+    "investment": {
+      "investmentId": null
+    },
+    "quantityBought": null,
+    "purchasePrice": null,
+    "purchaseDate": null
+  }
+
+  buyInvestent(investmentId: number) {
+    this.userController.investment.investmentId = investmentId;
+    this.userController.quantityBought = 0; // reset default
+    this.showQuantityModal = true;
+  }
+
+  closeModal() {
+    this.showQuantityModal = false;
+    this.userController.investment.investmentId = null;
+  }
+
+  confirmBuy() {
+    if (this.userController.quantityBought <= 0) {
+      alert("Quantity must be greater than 0");
+      return;
+    }
+    this.investmentService.buyInvestment(this.userController).subscribe(data => {
+      console.log("Purchase successful", data);
+      this.closeModal();
+    });
   }
 
 

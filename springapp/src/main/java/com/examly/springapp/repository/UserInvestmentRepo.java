@@ -7,10 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.examly.springapp.model.Investment;
 import com.examly.springapp.model.UserInvestment;
 
 @Repository
 public interface UserInvestmentRepo extends JpaRepository<UserInvestment, Long> {
+    @Query("SELECT ui FROM UserInvestment ui WHERE ui.user.userId = :userId")
+    List<UserInvestment> findByUserUserId(@Param("userId") Long userId);
+
     @Query("SELECT SUM(ui.quantityBought * ui.purchasePrice) FROM UserInvestment ui")
     double getTotalMoneyInvestedByAllUsers();
 

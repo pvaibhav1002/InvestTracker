@@ -12,4 +12,5 @@ springapp/target/
 junit/
 karma/
  
+springapp/src/main/resources/application.properties
 springapp/src/main/resources/application-local.properties

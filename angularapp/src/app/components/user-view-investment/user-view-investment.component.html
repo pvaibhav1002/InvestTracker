@@ -24,8 +24,19 @@ Filter By Type:
     <div>Posted Date: {{investment.postedDate}}</div>
     <div>Status: {{investment.status}}</div>
     
+    <button (click)="buyInvestent(investment.investmentId)"  >Buy</button><br>
     <button (click)="addToWatchlist(investment.investmentId)"  >Add to watchList</button><br>
     <button [routerLink]="['/user-add-inquiry',investment.investmentId]">Inquire</button>
 
 </div>
 
+<!-- Quantity Popup -->
+<div class="modal-backdrop" *ngIf="showQuantityModal">
+  <div class="modal">
+    <h3>Enter Quantity</h3>
+    <input type="number" [(ngModel)]="userController.quantityBought" min="1" class="form-control">
+    <br>
+    <button (click)="confirmBuy()">Confirm</button>
+    <button (click)="closeModal()">Cancel</button>
+  </div>
+</div>

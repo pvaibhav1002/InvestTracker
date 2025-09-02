@@ -19,7 +19,7 @@ export class UserWatchlistService {
   }
 
   addToWatchlist(investmentId: number, userId:number): Observable<any> {
-    let watchlist={"investment":{"investmentId":investmentId},"user-id":userId};
+    let watchlist={"investment":{"investmentId":investmentId},"userId":userId};
     return this.httpClient.post<any>(`${APP_URL}/watchlist`,watchlist);
   }
 

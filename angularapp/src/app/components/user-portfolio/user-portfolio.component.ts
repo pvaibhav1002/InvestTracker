@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartType } from 'chart.js';
+import { AuthService } from 'src/app/services/auth.service';
 import { ChartService } from 'src/app/services/chart.service';
 
 @Component({
@@ -9,47 +10,106 @@ import { ChartService } from 'src/app/services/chart.service';
 })
 export class UserPortfolioComponent implements OnInit {
 
-  totalInvested: number = 0;
-  currentValue: number = 0;
-  profitOrLossAmount: number = 0;
-  profitOrLossLabel: string = '';
-  TypeLabels: string[] = [];
-  TypeData: number[] = [];
-  SectorLabels: string[] = [];
-  SectorData: number[] = [];
-  CapSizeLabels: string[] = [];
-  CapSizeData: number[] = [];
+  portfolioData: any = {
+    totalInvested: 0,
+    currentValue: 0,
+    profitOrLossAmount: 0,
+    profitOrLossLabel: '',
+    TypeLabels: [] as string[],
+    TypeData: [] as number[],
+    SectorLabels: [] as string[],
+    SectorData: [] as number[],
+    CapSizeLabels: [] as string[],
+    CapSizeData: [] as number[],
+    investments: [] as any[]
+  };
 
 
-  investments: {
-    name: string;
-    invested: number;
-    currentValue: number;
-  }[] = [];
-
+  doughnutChartColors: Array<any> = [
+    {
+      backgroundColor: [
+        '#007bff', // Blue
+        '#28a745', // Green
+        '#17a2b8', // Teal
+        '#ffc107', // Yellow
+        '#dc3545', // Red
+        '#6f42c1'  // Purple
+      ]
+    }
+  ];
 
   doughnutChartType: ChartType = 'doughnut';
 
-  constructor(private chartService: ChartService) { }
+  constructor(private chartService: ChartService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    const userId = 1; // Replace with dynamic user ID
-    this.chartService.getUserPortfolioData(userId).subscribe(data => {
-      this.totalInvested = data.totalInvested;
-      this.currentValue = data.currentValue;
-      this.profitOrLossAmount = data.profitOrLossAmount;
-      this.profitOrLossLabel = data.profitOrLossLabel;
-      this.TypeLabels = Object.keys(data.distributionByType);
-      this.TypeData = Object.values(data.distributionByType);
-      this.SectorLabels = Object.keys(data.distributionBySector);
-      this.SectorData = Object.values(data.distributionBySector);
-      this.CapSizeLabels = Object.keys(data.distributionByCapSize);
-      this.CapSizeData = Object.values(data.distributionByCapSize);
-      this.investments = data.investments;
+    this.chartService.getUserPortfolioData(this.authService.getAuthenticatedUserId()).subscribe(data => {
+      this.portfolioData.totalInvested = data.totalInvested;
+      this.portfolioData.currentValue = data.currentValue;
+      this.portfolioData.profitOrLossAmount = data.profitOrLossAmount;
+      this.portfolioData.profitOrLossLabel = data.profitOrLossLabel;
+      this.portfolioData.TypeLabels = Object.keys(data.distributionByType);
+      this.portfolioData.TypeData = Object.values(data.distributionByType);
+      this.portfolioData.SectorLabels = Object.keys(data.distributionBySector);
+      this.portfolioData.SectorData = Object.values(data.distributionBySector);
+      this.portfolioData.CapSizeLabels = Object.keys(data.distributionByCapSize);
+      this.portfolioData.CapSizeData = Object.values(data.distributionByCapSize);
+      this.portfolioData.investments = data.investments;
     });
   }
 
+  async exportToPDF() {
+    const { jsPDF } = await import('jspdf');
+    await import('jspdf-autotable');
+
+    const doc = new jsPDF({
+      unit: 'pt',
+      format: 'a4',
+      orientation: 'portrait'
+    });
+
+    const margin = 40;
+    let y = 50;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(24);
+    doc.text('User Portfolio', 200, y);
+    doc.setFontSize(12);
+    y += 30;
+    doc.text(`Total Invested: Rs. ${this.portfolioData.totalInvested.toString()}`, margin, y);
+    // y += 20;
+    doc.text(`Current Value: Rs. ${this.portfolioData.currentValue.toString()}`, margin + 150, y);
+    // y += 20;
+    const profitOrLoss = this.portfolioData.profitOrLossAmount;
+    if (profitOrLoss >= 0) {
+      doc.setTextColor(40, 167, 69); // bootstrap green (#28a745)
+    } else if (profitOrLoss < 0) {
+      doc.setTextColor(220, 53, 69); // bootstrap red (#dc3545)
+    }
+    doc.text(`Profit/Loss: Rs. ${profitOrLoss.toString()}`, margin + 300, y);
+    y += 10; // space before table
+
+    doc.setTextColor(0, 0, 0); // black
+    // Add table
+    doc.setFont('helvetica', 'normal');
+    (doc as any).autoTable({
+      head: [['Investment Name', 'Cap Size', 'Sector', 'Type', 'Amount Invested', 'Current Value', 'Profit/Loss', 'Status']],
+      body: this.portfolioData.investments.map(inv => [
+        inv.name || '',
+        inv.capSize || '',
+        inv.sector || '',
+        inv.type || '',
+        ((inv.purchasePrice * inv.quantityBought) || 0).toString(),
+        ((inv.currentPrice * inv.quantityBought) || 0).toString(),
+        (((inv.currentPrice * inv.quantityBought) || 0) - ((inv.purchasePrice * inv.quantityBought) || 0)).toString(),
+        inv.status || ''
+      ]),
+      startY: y,
+      headStyles: { fillColor: [0, 123, 255] }
+    });
+
+    // Save PDF
+    doc.save('UserPortfolio.pdf');
+  }
+
 }
-
-
-

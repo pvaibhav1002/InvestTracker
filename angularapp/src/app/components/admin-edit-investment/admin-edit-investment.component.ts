@@ -16,20 +16,25 @@ export class AdminEditInvestmentComponent implements OnInit {
   updated: boolean = false;
   constructor(private readonly fb: FormBuilder, private readonly ar: ActivatedRoute, private readonly is: InvestmentService, private readonly router: Router) {
     this.investmentForm = this.fb.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
+      name: ['', Validators.required], 
+      description: ['', [Validators.required, Validators.minLength(15)]],
       type: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(0)]],
       quantity: [0, [Validators.required, Validators.min(0)]],
-      status: ['', Validators.required]
+      status: ['', Validators.required],
+      capSize: ['', Validators.required],
+      sector: ['', Validators.required],
+      postedDate: [''] 
     });
+
   }
- 
+
   ngOnInit(): void {
     this.investmentId = this.ar.snapshot.params['id'];
     this.is.getInvestmentById(this.investmentId).subscribe((data) => {
       this.investment = data;
       this.investmentForm.patchValue(data);
+      console.log(data);
     });
   }
   updateInvestment() {
@@ -41,13 +46,13 @@ export class AdminEditInvestmentComponent implements OnInit {
     }
   }
 
-  
+
   closeModal() {
     this.updated = false;
     this.router.navigate(['/admin-view-investment']);
- 
+
   }
- 
+
   get f() {
     return this.investmentForm.controls;
   }

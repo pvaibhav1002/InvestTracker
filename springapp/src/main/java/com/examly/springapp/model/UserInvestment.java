@@ -1,7 +1,11 @@
 package com.examly.springapp.model;
  
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
  
 @Entity
 public class UserInvestment {
@@ -10,11 +14,12 @@ public class UserInvestment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int quantityBought;
-    private LocalDateTime purchaseDate;
+    private LocalDate purchaseDate;
     private double purchasePrice;
  
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
  
     @ManyToOne
@@ -22,14 +27,12 @@ public class UserInvestment {
     private Investment investment;
  
     public UserInvestment() {
-        this.user = new User();
-        this.investment = new Investment();
         this.quantityBought = 0;
-        this.purchaseDate = LocalDateTime.now();
+        this.purchaseDate = LocalDate.now();
         this.purchasePrice = 0.0; // default value
     }
  
-    public UserInvestment(Long id, User user, Investment investment, int quantityBought, LocalDateTime purchaseDate,
+    public UserInvestment(Long id, User user, Investment investment, int quantityBought, LocalDate purchaseDate,
             double purchasePrice) {
         this.id = id;
         this.user = user;
@@ -71,11 +74,11 @@ public class UserInvestment {
         this.quantityBought = quantityBought;
     }
  
-    public LocalDateTime getPurchaseDate() {
+    public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
  
-    public void setPurchaseDate(LocalDateTime purchaseDate) {
+    public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
  

@@ -2,7 +2,9 @@ package com.examly.springapp.model;
  
 import java.util.ArrayList;
 import java.util.List;
- 
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
  
@@ -10,7 +12,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String email;
     private String password;
@@ -20,6 +22,7 @@ public class User {
     private boolean accountStatus;
  
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<UserInvestment> userInvestments = new ArrayList<>();
  
     public User() {

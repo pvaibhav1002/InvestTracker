@@ -33,5 +33,9 @@ export class InvestmentService {
   deleteInvestment(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${APP_URL}/investments/${id}`);
   }
+
+  buyInvestment(userInvestment:any){
+    return this.httpClient.post<any>(`${APP_URL}/api/user/buy`,userInvestment);
+  }
  
 }

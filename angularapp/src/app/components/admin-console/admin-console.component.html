@@ -29,7 +29,7 @@
     <div class="card">
         <h3>Doughnut — Distribution by Type</h3>
         <div class="card-body">
-            <canvas baseChart [data]="TypeData" [labels]="TypeLabels" [chartType]="doughnutChartType"
+            <canvas #typeChart baseChart [data]="TypeData" [labels]="TypeLabels" [chartType]="doughnutChartType"
                 [colors]="doughnutChartColors">
             </canvas>
         </div>
@@ -37,7 +37,7 @@
     <div class="card">
         <h3>Doughnut — Distribution by Sector</h3>
         <div class="card-body">
-            <canvas baseChart [data]="SectorData" [labels]="SectorLabels" [chartType]="doughnutChartType"
+            <canvas  #sectorChart baseChart [data]="SectorData" [labels]="SectorLabels" [chartType]="doughnutChartType"
                 [colors]="doughnutChartColors">
             </canvas>
         </div>
@@ -45,7 +45,7 @@
     <div class="card">
         <h3>Doughnut — Distribution by Cap Size</h3>
         <div class="card-body">
-            <canvas baseChart [data]="CapSizeData" [labels]="CapSizeLabels" [chartType]="doughnutChartType"
+            <canvas  #capSizeChart baseChart [data]="CapSizeData" [labels]="CapSizeLabels" [chartType]="doughnutChartType"
                 [colors]="doughnutChartColors">
             </canvas>
         </div>
