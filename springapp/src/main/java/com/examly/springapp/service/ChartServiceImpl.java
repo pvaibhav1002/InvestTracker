@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
  
 import com.examly.springapp.model.AdminConsoleDTO;
 import com.examly.springapp.model.User;
+import com.examly.springapp.model.UserPortfolioDTO;
 import com.examly.springapp.repository.InvestmentRepo;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.repository.UserInvestmentRepo;
@@ -89,6 +90,73 @@ public class ChartServiceImpl implements ChartService {
     private Map<String, Long> getInvestmentDistributionByCapSize() {
         Map<String, Long> distribution = new HashMap<>();
         List<Object[]> results = investmentRepo.countInvestmentsByCapSize();
+        for (Object[] result : results) {
+            String capSize = (String) result[0];
+            Long count = (Long) result[1];
+            distribution.put(capSize, count);
+        }
+        return distribution;
+    }
+
+    public UserPortfolioDTO getUserPortfolioData(Long userId) {
+        Double totalInvested = userInvestmentRepo.getTotalInvestedByUser(userId);
+        Double currentValue = userInvestmentRepo.getCurrentInvestmentByUser(userId);
+
+        totalInvested = totalInvested != null ? totalInvested : 0.0;
+        currentValue = currentValue != null ? currentValue : 0.0;
+
+        Double profitOrLossAmount = currentValue - totalInvested;
+        String profitOrLossLabel = getProfitOrLossLabel(profitOrLossAmount);
+
+        Map<String, Long> distributionByType = getInvestmentDistributionByTypeForUser(userId);
+        Map<String, Long> distributionBySector = getInvestmentDistributionBySectorForUser(userId);
+        Map<String, Long> distributionByCapSize = getInvestmentDistributionByCapSizeForUser(userId);
+
+        return new UserPortfolioDTO(
+                totalInvested,
+                currentValue,
+                profitOrLossAmount,
+                profitOrLossLabel,
+                distributionByType,
+                distributionBySector,
+                distributionByCapSize);
+    }
+
+    private String getProfitOrLossLabel(Double profitOrLossAmount) {
+        if (profitOrLossAmount > 0) {
+            return "Profit";
+        } else if (profitOrLossAmount < 0) {
+            return "Loss";
+        } else {
+            return "No Change";
+        }
+    }
+
+    public Map<String, Long> getInvestmentDistributionByTypeForUser(Long userId) {
+        Map<String, Long> distribution = new HashMap<>();
+        List<Object[]> results = userInvestmentRepo.countInvestmentsByTypeForUser(userId);
+        for (Object[] result : results) {
+            String type = (String) result[0];
+            Long count = (Long) result[1];
+            distribution.put(type, count);
+        }
+        return distribution;
+    }
+
+    public Map<String, Long> getInvestmentDistributionBySectorForUser(Long userId) {
+        Map<String, Long> distribution = new HashMap<>();
+        List<Object[]> results = userInvestmentRepo.countInvestmentsBySectorForUser(userId);
+        for (Object[] result : results) {
+            String sector = (String) result[0];
+            Long count = (Long) result[1];
+            distribution.put(sector, count);
+        }
+        return distribution;
+    }
+
+    public Map<String, Long> getInvestmentDistributionByCapSizeForUser(Long userId) {
+        Map<String, Long> distribution = new HashMap<>();
+        List<Object[]> results = userInvestmentRepo.countInvestmentsByCapSizeForUser(userId);
         for (Object[] result : results) {
             String capSize = (String) result[0];
             Long count = (Long) result[1];

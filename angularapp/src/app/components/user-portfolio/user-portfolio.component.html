@@ -1,48 +1,87 @@
 <div class="row">
-    <div class="col-md-4">
-      <div class="card text-white bg-primary mb-3">
-        <div class="card-header">Total Invested</div>
-        <div class="card-body">
-          <h5 class="card-title">₹{{ totalInvested | number:'1.2-2' }}</h5>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card text-white bg-success mb-3">
-        <div class="card-header">Current Value</div>
-        <div class="card-body">
-          <h5 class="card-title">₹{{ currentValue | number:'1.2-2' }}</h5>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card text-white bg-info mb-3">
-        <div class="card-header">{{ profitOrLossLabel }}</div>
-        <div class="card-body">
-          <h5 class="card-title">₹{{ profitOrLossAmount | number:'1.2-2' }}</h5>
-        </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-primary mb-3">
+      <div class="card-header">Total Invested</div>
+      <div class="card-body">
+        <h5 class="card-title">₹{{ totalInvested | number:'1.2-2' }}</h5>
       </div>
     </div>
   </div>
-   
-  <div class="dashboard">
-    <div class="card">
-      <h3>Doughnut — Distribution by Type</h3>
+  <div class="col-md-4">
+    <div class="card text-white bg-success mb-3">
+      <div class="card-header">Current Value</div>
       <div class="card-body">
-        <canvas baseChart [data]="TypeData" [labels]="TypeLabels" [chartType]="doughnutChartType"></canvas>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Doughnut — Distribution by Sector</h3>
-      <div class="card-body">
-        <canvas baseChart [data]="SectorData" [labels]="SectorLabels" [chartType]="doughnutChartType"></canvas>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Doughnut — Distribution by Cap Size</h3>
-      <div class="card-body">
-        <canvas baseChart [data]="CapSizeData" [labels]="CapSizeLabels" [chartType]="doughnutChartType"></canvas>
+        <h5 class="card-title">₹{{ currentValue | number:'1.2-2' }}</h5>
       </div>
     </div>
   </div>
-   
+  <div class="col-md-4">
+    <div class="card text-white bg-info mb-3">
+      <div class="card-header">{{ profitOrLossLabel }}</div>
+      <div class="card-body">
+        <h5 class="card-title">₹{{ profitOrLossAmount | number:'1.2-2' }}</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard">
+  <div class="card">
+    <h3>Doughnut — Distribution by Type</h3>
+    <div class="card-body">
+      <canvas baseChart [data]="TypeData" [labels]="TypeLabels" [chartType]="doughnutChartType"></canvas>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Doughnut — Distribution by Sector</h3>
+    <div class="card-body">
+      <canvas baseChart [data]="SectorData" [labels]="SectorLabels" [chartType]="doughnutChartType"></canvas>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Doughnut — Distribution by Cap Size</h3>
+    <div class="card-body">
+      <canvas baseChart [data]="CapSizeData" [labels]="CapSizeLabels" [chartType]="doughnutChartType"></canvas>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="card mt-4">
+  <div class="card-header bg-secondary text-white">
+    Profit/Loss Summary
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-hover" border="1">
+      <thead class="thead-dark">
+        <tr>
+          <th>Investment Name</th>
+          <th>Amount Invested (₹)</th>
+          <th>Current Value (₹)</th>
+          <th>Profit/Loss (₹)</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let investment of investments">
+          <td>{{ investment.name }}</td>
+          <td>{{ investment.invested | number:'1.2-2' }}</td>
+          <td>{{ investment.currentValue | number:'1.2-2' }}</td>
+          <td>{{ investment.currentValue - investment.invested | number:'1.2-2' }}</td>
+          <td>
+            <span [ngClass]="{
+                'text-success': investment.currentValue > investment.invested,
+                'text-danger': investment.currentValue < investment.invested,
+                'text-warning': investment.currentValue === investment.invested
+              }">
+              {{ investment.currentValue > investment.invested ? 'Profit' :
+              investment.currentValue < investment.invested ? 'Loss' : 'No Change' }} </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
