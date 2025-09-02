@@ -9,6 +9,7 @@ import com.examly.springapp.model.User;
 
 @Repository
 public interface UserRepo extends JpaRepository<User,Long> {
+    long countByUserRole(String userRole);
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
     User findByUsername(String username);
