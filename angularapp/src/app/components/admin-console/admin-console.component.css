@@ -1,43 +1,54 @@
-.admin-console {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #e0f7ff; 
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
+.dashboard {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+  gap: 1rem;
+
+  padding: 1rem;
  
-  .admin-console h2 {
-    text-align: center;
-    color: #0288d1;
-    margin-bottom: 30px;
-    font-size: 28px;
-  }
-  
- 
-  .stat-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-    border: 1px solid #b3e5fc;
+  .card {
+
+    background: #fff;
+
     border-radius: 8px;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  }
-  
+
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+
+    padding: 0.5rem;
  
-  .stat-card label {
-    font-weight: bold;
-    color: #0277bd;
-    font-size: 16px;
+    .card-header {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 0.5rem;
+ 
+      .actions button {
+
+        margin-left: 0.5rem;
+
+      }
+
+    }
+ 
+    .card-body {
+
+      canvas {
+
+        width: 100% !important;
+
+        height: 300px !important;
+
+      }
+
+    }
+
   }
-  
-  
-  .stat-card span {
-    font-size: 18px;
-    color: #01579b;
-  }
+
+}
+ 
