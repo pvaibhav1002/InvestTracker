@@ -3,10 +3,20 @@ import { ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { ChartService } from 'src/app/services/chart.service';
 
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+
+import { BaseChartDirective, Label } from 'ng2-charts';
+
+import { ChartService } from 'src/app/services/chart.service';
+ 
 @Component({
+
   selector: 'app-admin-console',
+
   templateUrl: './admin-console.component.html',
+
   styleUrls: ['./admin-console.component.css']
+
 })
 
 export class AdminConsoleComponent implements OnInit {

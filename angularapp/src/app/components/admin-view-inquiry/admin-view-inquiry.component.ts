@@ -1,7 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
+import { EmailService } from 'src/app/services/email.service';
 import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> InvestTrack-Deepu1412
 @Component({
   selector: 'app-admin-view-inquiry',
   templateUrl: './admin-view-inquiry.component.html',
@@ -19,7 +25,11 @@ export class AdminViewInquiryComponent implements OnInit {
   filterRisk: string = '';
   originalInquiries: InvestmentInquiry[] = [];
 
+<<<<<<< HEAD
   constructor(private inquiryService: InvestmentInquiryService) { }
+=======
+  constructor(private inquiryService: InvestmentInquiryService,private emailservice:EmailService) { }
+>>>>>>> InvestTrack-Deepu1412
  
   ngOnInit(): void {
     this.fetchAllInquiries();
@@ -73,6 +83,16 @@ export class AdminViewInquiryComponent implements OnInit {
       inquiry.responseDate = new Date().toISOString();
       this.inquiryService.updateInquiry(inquiry.inquiryId, inquiry).subscribe({
         next: () => {
+          
+          this.emailservice.sendInquiryResponse(
+            inquiry.user.email,
+            inquiry.user.username,
+            this.responseText
+          ).subscribe({
+            next: () => console.log('Email sent successfully'),
+            error: (err) => console.error('Error sending email:', err)
+          });
+  
           this.responseSubmitted = true;
           setTimeout(() => {
             this.responseSubmitted = false;

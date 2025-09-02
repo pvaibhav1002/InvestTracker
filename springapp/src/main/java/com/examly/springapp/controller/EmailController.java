@@ -43,4 +43,13 @@ public class EmailController {
         }
         return ResponseEntity.ok(Map.of("status", "Account Activated"));
     }
+
+    @PostMapping("/priceUpdate")
+    public ResponseEntity<String> notifyPriceUpdate(@RequestBody String updatedPriceInfo) {
+        emailService.sendPriceUpdateToAllUsers(updatedPriceInfo);
+        return ResponseEntity.ok("Price update emails sent to all users.");
+    }
+    
+    
+
 }

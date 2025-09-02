@@ -8,6 +8,5 @@ export interface Investment{
     price?:number;
     quantity?:number;
     postedDate?:string;
-    status?:string;
-    user?:User;
+    status?:string;   
 }

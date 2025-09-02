@@ -13,7 +13,6 @@ export class UserPortfolioComponent implements OnInit {
   currentValue: number = 0;
   profitOrLossAmount: number = 0;
   profitOrLossLabel: string = '';
-
   TypeLabels: string[] = [];
   TypeData: number[] = [];
   SectorLabels: string[] = [];
@@ -40,7 +39,6 @@ export class UserPortfolioComponent implements OnInit {
       this.currentValue = data.currentValue;
       this.profitOrLossAmount = data.profitOrLossAmount;
       this.profitOrLossLabel = data.profitOrLossLabel;
-
       this.TypeLabels = Object.keys(data.distributionByType);
       this.TypeData = Object.values(data.distributionByType);
       this.SectorLabels = Object.keys(data.distributionBySector);
