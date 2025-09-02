@@ -6,6 +6,7 @@ import { InvestmentService } from 'src/app/services/investment.service';
 import { Investment } from 'src/app/models/investment.model';
 import { Feedback } from 'src/app/models/feedback.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { EmailService } from 'src/app/services/email.service';
 
 @Component({
   selector: 'app-user-add-feedback',
@@ -17,18 +18,31 @@ export class UserAddFeedbackComponent implements OnInit {
   feedbackForm: FormGroup;
   investments: Investment[] = [];
   feedback: Feedback = { investment: {}, user: {} };
-  constructor(private fb: FormBuilder, private fs: FeedbackService, private router: Router, private investmentService: InvestmentService, private authService: AuthService) {
+  name: string = '';
+  email: string = '';
+  responseMessage: string = '';
+
+  constructor(
+    private fb: FormBuilder,
+    private fs: FeedbackService,
+    private router: Router,
+    private investmentService: InvestmentService,
+    private authService: AuthService,
+    private emailService: EmailService
+  ) {
     this.feedbackForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       message: ['', Validators.required],
       category: ['', Validators.required],
-      investmentId: [null, Validators.required]
+      investmentId: [null]
     });
   }
 
   ngOnInit(): void {
     this.investmentService.getAllInvestments().subscribe(data => {
       this.investments = data;
-    })
+    });
 
     this.feedbackForm.get('category')?.valueChanges.subscribe(category => {
       const investmentControl = this.feedbackForm.get('investmentId');
@@ -40,7 +54,6 @@ export class UserAddFeedbackComponent implements OnInit {
       }
       investmentControl?.updateValueAndValidity();
     });
-
   }
 
   get f() {
@@ -48,20 +61,35 @@ export class UserAddFeedbackComponent implements OnInit {
   }
 
   submitFeedback(): void {
-    let formData = this.feedbackForm.value;
+    const formData = this.feedbackForm.value;
     this.feedback.feedbackText = formData.message;
     this.feedback.category = formData.category;
     this.feedback.investment.investmentId = formData.investmentId;
-    let date = new Date();
-    this.feedback.date = date.toDateString();
+    this.feedback.date = new Date().toDateString();
     this.feedback.user.userId = this.authService.getAuthenticatedUserId();
+
+    this.name = formData.name;
+    this.email = formData.email;
 
     if (this.feedbackForm.valid) {
       this.fs.sendFeedback(this.feedback).subscribe(() => {
-        console.log('Feedback submitted Successfully!');
+        this.sendFeedbackConfirmation(); // Send confirmation email
         this.router.navigate(['/user-view-feedback']);
       });
     }
+  }
+
+  sendFeedbackConfirmation(): void {
+    const emailRequest = {
+      to: this.email,
+      subject: 'Feedback Submitted Successfully',
+      text: `Dear ${this.name},\n\nThank you for your feedback. We appreciate your input and will review it shortly.\n\nBest regards,\nInvestTrack Team`
+    };
+
+    this.emailService.sendEmail(emailRequest).subscribe({
+      next: (res) => this.responseMessage = res,
+      error: () => this.responseMessage = 'Failed to send confirmation email'
+    });
   }
 
   cancel(): void {

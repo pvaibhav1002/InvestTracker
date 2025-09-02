@@ -2,8 +2,21 @@
     <h2>Submit Your Inquiry</h2>
 
     <form (ngSubmit)="onSubmit()" #inquiryForm="ngForm">
-        <label for="investment">Investment</label>
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" [(ngModel)]="name" required #nameRef="ngModel"
+            placeholder="Enter your name" />
+        <div *ngIf="nameRef.invalid && nameRef.touched">
+            <small>Your name is required.</small>
+        </div>
 
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" required #emailRef="ngModel"
+            placeholder="Enter your email" />
+        <div *ngIf="emailRef.invalid && emailRef.touched">
+            <small>Valid email is required.</small>
+        </div>
+
+        <label for="investment">Investment</label>
         <input type="text" id="investment" name="investment" [(ngModel)]="investmentName" #investment="ngModel"
             placeholder="Enter investment" disabled />
 
@@ -23,7 +36,7 @@
         <input type="number" name="expectedReturn" id="expectedReturn" [(ngModel)]="newInvest.expectedReturn" required
             #expectedReturn="ngModel">
         <div *ngIf="expectedReturn.invalid && expectedReturn.touched">
-            <small *ngIf="interest.errors?.required">Expected Return is required.</small>
+            <small *ngIf="expectedReturn.errors?.required">Expected Return is required.</small>
         </div>
 
         <label for="interest">Reason for Interest</label>
@@ -38,13 +51,10 @@
         <textarea id="questions" name="questions" [(ngModel)]="newInvest.questions" required #questions="ngModel"
             placeholder="Enter your questions here..."></textarea>
         <div *ngIf="questions.invalid && questions.touched">
-            <small *ngIf="questions.errors?.required">Atleast one question is required.</small>
-
+            <small *ngIf="questions.errors?.required">At least one question is required.</small>
         </div>
 
-        <button type="submit" [disabled]="inquiryForm.invalid">
-            Submit Inquiry
-        </button>
+        <button type="submit" [disabled]="inquiryForm.invalid" (click)="sendInquiryConfirmation()">Submit Inquiry</button>
     </form>
 
     <div class="popup" *ngIf="showPopup">

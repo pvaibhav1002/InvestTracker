@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { EmailService } from 'src/app/services/email.service';
 import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
 import { InvestmentService } from 'src/app/services/investment.service';
 
@@ -15,16 +16,27 @@ export class UserAddInquiryComponent implements OnInit {
   investmentName: string = "";
   id: number = null;
   newInvest: InvestmentInquiry;
+  responseMessage: string = '';
 
-  constructor(private investmentInquiryService: InvestmentInquiryService, private authService: AuthService, private investmentService: InvestmentService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  // Add these fields to capture user info for email
+  name: string = '';
+  email: string = '';
+
+  constructor(
+    private emailService: EmailService,
+    private investmentInquiryService: InvestmentInquiryService,
+    private authService: AuthService,
+    private investmentService: InvestmentService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
-      this.investmentService.getInvestmentById(params['id']).subscribe(data => {
-
+      this.investmentService.getInvestmentById(this.id).subscribe(data => {
         this.investmentName = data.name;
-      })
+      });
     });
 
     this.newInvest = {
@@ -43,9 +55,9 @@ export class UserAddInquiryComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.newInvest)
     this.investmentInquiryService.addInquiry(this.newInvest).subscribe({
       next: () => {
+        this.sendInquiryConfirmation(); 
         this.showPopup = true;
       },
       error: (err) => {
@@ -53,6 +65,15 @@ export class UserAddInquiryComponent implements OnInit {
       }
     });
   }
+
+
+  sendInquiryConfirmation(): void {
+    this.emailService.sendInquiryConfirmation(this.email, this.name).subscribe({
+      next: (res) => this.responseMessage = res,
+      error: () => this.responseMessage = 'Failed to send confirmation email'
+    });
+  }
+
 
   closePopup(): void {
     this.showPopup = false;
