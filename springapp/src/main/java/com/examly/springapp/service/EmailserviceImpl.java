@@ -3,6 +3,7 @@ package com.examly.springapp.service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
  
@@ -82,5 +83,18 @@ public class EmailserviceImpl implements Emailservice {
         emailSender.send(message);
     }
     
- 
+    public void sendPriceUpdateToAllUsers(String updatedPriceInfo) {
+        List<User> users = userRepo.findAll();
+        String subject = "Important: Price Update Notification";
+        String text = "Dear User,\n\nWe would like to inform you that the price has been updated:\n" 
+                    + updatedPriceInfo + "\n\nThank you for staying with us.\nInvestTrack Team";
+    
+        for (User user : users) {
+            if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+                sendSimpleMessage(user.getEmail(), subject, text);
+            }
+        }
+    }
+    
+    
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Investment } from 'src/app/models/investment.model';
+import { EmailService } from 'src/app/services/email.service';
+import { FeedbackService } from 'src/app/services/feedback.service';
 
 import { InvestmentService } from 'src/app/services/investment.service';
 @Component({
@@ -14,7 +16,9 @@ export class AdminEditInvestmentComponent implements OnInit {
   investmentId: number;
   investmentForm: FormGroup;
   updated: boolean = false;
-  constructor(private fb: FormBuilder, private ar: ActivatedRoute, private is: InvestmentService, private router: Router) {
+  originalPrice: number;
+
+  constructor(private fb: FormBuilder, private ar: ActivatedRoute, private feedbackservice:FeedbackService,private is: InvestmentService, private router: Router,private emailservice:EmailService) {
     this.investmentForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -30,6 +34,7 @@ export class AdminEditInvestmentComponent implements OnInit {
     this.is.getInvestmentById(this.investmentId).subscribe((data) => {
       this.investment = data;
       this.investmentForm.patchValue(data);
+      this.originalPrice = data.price;
     });
   }
   updateInvestment() {
@@ -40,7 +45,8 @@ export class AdminEditInvestmentComponent implements OnInit {
       });
     }
   }
- 
+
+  
   closeModal() {
     this.updated = false;
     this.router.navigate(['/admin-view-investment']);

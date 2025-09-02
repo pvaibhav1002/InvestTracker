@@ -5,4 +5,5 @@ public interface Emailservice {
     String sendSimpleOtp(String to);
     boolean activateAccount(Long userId);
     void sendInquiryConfirmation(String to, String userName);
+    void sendPriceUpdateToAllUsers(String updatedPriceInfo);
 }
