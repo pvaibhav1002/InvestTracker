@@ -1,5 +1,8 @@
 package com.examly.springapp.model;
  
+import java.util.ArrayList;
+import java.util.List;
+ 
 import jakarta.persistence.*;
  
 @Entity
@@ -14,6 +17,9 @@ public class User {
     private String userRole;
     private boolean accountStatus;
  
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserInvestment> userInvestments = new ArrayList<>();
+ 
     public User() {
         this.email = "";
         this.password = "";
@@ -21,10 +27,11 @@ public class User {
         this.mobileNumber = "";
         this.userRole = "";
         this.accountStatus = false;
+        this.userInvestments = new ArrayList<>();
     }
  
     public User(Long userId, String email, String password, String username, String mobileNumber, String userRole,
-            boolean accountStatus) {
+            boolean accountStatus, List<UserInvestment> userInvestments) {
         this.userId = userId;
         this.email = email;
         this.password = password;
@@ -32,6 +39,7 @@ public class User {
         this.mobileNumber = mobileNumber;
         this.userRole = userRole;
         this.accountStatus = accountStatus;
+        this.userInvestments = userInvestments;
     }
  
     public Long getUserId() {
@@ -90,4 +98,11 @@ public class User {
         this.accountStatus = accountStatus;
     }
  
+    public List<UserInvestment> getUserInvestments() {
+        return userInvestments;
+    }
+ 
+    public void setUserInvestments(List<UserInvestment> userInvestments) {
+        this.userInvestments = userInvestments;
+    }
 }
