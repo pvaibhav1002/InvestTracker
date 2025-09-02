@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,8 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtils {
 
-    private static final String SECRET = "VQ7yTeEx=Ko4vf56i+FpkLpbvdsVgzIU1vwk9To1o+yTE/O+xCSI=coz+GuPP3ah3f6Sg4ghXQOeV61Xppqy6sktwEpA7YzA5xGqdQzFhlF";
+    @Value("${jwt.secret}")
+    private String jwtSecret;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -44,14 +46,14 @@ public class JwtUtils {
         return extractExpiration(token).before(new Date());
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);   
+    public boolean validateToken(String token, UserDetails userDetails) {
+        final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    public String generateToken(String username, Map<String, Object> claims){
-     
-         return createToken(claims, username);
+    public String generateToken(String username, Map<String, Object> claims) {
+
+        return createToken(claims, username);
     }
 
     private String createToken(Map<String, Object> claims, String username) {
@@ -65,7 +67,7 @@ public class JwtUtils {
     }
 
     private Key getSignKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET);
+        byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

@@ -12,9 +12,12 @@ import com.examly.springapp.service.Emailservice;
 @RestController
 @RequestMapping("/api/email")
 public class EmailController {
+    private Emailservice emailService;
 
     @Autowired
-    private Emailservice emailService;
+    public EmailController(Emailservice emailService) {
+        this.emailService = emailService;
+    }
 
     @PostMapping("/send")
     public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest) {
@@ -40,7 +43,4 @@ public class EmailController {
         }
         return ResponseEntity.ok(Map.of("status", "Account Activated"));
     }
-
-    
-
 }

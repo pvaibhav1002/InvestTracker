@@ -14,6 +14,7 @@ export class ChartService {
     return this.httptClient.get<any>(`${APP_URL}/admin/console`);
   }
 
+
   getUserPortfolioData(userId:number):Observable<any>{
     return this.httptClient.get<any>(`${APP_URL}/user/${userId}/portfolio`);
   }

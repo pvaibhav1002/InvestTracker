@@ -59,7 +59,9 @@ import { UserPortfolioComponent } from './components/user-portfolio/user-portfol
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    ChartsModule
+
+    ChartsModule     
+
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
