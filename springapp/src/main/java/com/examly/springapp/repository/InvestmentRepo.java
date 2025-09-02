@@ -34,4 +34,5 @@ public interface InvestmentRepo extends JpaRepository<Investment, Long> {
     @Query("SELECT i.price FROM Investment i WHERE i.investmentId = :investmentId")
     double findInvestmentPriceById(@Param("investmentId") Long investmentId);
 
+   
 }

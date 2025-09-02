@@ -1,51 +1,31 @@
 .dashboard {
-
   display: grid;
-
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-
   gap: 1rem;
-
   padding: 1rem;
  
   .card {
-
     background: #fff;
-
     border-radius: 8px;
-
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
-
     padding: 0.5rem;
  
     .card-header {
-
       display: flex;
-
       justify-content: space-between;
-
       align-items: center;
-
       margin-bottom: 0.5rem;
  
       .actions button {
-
         margin-left: 0.5rem;
-
       }
-
     }
  
     .card-body {
-
       canvas {
-
         width: 100% !important;
-
         height: 300px !important;
-
       }
-
     }
 
   }
