@@ -12,4 +12,4 @@ springapp/target/
 junit/
 karma/
 
-.env
+springapp/src/main/resources/application-local.properties
