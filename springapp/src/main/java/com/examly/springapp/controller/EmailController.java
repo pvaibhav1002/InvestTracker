@@ -12,7 +12,6 @@ import com.examly.springapp.service.Emailservice;
 @RestController
 @RequestMapping("/api/email")
 public class EmailController {
-
     private Emailservice emailService;
 
     @Autowired
@@ -21,7 +20,6 @@ public class EmailController {
     }
 
     @PostMapping("/send")
-
     public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest) {
         emailService.sendSimpleMessage(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getText());
         return ResponseEntity.status(200).body("Email sent successfully");

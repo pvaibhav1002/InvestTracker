@@ -62,4 +62,15 @@ public class EmailserviceImpl implements Emailservice {
         return false;
     }
 
+    public void sendInquiryConfirmation(String to, String userName) {
+        String subject = "Inquiry Submitted Successfully";
+        String text = "Dear " + userName + ",\n\nThank you for your inquiry. We have received your request and will get back to you shortly.\n\nBest regards,\nInvestTrack Team";
+    
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("do.not.reply.investtrack@gmail.com");
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(text);
+        emailSender.send(message);
+    }
 }
