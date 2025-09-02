@@ -38,7 +38,6 @@ public class InvestmentInquiryServiceImpl implements InvestmentInquiryService {
         Optional<Investment> investment = investmentRepo.findById(investmentInquiry.getInvestment().getInvestmentId());
         if (user.isPresent() && investment.isPresent()) {
             investmentInquiry.setContactDetails(user.get().getMobileNumber());
-            System.out.println("impl" + investmentInquiry);
             return investmentInquiryRepo.save(investmentInquiry);
         }
         return null;
@@ -70,11 +69,6 @@ public class InvestmentInquiryServiceImpl implements InvestmentInquiryService {
         }
         return new ArrayList<>();
     }
-
-    // @Override
-    // public List<InvestmentInquiry> getInquiriesByPriority(String priority) {
-    // return investmentInquiryRepo.findByPriority(priority);
-    // }
 
     @Override
     public InvestmentInquiry getInquiryById(Long inquiryId) {

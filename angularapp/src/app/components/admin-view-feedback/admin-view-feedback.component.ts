@@ -14,11 +14,10 @@ export class AdminViewFeedbackComponent implements OnInit {
   selectedInvestment: any = null;
 
 
-  constructor(private feedbackService: FeedbackService) { }
+  constructor(private readonly feedbackService: FeedbackService) { }
 
   ngOnInit(): void {
     this.getFeedbacks();
-
   }
 
   getFeedbacks(): void {
@@ -70,13 +69,13 @@ export class AdminViewFeedbackComponent implements OnInit {
     this.ascDate = !this.ascDate;
   }
 
-  searchByText:string='';
+  searchByText: string = '';
 
   searchBasedOnText() {
     this.filterFeedbacks = this.feedbacks;
     this.filterFeedbacks = this.feedbacks.filter((feed) => {
       let a = feed.user.username.toLowerCase().includes(this.searchByText.toLowerCase()) || feed.investment?.name.toLowerCase().includes(this.searchByText.toLowerCase()) ||
-        feed.category.toLowerCase().includes(this.searchByText.toLowerCase())||feed.feedbackText.toLowerCase().includes(this.searchByText.toLowerCase());
+        feed.category.toLowerCase().includes(this.searchByText.toLowerCase()) || feed.feedbackText.toLowerCase().includes(this.searchByText.toLowerCase());
       return a;
     });
   }

@@ -14,7 +14,7 @@ export class AdminEditInvestmentComponent implements OnInit {
   investmentId: number;
   investmentForm: FormGroup;
   updated: boolean = false;
-  constructor(private fb: FormBuilder, private ar: ActivatedRoute, private is: InvestmentService, private router: Router) {
+  constructor(private readonly fb: FormBuilder, private readonly ar: ActivatedRoute, private readonly is: InvestmentService, private readonly router: Router) {
     this.investmentForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -24,7 +24,7 @@ export class AdminEditInvestmentComponent implements OnInit {
       status: ['', Validators.required]
     });
   }
- 
+
   ngOnInit(): void {
     this.investmentId = this.ar.snapshot.params['id'];
     this.is.getInvestmentById(this.investmentId).subscribe((data) => {
@@ -40,13 +40,13 @@ export class AdminEditInvestmentComponent implements OnInit {
       });
     }
   }
- 
+
   closeModal() {
     this.updated = false;
     this.router.navigate(['/admin-view-investment']);
- 
+
   }
- 
+
   get f() {
     return this.investmentForm.controls;
   }

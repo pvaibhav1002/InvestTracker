@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
  
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
  
 @Entity
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue
@@ -28,18 +30,6 @@ public class User {
         this.userRole = "";
         this.accountStatus = false;
         this.userInvestments = new ArrayList<>();
-    }
- 
-    public User(Long userId, String email, String password, String username, String mobileNumber, String userRole,
-            boolean accountStatus, List<UserInvestment> userInvestments) {
-        this.userId = userId;
-        this.email = email;
-        this.password = password;
-        this.username = username;
-        this.mobileNumber = mobileNumber;
-        this.userRole = userRole;
-        this.accountStatus = accountStatus;
-        this.userInvestments = userInvestments;
     }
  
     public Long getUserId() {
@@ -97,9 +87,6 @@ public class User {
     public void setAccountStatus(boolean accountStatus) {
         this.accountStatus = accountStatus;
     }
-<<<<<<< HEAD
-}
-=======
  
     public List<UserInvestment> getUserInvestments() {
         return userInvestments;
@@ -109,4 +96,3 @@ public class User {
         this.userInvestments = userInvestments;
     }
 }
->>>>>>> a831f32230c1a206a7e6f5d6b564a435119b2a7b

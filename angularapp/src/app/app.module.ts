@@ -54,7 +54,7 @@ import { UserWatchlistComponent } from './components/user-watchlist/user-watchli
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    ChartsModule        
+    ChartsModule     
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

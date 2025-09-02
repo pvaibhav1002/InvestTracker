@@ -11,3 +11,5 @@ springapp/target/
 # Test folders
 junit/
 karma/
+
+.env

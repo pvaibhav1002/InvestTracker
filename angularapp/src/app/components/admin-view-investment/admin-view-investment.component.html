@@ -35,13 +35,13 @@
         <tr>
           <th>S No.</th>
           <th>ID</th>
-          <th (click)="sortByName()">Name</th>
+          <th (click)="sortByName()" (keydown)="onKeyDown($event)">Name</th>
           <th>Description</th>
-          <th (click)="sortByType()">Type</th>
-          <th (click)="sortByPrice()">Price (USD)</th>
-          <th (click)="sortByQuantity()">Quantity</th>
-          <th (click)="sortByDate()">Posted Date</th>
-          <th (click)="sortByStatus()">Status</th>
+          <th (click)="sortByType()" (keydown)="onKeyDown($event)">Type</th>
+          <th (click)="sortByPrice()" (keydown)="onKeyDown($event)">Price (USD)</th>
+          <th (click)="sortByQuantity()" (keydown)="onKeyDown($event)">Quantity</th>
+          <th (click)="sortByDate()" (keydown)="onKeyDown($event)">Posted Date</th>
+          <th (click)="sortByStatus()" (keydown)="onKeyDown($event)">Status</th>
           <th>Actions</th>
         </tr>
       </thead>

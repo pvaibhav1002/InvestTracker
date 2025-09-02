@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
         return;
       }
       let role = this.authService.getAuthenticatedUserRole();
+      console.log(role)
       if (role === 'Admin') {
         this.router.navigate(['/admin-console']);
       } else if (role === 'User') {

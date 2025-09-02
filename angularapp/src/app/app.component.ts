@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   isUser = false;
   isAdmin = false;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private readonly authService: AuthService) { }
 
   ngOnInit(): void {
     this.router.events.pipe(

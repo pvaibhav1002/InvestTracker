@@ -8,8 +8,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
  
 @Entity
+@AllArgsConstructor
 public class Investment {
     @Id
     @GeneratedValue
@@ -38,21 +40,6 @@ public class Investment {
         this.sector = "";
         this.status = "";
         this.userInvestments = new ArrayList<>();
-    }
- 
-    public Investment(Long investmentId, String name, String description, String type, double price, int quantity,
-            String postedDate, String capSize, String sector, String status, List<UserInvestment> userInvestments) {
-        this.investmentId = investmentId;
-        this.name = name;
-        this.description = description;
-        this.type = type;
-        this.price = price;
-        this.quantity = quantity;
-        this.postedDate = postedDate;
-        this.capSize = capSize;
-        this.sector = sector;
-        this.status = status;
-        this.userInvestments = userInvestments;
     }
  
     public Long getInvestmentId() {

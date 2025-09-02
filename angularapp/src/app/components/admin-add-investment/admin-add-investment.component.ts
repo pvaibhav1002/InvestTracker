@@ -7,12 +7,12 @@ import { InvestmentService } from 'src/app/services/investment.service';
   templateUrl: './admin-add-investment.component.html',
   styleUrls: ['./admin-add-investment.component.css']
 })
-export class AdminAddInvestmentComponent implements OnInit {
+export class AdminAddInvestmentComponent {
   investmentForm: FormGroup;
   addedInvestment: boolean = false;
   investmentData: any;
   date: Date = new Date();
-  constructor(private investmentService: InvestmentService, private fb: FormBuilder, private router: Router) {
+  constructor(private readonly investmentService: InvestmentService, private readonly fb: FormBuilder, private readonly router: Router) {
     this.investmentForm = fb.group({
 
       name: ['', [Validators.required, Validators.minLength(5)]],
@@ -44,8 +44,6 @@ export class AdminAddInvestmentComponent implements OnInit {
   closeAddSuccessPage() {
     this.addedInvestment = false;
     this.router.navigate(['/admin-view-investment']);
-  }
-  ngOnInit(): void {
   }
   get f() {
     return this.investmentForm.controls;
