@@ -1,4 +1,3 @@
-
 <h1>Explore Investments</h1>
 <input placeholder="Search in Name and Type..." type="text" name="searchText" id="searchText" [(ngModel)]="searchText"
     (input)="filterByNameAndType()"><br><br>
@@ -15,28 +14,41 @@ Filter By Type:
 <button (click)="sortByQuantity()">Sort By Quantity</button>
 
 
-<div *ngFor="let investment of investments">
-    <h4>Name: {{investment.name}}</h4>
-    <div>Description: {{investment.description}}</div>
-    <div>Type: {{investment.type}}</div>
-    <div>Price: ${{investment.price | number:'.2-5'}}</div>
-    <div>Quantity: {{investment.quantity}}</div>
-    <div>Posted Date: {{investment.postedDate}}</div>
-    <div>Status: {{investment.status}}</div>
-    
-    <button (click)="buyInvestent(investment.investmentId)"  >Buy</button><br>
-    <button (click)="addToWatchlist(investment.investmentId)"  >Add to watchList</button><br>
-    <button [routerLink]="['/user-add-inquiry',investment.investmentId]">Inquire</button>
 
-</div>
-
-<!-- Quantity Popup -->
-<div class="modal-backdrop" *ngIf="showQuantityModal">
-  <div class="modal">
-    <h3>Enter Quantity</h3>
-    <input type="number" [(ngModel)]="userController.quantityBought" min="1" class="form-control">
-    <br>
-    <button (click)="confirmBuy()">Confirm</button>
-    <button (click)="closeModal()">Cancel</button>
+<div class="investment-grid">
+    <div *ngFor="let investment of investments">
+      <div *ngIf="investment.status=='Active' && investment.quantity > 0" class="investment-card">
+        <h4>Name: {{investment.name}}</h4>
+        <div>Description: {{investment.description}}</div>
+        <div>Type: {{investment.type}}</div>
+        <div>Price: ₹{{investment.price | number:'.2-5'}}</div>
+        <div>Quantity: {{investment.quantity}}</div>
+        <div>Posted Date: {{investment.postedDate}}</div>
+        <div>Status: {{investment.status}}</div>
+      
+        <button (click)="addToWatchlist(investment.investmentId)">Add to watchList</button>
+        <button [routerLink]="['/user-add-inquiry',investment.investmentId]">Inquire</button>
+        <button (click)="openBuyModal(investment)">Buy</button>
+        <!-- Investment details and buttons -->
+      </div>
+    </div>
   </div>
+
+
+<!-- Modal -->
+<div class="modal" *ngIf="showModal">
+    <div class="modal-overlay" (click)="closeModal()"></div>
+    <div class="modal-content">
+        <h3>Buy Investment</h3>
+        <form (ngSubmit)="confirmBuy()" #buyForm="ngForm">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" [(ngModel)]="buyQuantity" required min="1" />
+            <div *ngIf="buyError" class="error">{{ buyError }}</div>
+            <div *ngIf="buySuccess" class="success">{{ buySuccess }}</div>
+            <div class="modal-buttons">
+                <button type="submit" [disabled]="!buyForm.form.valid">Confirm Buy</button>
+                <button type="button" (click)="closeModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
 </div>

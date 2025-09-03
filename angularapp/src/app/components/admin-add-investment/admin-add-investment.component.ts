@@ -15,7 +15,6 @@ export class AdminAddInvestmentComponent {
   addedInvestment: boolean = false;
   investmentData: any;
   date: Date = new Date();
-
   constructor(
 
     private readonly investmentService: InvestmentService,

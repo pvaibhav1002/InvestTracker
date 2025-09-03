@@ -1,1 +1,88 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    margin: 0;
+    padding: 0;
+    /* background-color: #000000; */
+}
+/* src/styles.css */
+.auth-links {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    gap: 15px;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e3f2fd;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .auth-links {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    background-color: #000000;
+    gap: 15px;
+  }
+  
+  .auth-links a {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .auth-links a:hover {
+    text-decoration: underline;
+  }
+  
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  
+  .site-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .auth-links {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .auth-links .btn {
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .auth-links .btn:hover {
+    background-color: #0056b3;
+  }
+
+  .tradingview-widget-container {
+    height: 40px; /* Adjust height as needed */
+    overflow: hidden;
+    transform: scale(0.85); /* Shrinks the entire widget */
+    transform-origin: top left;
+  }
+  
+  .tradingview-widget-container__widget {
+    height: 100%;
+  }
+  

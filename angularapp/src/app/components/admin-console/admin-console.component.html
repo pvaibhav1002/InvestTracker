@@ -27,51 +27,47 @@
 
 <div class="dashboard">
     <div class="card">
-    <h3>Doughnut — Distribution by Type</h3>
-    <div class="card-body">
-    <canvas #typeChart baseChart [data]="TypeData" [labels]="TypeLabels" [chartType]="doughnutChartType"
-    
-                    [colors]="doughnutChartColors">
-    </canvas>
-    </div>
-    </div>
-    <div class="card">
-    <h3>Doughnut — Distribution by Sector</h3>
-    <div class="card-body">
-    <canvas  #sectorChart baseChart [data]="SectorData" [labels]="SectorLabels" [chartType]="doughnutChartType"
-    
-                    [colors]="doughnutChartColors">
-    </canvas>
-    </div>
+        <h3>Doughnut — Distribution by Type</h3>
+        <div class="card-body">
+            <canvas #typeChart baseChart [data]="TypeData" [labels]="TypeLabels" [chartType]="doughnutChartType"
+                [colors]="doughnutChartColors">
+            </canvas>
+        </div>
     </div>
     <div class="card">
-    <h3>Doughnut — Distribution by Cap Size</h3>
-    <div class="card-body">
-    <canvas  #capSizeChart baseChart [data]="CapSizeData" [labels]="CapSizeLabels" [chartType]="doughnutChartType"
-    
-                    [colors]="doughnutChartColors">
-    </canvas>
+        <h3>Doughnut — Distribution by Sector</h3>
+        <div class="card-body">
+            <canvas #sectorChart baseChart [data]="SectorData" [labels]="SectorLabels" [chartType]="doughnutChartType"
+                [colors]="doughnutChartColors">
+            </canvas>
+        </div>
     </div>
+    <div class="card">
+        <h3>Doughnut — Distribution by Cap Size</h3>
+        <div class="card-body">
+            <canvas #capSizeChart baseChart [data]="CapSizeData" [labels]="CapSizeLabels"
+                [chartType]="doughnutChartType" [colors]="doughnutChartColors">
+            </canvas>
+        </div>
     </div>
-    </div>
-    <div class="table-responsive">
+</div>
+<div class="table-responsive">
     <table class="table table-bordered table-striped">
-    <thead class="thead-dark">
-    <tr>
-    <th>Username</th>
-    <th>Total Invested (₹)</th>
-    <th>Current Investment (₹)</th>
-    <th>Current Profit (₹)</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of userSummaries">
-    <td>{{ user.username }}</td>
-    <td>{{ user.totalInvested | number:'1.2-2' }}</td>
-    <td>{{ user.currentInvestment | number:'1.2-2' }}</td>
-    <td>{{ user.currentProfit | number:'1.2-2' }}</td>
-    </tr>
-    </tbody>
+        <thead class="thead-dark">
+            <tr>
+                <th>Username</th>
+                <th>Total Invested (₹)</th>
+                <th>Current Investment (₹)</th>
+                <th>Current Profit (₹)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userSummaries">
+                <td>{{ user.username }}</td>
+                <td>{{ user.totalInvested | number:'1.2-2' }}</td>
+                <td>{{ user.currentInvestment | number:'1.2-2' }}</td>
+                <td>{{ user.currentProfit | number:'1.2-2' }}</td>
+            </tr>
+        </tbody>
     </table>
-    </div>
-     
+</div>

@@ -14,6 +14,10 @@ export class HttpInterceptorService implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let token = this.authService.getAuthenticatedToken();
     let username = this.authService.getAuthenticatedUsername();
+    // if (!this.authService.isLoggedin() || this.authService.isTokenExpired()) {
+    //   localStorage.clear();
+    //   return;
+    // }
     if (token && username) {
       request = request.clone({
         setHeaders: {
