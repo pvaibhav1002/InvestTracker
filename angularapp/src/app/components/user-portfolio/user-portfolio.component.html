@@ -1,84 +1,89 @@
 <button (click)="exportToPDF()">Download PDF</button>
 <div class="row">
-<div class="col-md-4">
-<div class="card text-white bg-primary mb-3">
-<div class="card-header">Total Invested</div>
-<div class="card-body">
-<h5 class="card-title">₹{{ portfolioData.totalInvested | number:'1.2-2' }}</h5>
+  <div class="col-md-4">
+    <div class="card text-white bg-primary mb-3">
+      <div class="card-header">Total Invested</div>
+      <div class="card-body">
+        <h5 class="card-title">₹{{ portfolioData.totalInvested | number:'1.2-2' }}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-success mb-3">
+      <div class="card-header">Current Value</div>
+      <div class="card-body">
+        <h5 class="card-title">₹{{ portfolioData.currentValue | number:'1.2-2' }}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-info mb-3">
+      <div class="card-header">{{ portfolioData.profitOrLossLabel }}</div>
+      <div class="card-body">
+        <h5 class="card-title">₹{{ portfolioData.profitOrLossAmount | number:'1.2-2' }}</h5>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-<div class="col-md-4">
-<div class="card text-white bg-success mb-3">
-<div class="card-header">Current Value</div>
-<div class="card-body">
-<h5 class="card-title">₹{{ portfolioData.currentValue | number:'1.2-2' }}</h5>
-</div>
-</div>
-</div>
-<div class="col-md-4">
-<div class="card text-white bg-info mb-3">
-<div class="card-header">{{ portfolioData.profitOrLossLabel }}</div>
-<div class="card-body">
-<h5 class="card-title">₹{{ portfolioData.profitOrLossAmount | number:'1.2-2' }}</h5>
-</div>
-</div>
-</div>
-</div>
- 
+
 <div class="dashboard">
-<div class="card">
-<h3>Doughnut — Distribution by Type</h3>
-<div class="card-body">
-<canvas baseChart [data]="portfolioData.TypeData" [labels]="portfolioData.TypeLabels" [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
+  <div class="card">
+    <h3>Doughnut — Distribution by Type</h3>
+    <div class="card-body">
+      <canvas baseChart [data]="portfolioData.TypeData" [labels]="portfolioData.TypeLabels"
+        [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Doughnut — Distribution by Sector</h3>
+    <div class="card-body">
+      <canvas baseChart [data]="portfolioData.SectorData" [labels]="portfolioData.SectorLabels"
+        [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Doughnut — Distribution by Cap Size</h3>
+    <div class="card-body">
+      <canvas baseChart [data]="portfolioData.CapSizeData" [labels]="portfolioData.CapSizeLabels"
+        [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
+    </div>
+  </div>
 </div>
-</div>
-<div class="card">
-<h3>Doughnut — Distribution by Sector</h3>
-<div class="card-body">
-<canvas baseChart [data]="portfolioData.SectorData" [labels]="portfolioData.SectorLabels" [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
-</div>
-</div>
-<div class="card">
-<h3>Doughnut — Distribution by Cap Size</h3>
-<div class="card-body">
-<canvas baseChart [data]="portfolioData.CapSizeData" [labels]="portfolioData.CapSizeLabels" [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
-</div>
-</div>
-</div>
- 
- 
- 
+
+
+
 <div class="card mt-4">
-<div class="card-header bg-secondary text-white">
+  <div class="card-header bg-secondary text-white">
 
     Profit/Loss Summary
-</div>
-<div class="card-body">
-<table class="table table-bordered table-hover" border="1">
-<thead class="thead-dark">
-<tr>
-<th>Investment Name</th>
-<th>Cap Size</th>
-<th>Sector</th>
-<th>Type</th>
-<th>Amount Invested (₹)</th>
-<th>Current Value (₹)</th>
-<th>Profit/Loss (₹)</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-<tr *ngFor="let investment of portfolioData.investments">
-<td>{{ investment.name }}</td>
-<td>{{ investment.capSize }}</td>
-<td>{{ investment.sector }}</td>
-<td>{{ investment.type }}</td>
-<td>{{ investment.purchasePrice*investment.quantityBought | number:'1.2-2' }}</td>
-<td>{{ investment.currentPrice*investment.quantityBought | number:'1.2-2' }}</td>
-<td>{{ (investment.currentPrice*investment.quantityBought)-(investment.purchasePrice*investment.quantityBought) | number:'1.2-2' }}</td>
-<td>
-<span [ngClass]="{
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-hover" border="1">
+      <thead class="thead-dark">
+        <tr>
+          <th>Investment Name</th>
+          <th>Cap Size</th>
+          <th>Sector</th>
+          <th>Type</th>
+          <th>Amount Invested (₹)</th>
+          <th>Current Value (₹)</th>
+          <th>Profit/Loss (₹)</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let investment of portfolioData.investments">
+          <td>{{ investment.name }}</td>
+          <td>{{ investment.capSize }}</td>
+          <td>{{ investment.sector }}</td>
+          <td>{{ investment.type }}</td>
+          <td>{{ investment.purchasePrice*investment.quantityBought | number:'1.2-2' }}</td>
+          <td>{{ investment.currentPrice*investment.quantityBought | number:'1.2-2' }}</td>
+          <td>{{
+            (investment.currentPrice*investment.quantityBought)-(investment.purchasePrice*investment.quantityBought) |
+            number:'1.2-2' }}</td>
+          <td>
+            <span [ngClass]="{
 
                 'text-success': investment.currentValue > investment.invested,
 
@@ -91,10 +96,9 @@
               {{ investment.currentPrice > investment.purchasePrice ? 'Profit' :
 
               investment.currentPrice < investment.purchasePrice ? 'Loss' : 'No Change' }} </span>
-</td>
-</tr>
-</tbody>
-</table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-</div>
- 
