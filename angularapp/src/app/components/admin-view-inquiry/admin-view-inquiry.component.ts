@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
 
 import { EmailService } from 'src/app/services/email.service';
-
 import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
+
 
 @Component({
 
@@ -26,7 +26,9 @@ export class AdminViewInquiryComponent implements OnInit {
   filterRisk: string = '';
   originalInquiries: InvestmentInquiry[] = [];
 
-  constructor(private inquiryService: InvestmentInquiryService, private emailservice: EmailService) { }
+
+  constructor(private inquiryService: InvestmentInquiryService,private emailservice:EmailService) { }
+ 
 
   ngOnInit(): void {
     this.fetchAllInquiries();
