@@ -7,8 +7,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
  
 @Entity
+@AllArgsConstructor
 public class InvestmentInquiry {
     @Id
     @GeneratedValue
@@ -43,23 +45,6 @@ public class InvestmentInquiry {
         this.contactDetails = "";
         this.investment = new Investment();
         this.user = new User();
-    }
- 
-    public InvestmentInquiry(Long inquiryId, String reasonOfInterest, String questions, LocalDateTime inquiryDate,
-            String riskTolerance, String expectedReturn, String status, LocalDateTime responseDate,
-            String adminResponse, String contactDetails, Investment investment, User user) {
-        this.inquiryId = inquiryId;
-        this.reasonOfInterest = reasonOfInterest;
-        this.questions = questions;
-        this.inquiryDate = inquiryDate;
-        this.riskTolerance = riskTolerance;
-        this.expectedReturn = expectedReturn;
-        this.status = status;
-        this.responseDate = responseDate;
-        this.adminResponse = adminResponse;
-        this.contactDetails = contactDetails;
-        this.investment = investment;
-        this.user = user;
     }
  
     public Long getInquiryId() {

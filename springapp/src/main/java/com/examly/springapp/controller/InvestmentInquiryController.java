@@ -27,9 +27,7 @@ public class InvestmentInquiryController {
     @PostMapping
     @PreAuthorize("hasRole('User')")
     public ResponseEntity<InvestmentInquiry> addInvestmentInquiry(@RequestBody InvestmentInquiry investmentinquiry) {
-        System.out.println("control" + investmentinquiry);
         InvestmentInquiry newInvest = investmentInquiryService.createInquiry(investmentinquiry);
-        System.out.println("control" + newInvest);
         if (newInvest == null) {
             return ResponseEntity.status(403).build();
         }

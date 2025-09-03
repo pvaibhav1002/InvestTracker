@@ -3,8 +3,11 @@ package com.examly.springapp.service;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -51,7 +54,7 @@ public class UserServiceImpl implements UserService {
                 .authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
         User newUser = userRepo.findByEmail(user.getEmail());
         if (!newUser.isAccountStatus()) {
-            throw new RuntimeException("Account Inactive");
+            throw new LockedException("Account is locked. Please contact support.");
         }
         if (authentication.isAuthenticated()) {
             Map<String, Object> claims = new HashMap<>();
@@ -60,6 +63,6 @@ public class UserServiceImpl implements UserService {
             claims.put("username", newUser.getUsername());
             return new LoginDTO(jwtUtils.generateToken(newUser.getEmail(), claims));
         }
-        throw new RuntimeException("Invalid Credentials");
+        throw new BadCredentialsException("Invalid username or password");
     }
 }

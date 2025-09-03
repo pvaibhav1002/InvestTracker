@@ -27,8 +27,6 @@ public class FeedbackController {
     @PostMapping
     @PreAuthorize("hasRole('User')")
     public ResponseEntity<Feedback> createFeedback(@RequestBody Feedback feedback) {
-        System.out.println(feedback);
-
         if (!"Assets".equalsIgnoreCase(feedback.getCategory())) {
             feedback.setInvestment(null);
         }

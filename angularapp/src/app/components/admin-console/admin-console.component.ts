@@ -40,7 +40,6 @@ export class AdminConsoleComponent implements OnInit {
   ];
  
   ngOnInit() {
-
     this.chartDto.getAdminConsoleData().subscribe(data => {
       this.distribution = data;
       this.totalUsers = data.totalUsers;
@@ -53,10 +52,7 @@ export class AdminConsoleComponent implements OnInit {
       this.CapSizeLabels = Object.keys(this.distribution.distributionByCapSize);
       this.CapSizeData = Object.values(this.distribution.distributionByCapSize);
       this.userSummaries = data.userSummaries;
-
     });
-
   }
 
 }
- 

@@ -14,13 +14,15 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #333;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.6); /* 3D depth */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    /* 3D depth */
 }
 
 .navbar .logo {
     color: #ffffff;
     font-size: 1.5rem;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.7); /* glowing depth */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    /* glowing depth */
 }
 
 .navbar .nav-links a {
@@ -32,12 +34,10 @@ body {
 
 .navbar .nav-links a:hover {
     color: #4dabf7;
-    transform: translateY(-2px); /* pop-up effect */
+    transform: translateY(-2px);
+    /* pop-up effect */
 }
 
-.auth-buttons{
-    justify-content: right;
-}
 
 .auth-buttons button {
     background: transparent;
@@ -48,22 +48,24 @@ body {
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
 }
 
 
 .auth-buttons {
-    margin-left: auto; /* Pushes it to the right inside the flex container */
+    margin-left: auto;
+    /* Pushes it to the right inside the flex container */
     display: flex;
     align-items: center;
+    justify-content: right;
 }
 
 
-  
+
 
 .auth-buttons button:hover {
     background: #4dabf7;
     color: #121212;
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.8);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8);
 }

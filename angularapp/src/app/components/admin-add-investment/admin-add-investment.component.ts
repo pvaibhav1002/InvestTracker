@@ -10,7 +10,6 @@ import { InvestmentService } from 'src/app/services/investment.service';
   styleUrls: ['./admin-add-investment.component.css']
 
 })
-
 export class AdminAddInvestmentComponent {
   investmentForm: FormGroup;
   addedInvestment: boolean = false;
@@ -64,7 +63,6 @@ export class AdminAddInvestmentComponent {
   closeAddSuccessPage() {
     this.addedInvestment = false;
     this.router.navigate(['/admin-view-investment']);
-
   }
   get f() {
     return this.investmentForm.controls;

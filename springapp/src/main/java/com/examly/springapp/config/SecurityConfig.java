@@ -21,22 +21,25 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
- 
-    @Autowired
     UserDetailsService userDetailsService;
- 
-    @Autowired
     JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Autowired
+    public SecurityConfig(UserDetailsService userDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.userDetailsService = userDetailsService;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf(csrf -> csrf.disable()).cors(cors->{}).authorizeHttpRequests(
-                auth -> auth.requestMatchers("/api/register","/api/login","/api/email/**").permitAll().anyRequest().authenticated())
+        return httpSecurity.csrf(csrf -> csrf.disable()).cors(cors -> {
+        }).authorizeHttpRequests(
+                auth -> auth.requestMatchers("/api/register", "/api/login", "/api/email/**").permitAll().anyRequest()
+                        .authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class).build();
     }
- 
- 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

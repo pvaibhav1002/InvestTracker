@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-
 import { Component, OnInit } from '@angular/core';
 
 import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
