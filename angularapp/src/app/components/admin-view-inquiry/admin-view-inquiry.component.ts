@@ -4,10 +4,6 @@ import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
 import { EmailService } from 'src/app/services/email.service';
 import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> InvestTrack-Deepu1412
 @Component({
   selector: 'app-admin-view-inquiry',
   templateUrl: './admin-view-inquiry.component.html',
@@ -25,11 +21,7 @@ export class AdminViewInquiryComponent implements OnInit {
   filterRisk: string = '';
   originalInquiries: InvestmentInquiry[] = [];
 
-<<<<<<< HEAD
-  constructor(private inquiryService: InvestmentInquiryService) { }
-=======
   constructor(private inquiryService: InvestmentInquiryService,private emailservice:EmailService) { }
->>>>>>> InvestTrack-Deepu1412
  
   ngOnInit(): void {
     this.fetchAllInquiries();

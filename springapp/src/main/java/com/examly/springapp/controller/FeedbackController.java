@@ -7,7 +7,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.examly.springapp.model.Feedback;
-import com.examly.springapp.model.Investment;
 import com.examly.springapp.service.FeedbackService;
 
 import java.util.List;
