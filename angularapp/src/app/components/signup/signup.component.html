@@ -75,20 +75,23 @@
     </form>
 </div>
 
-<div *ngIf="formSubmitted">
-    <h2>Verify OTP</h2>
-    <form #otpForm="ngForm" (ngSubmit)="verifyOtp(otpForm)">
+<div *ngIf="formSubmitted" class="otp-container">
+    <div class="otp-form-box">
+      <h2>Verify OTP</h2>
+      <form #otpForm="ngForm" (ngSubmit)="verifyOtp(otpForm)">
         <div class="form-group">
-            <input type="text" name="submittedOtp" [(ngModel)]="submittedOtp" placeholder="Enter OTP"
-                #otpField="ngModel" required />
-            <div *ngIf="otpField.invalid && otpField.touched">
-                <small *ngIf="otpField.errors?.required">OTP is required.</small>
-            </div>
+          <input type="text" name="submittedOtp" [(ngModel)]="submittedOtp" placeholder="Enter OTP"
+            #otpField="ngModel" required />
+          <div *ngIf="otpField.invalid && otpField.touched">
+            <small *ngIf="otpField.errors?.required">OTP is required.</small>
+          </div>
         </div>
         <button type="submit" class="btn btn-primary">Verify</button>
-    </form>
-    <button (click)="resendOTP()" class="btn btn-primary">Resend OTP</button>
-
-    <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
-    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-</div>
+      </form> <br><br>
+      <button (click)="resendOTP()" class="btn btn-primary">Resend OTP</button>
+  
+      <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    </div>
+  </div>
+  

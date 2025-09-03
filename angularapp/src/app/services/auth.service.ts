@@ -24,6 +24,7 @@ export class AuthService {
     return this.http.post<any>(`${APP_URL}/login`, login).pipe(
       map(
         data => {
+          // console.log(data);
           localStorage.setItem(TOKEN, `Bearer ${data.token}`);
           return data;
         }

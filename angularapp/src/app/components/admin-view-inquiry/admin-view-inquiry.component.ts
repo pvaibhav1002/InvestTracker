@@ -132,6 +132,7 @@ export class AdminViewInquiryComponent implements OnInit {
       });
 
     }
+    this.showResForm = false;
     this.selectedInquiryId = null;
     this.responseText = '';
 

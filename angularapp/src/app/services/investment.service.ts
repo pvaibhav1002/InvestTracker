@@ -31,6 +31,7 @@ export class InvestmentService {
   }
  
   buyInvestment(userInvestment:any){
-    return this.httpClient.post<any>(`${APP_URL}/api/user/buy`,userInvestment);
+    console.log(userInvestment);
+    return this.httpClient.post<any>(`${APP_URL}/user/buy`,userInvestment);
   }
 }

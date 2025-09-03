@@ -1,85 +1,145 @@
+/* Container */
 .container {
-    max-width: 1000px;
+    max-width: 500px;
     margin: 40px auto;
-    padding: 20px;
-    background-color: #e0f7ff;
+    padding: 30px;
+    background-color: #1e1e1e;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
-
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
-
-}
-
-
-.container h2 {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    color: #f0f0f0;
+  }
+  
+  /* Headings */
+  h2 {
     text-align: center;
-    color: #0288d1;
-    margin-bottom: 30px;
-}
-
-
-label {
-    font-weight: bold;
-    color: #0277bd;
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 5px;
-}
-
-select,
-input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #81d4fa;
-    border-radius: 6px;
-    background-color: #f1faff;
-    font-size: 14px;
     margin-bottom: 20px;
-}
-
-select,
-input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #81d4fa;
-    border-radius: 6px;
-    background-color: #f1faff;
-    font-size: 14px;
+    color: #ffffff;
+  }
+  
+  /* Form Group */
+  .form-group {
     margin-bottom: 20px;
-}
-
-select,
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #81d4fa;
-    border-radius: 6px;
-    background-color: #f1faff;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-
-
-.button {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.button .btn {
-    margin-bottom: 10px;
-    margin-top: 20px;
+  }
+  
+  /* Inputs & Select */
+  input,
+  select {
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #2a2a2a;
+    color: #f0f0f0;
+    font-size: 1rem;
+  }
+  
+  input:focus,
+  select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  /* Validation Messages */
+  small {
+    color: #ff4d4d;
+    margin-top: 5px;
+    font-size: 0.85rem;
+  }
+  
+  /* Buttons */
+  button {
     padding: 10px 20px;
-    background-color: #42a5f5;
-    color: white;
     border: none;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    transition: background-color 0.3s;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Link */
+  a {
+    color: #00bcd4;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Success & Error Messages */
+  .success {
+    color: #28a745;
+    margin-top: 10px;
+  }
+  
+  .error {
+    color: #ff4d4d;
+    margin-top: 10px;
+  }
+  
+  /* OTP Section */
+  div[ngIf="formSubmitted"] {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    color: #f0f0f0;
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container {
+      padding: 20px;
+    }
+  
+    input,
+    select {
+      font-size: 0.95rem;
+    }
+  
+    button {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+  
+/* Centered OTP Form Container */
+.otp-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Adjust height as needed */
+  }
+  
+  /* OTP Form Styling */
+  .otp-form-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    color: #f0f0f0;
+  }
+  

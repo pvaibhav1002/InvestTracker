@@ -76,7 +76,7 @@ export class UserPortfolioComponent implements OnInit {
     doc.setFontSize(12);
     y += 30;
     doc.text(`Total Invested: Rs. ${this.portfolioData.totalInvested}`, margin, y);
-    doc.text(`Current Value: Rs. ${this.portfolioData.currentValue}`, margin + 150, y);
+    doc.text(`Current Value: Rs. ${this.portfolioData.currentValue}`, margin + 200, y);
 
     const profitOrLoss = this.portfolioData.profitOrLossAmount;
     if (profitOrLoss >= 0) {
@@ -84,7 +84,7 @@ export class UserPortfolioComponent implements OnInit {
     } else {
       doc.setTextColor(220, 53, 69); // bootstrap red
     }
-    doc.text(`Profit/Loss: Rs. ${profitOrLoss}`, margin + 300, y);
+    doc.text(`Profit/Loss: Rs. ${profitOrLoss}`, margin + 400, y);
 
     y += 10;
     doc.setTextColor(0, 0, 0); // reset to black

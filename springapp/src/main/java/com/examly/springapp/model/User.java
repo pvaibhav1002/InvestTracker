@@ -96,4 +96,12 @@ public class User {
     public void setUserInvestments(List<UserInvestment> userInvestments) {
         this.userInvestments = userInvestments;
     }
+
+    @Override
+    public String toString() {
+        return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", username=" + username
+                + ", mobileNumber=" + mobileNumber + ", userRole=" + userRole + ", accountStatus=" + accountStatus
+                + ", userInvestments=" + userInvestments + "]";
+    }
+
 }

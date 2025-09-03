@@ -12,13 +12,14 @@ public class UserInvestment {
     private int quantityBought;
     private LocalDate purchaseDate;
     private double purchasePrice;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;
+
     @ManyToOne
     @JoinColumn(name = "investment_id", nullable = false)
-
     private Investment investment;
 
     public UserInvestment() {
@@ -84,4 +85,11 @@ public class UserInvestment {
     public void setPurchasePrice(double purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
+
+    @Override
+    public String toString() {
+        return "UserInvestment [id=" + id + ", quantityBought=" + quantityBought + ", purchaseDate=" + purchaseDate
+                + ", purchasePrice=" + purchasePrice + ", user=" + user + ", investment=" + investment + "]";
+    }
+
 }
