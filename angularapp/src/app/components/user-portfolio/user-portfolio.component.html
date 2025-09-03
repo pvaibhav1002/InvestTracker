@@ -30,29 +30,29 @@
   <div class="card">
     <h3>Doughnut — Distribution by Type</h3>
     <div class="card-body">
-      <canvas baseChart [data]="portfolioData.TypeData" [labels]="portfolioData.TypeLabels" [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
+      <canvas baseChart [data]="portfolioData.TypeData" [labels]="portfolioData.TypeLabels"
+        [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
     </div>
   </div>
   <div class="card">
     <h3>Doughnut — Distribution by Sector</h3>
     <div class="card-body">
-      <canvas baseChart [data]="portfolioData.SectorData" [labels]="portfolioData.SectorLabels" [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
+      <canvas baseChart [data]="portfolioData.SectorData" [labels]="portfolioData.SectorLabels"
+        [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
     </div>
   </div>
   <div class="card">
     <h3>Doughnut — Distribution by Cap Size</h3>
     <div class="card-body">
-      <canvas baseChart [data]="portfolioData.CapSizeData" [labels]="portfolioData.CapSizeLabels" [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
+      <canvas baseChart [data]="portfolioData.CapSizeData" [labels]="portfolioData.CapSizeLabels"
+        [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
     </div>
   </div>
 </div>
 
-
-
-
-
 <div class="card mt-4">
   <div class="card-header bg-secondary text-white">
+
     Profit/Loss Summary
   </div>
   <div class="card-body">
@@ -77,14 +77,22 @@
           <td>{{ investment.type }}</td>
           <td>{{ investment.purchasePrice*investment.quantityBought | number:'1.2-2' }}</td>
           <td>{{ investment.currentPrice*investment.quantityBought | number:'1.2-2' }}</td>
-          <td>{{ (investment.currentPrice*investment.quantityBought)-(investment.purchasePrice*investment.quantityBought) | number:'1.2-2' }}</td>
+          <td>{{
+            (investment.currentPrice*investment.quantityBought)-(investment.purchasePrice*investment.quantityBought) |
+            number:'1.2-2' }}</td>
           <td>
             <span [ngClass]="{
+
                 'text-success': investment.currentValue > investment.invested,
+
                 'text-danger': investment.currentValue < investment.invested,
+
                 'text-warning': investment.currentValue === investment.invested
+
               }">
+
               {{ investment.currentPrice > investment.purchasePrice ? 'Profit' :
+
               investment.currentPrice < investment.purchasePrice ? 'Loss' : 'No Change' }} </span>
           </td>
         </tr>

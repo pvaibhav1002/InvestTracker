@@ -1,13 +1,11 @@
 package com.examly.springapp.model;
- 
+
 import java.util.ArrayList;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
- 
+
 @Entity
 @AllArgsConstructor
 public class User {
@@ -20,11 +18,11 @@ public class User {
     private String mobileNumber;
     private String userRole;
     private boolean accountStatus;
- 
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<UserInvestment> userInvestments = new ArrayList<>();
- 
+
     public User() {
         this.email = "";
         this.password = "";
@@ -34,67 +32,67 @@ public class User {
         this.accountStatus = false;
         this.userInvestments = new ArrayList<>();
     }
- 
+
     public Long getUserId() {
         return userId;
     }
- 
+
     public void setUserId(Long userId) {
         this.userId = userId;
     }
- 
+
     public String getEmail() {
         return email;
     }
- 
+
     public void setEmail(String email) {
         this.email = email;
     }
- 
+
     public String getPassword() {
         return password;
     }
- 
+
     public void setPassword(String password) {
         this.password = password;
     }
- 
+
     public String getUsername() {
         return username;
     }
- 
+
     public void setUsername(String username) {
         this.username = username;
     }
- 
+
     public String getMobileNumber() {
         return mobileNumber;
     }
- 
+
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
- 
+
     public String getUserRole() {
         return userRole;
     }
- 
+
     public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
- 
+
     public boolean isAccountStatus() {
         return accountStatus;
     }
- 
+
     public void setAccountStatus(boolean accountStatus) {
         this.accountStatus = accountStatus;
     }
- 
+
     public List<UserInvestment> getUserInvestments() {
         return userInvestments;
     }
- 
+
     public void setUserInvestments(List<UserInvestment> userInvestments) {
         this.userInvestments = userInvestments;
     }

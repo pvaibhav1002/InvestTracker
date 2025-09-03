@@ -1,21 +1,20 @@
 package com.examly.springapp.service;
 
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.UserRepo;
 
 @Service
 public class EmailServiceImpl implements Emailservice {
-
-   private JavaMailSender emailSender;
+    private JavaMailSender emailSender;
     private UserRepo userRepo;
+    private String from = "do.not.reply.investtrack@gmail.com";
     private static final SecureRandom RANDOM = new SecureRandom();
 
     @Autowired
@@ -26,7 +25,7 @@ public class EmailServiceImpl implements Emailservice {
 
     public void sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("do.not.reply.investtrack@gmail.com");
+        message.setFrom(from);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
@@ -34,13 +33,11 @@ public class EmailServiceImpl implements Emailservice {
     }
 
     public String sendSimpleOtp(String to) {
-
         try {
             int randnum = 100000 + RANDOM.nextInt(900000);
             String otp = String.valueOf(randnum);
-
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("do.not.reply.investtrack@gmail.com");
+            message.setFrom(from);
             message.setTo(to);
             message.setSubject("Verify your email address");
             message.setText("Your OTP is " + otp);
@@ -61,16 +58,28 @@ public class EmailServiceImpl implements Emailservice {
         }
         return false;
     }
-
     public void sendInquiryConfirmation(String to, String userName) {
         String subject = "Inquiry Submitted Successfully";
-        String text = "Dear " + userName + ",\n\nThank you for your inquiry. We have received your request and will get back to you shortly.\n\nBest regards,\nInvestTrack Team";
-    
+        String text = "Dear " + userName
+                + ",\n\nThank you for your inquiry. We have received your request and will get back to you shortly.\n\nBest regards,\nInvestTrack Team";
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("do.not.reply.investtrack@gmail.com");
+        message.setFrom(from);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
         emailSender.send(message);
     }
+
+    public void sendPriceUpdateToAllUsers(String updatedPriceInfo) {
+        List<User> users = userRepo.findAll();
+        String subject = "Important: Price Update Notification";
+        String text = "Dear User,\n\nWe would like to inform you that the price has been updated:\n"
+                + updatedPriceInfo + "\n\nThank you for staying with us.\nInvestTrack Team";
+        for (User user : users) {
+            if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+                sendSimpleMessage(user.getEmail(), subject, text);
+            }
+        }
+    }
+
 }

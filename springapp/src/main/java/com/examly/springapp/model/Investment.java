@@ -1,16 +1,9 @@
 package com.examly.springapp.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 
 @Entity
@@ -29,11 +22,6 @@ public class Investment {
     private String sector;
     private String status;
 
-    // @OneToMany(mappedBy = "investment", cascade = CascadeType.ALL, orphanRemoval
-    // = true)
-    // @JsonManagedReference
-    // private List<UserInvestment> userInvestments = new ArrayList<>();
-
     public Investment() {
         this.name = "";
         this.description = "";
@@ -44,7 +32,6 @@ public class Investment {
         this.capSize = "";
         this.sector = "";
         this.status = "";
-        // this.userInvestments = new ArrayList<>();
     }
 
     public Long getInvestmentId() {
@@ -126,13 +113,4 @@ public class Investment {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    // public List<UserInvestment> getUserInvestments() {
-    // return userInvestments;
-    // }
-
-    // public void setUserInvestments(List<UserInvestment> userInvestments) {
-    // this.userInvestments = userInvestments;
-    // }
-
 }

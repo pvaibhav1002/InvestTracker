@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class UserPortfolioDTO {
     private Double totalInvested;
     private Double currentValue;
@@ -13,7 +15,7 @@ public class UserPortfolioDTO {
     private Map<String, Long> distributionByType;
     private Map<String, Long> distributionBySector;
     private Map<String, Long> distributionByCapSize;
-    private List<InvestmentSummary> investments;  // ✅ list of detailed investments
+    private List<InvestmentSummary> investments;
 
     public UserPortfolioDTO() {
         this.totalInvested = 0.0;
@@ -24,22 +26,6 @@ public class UserPortfolioDTO {
         this.distributionBySector = new HashMap<>();
         this.distributionByCapSize = new HashMap<>();
         this.investments = new ArrayList<>();
-    }
-
-    public UserPortfolioDTO(Double totalInvested, Double currentValue, Double profitOrLossAmount,
-                            String profitOrLossLabel,
-                            Map<String, Long> distributionByType,
-                            Map<String, Long> distributionBySector,
-                            Map<String, Long> distributionByCapSize,
-                            List<InvestmentSummary> investments) {
-        this.totalInvested = totalInvested;
-        this.currentValue = currentValue;
-        this.profitOrLossAmount = profitOrLossAmount;
-        this.profitOrLossLabel = profitOrLossLabel;
-        this.distributionByType = distributionByType;
-        this.distributionBySector = distributionBySector;
-        this.distributionByCapSize = distributionByCapSize;
-        this.investments = investments;
     }
 
     // Getters & Setters
@@ -107,7 +93,7 @@ public class UserPortfolioDTO {
         this.investments = investments;
     }
 
-    // ✅ Nested class for investment details
+    @AllArgsConstructor
     public static class InvestmentSummary {
         private Long investmentId;
         private String name;
@@ -131,20 +117,6 @@ public class UserPortfolioDTO {
             this.profitOrLoss = 0.0;
         }
 
-        public InvestmentSummary(Long investmentId, String name, String type, String sector, String capSize,
-                                 int quantityBought, double purchasePrice, double currentPrice, double profitOrLoss) {
-            this.investmentId = investmentId;
-            this.name = name;
-            this.type = type;
-            this.sector = sector;
-            this.capSize = capSize;
-            this.quantityBought = quantityBought;
-            this.purchasePrice = purchasePrice;
-            this.currentPrice = currentPrice;
-            this.profitOrLoss = profitOrLoss;
-        }
-
-        // Getters & Setters
         public Long getInvestmentId() {
             return investmentId;
         }

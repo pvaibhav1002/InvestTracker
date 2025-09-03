@@ -3,7 +3,6 @@ package com.examly.springapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.examly.springapp.model.AdminConsoleDTO;
 import com.examly.springapp.model.UserInvestment;
 import com.examly.springapp.model.UserPortfolioDTO;
@@ -12,6 +11,7 @@ import com.examly.springapp.service.ChartService;
 @RestController
 @RequestMapping("/api")
 public class ChartController {
+
     private ChartService chartService;
 
     @Autowired
@@ -45,4 +45,12 @@ public class ChartController {
         return ResponseEntity.status(200).body(newUserInvestment);
     }
 
+    @PostMapping("/user/buy")
+    public ResponseEntity<UserInvestment> buyInvestment(@RequestBody UserInvestment userInvestment) {
+        UserInvestment newUserInvestment = chartService.buyInvestment(userInvestment);
+        if (newUserInvestment == null) {
+            return ResponseEntity.status(500).build();
+        }
+        return ResponseEntity.status(200).body(newUserInvestment);
+    }
 }
