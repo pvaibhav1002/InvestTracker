@@ -1,49 +1,185 @@
-<!-- Hero Section -->
-<section class="hero reveal zoom">
-    <div class="container">
-        <h2 class="hero-title">Track & Invest with Ease</h2>
-        <p class="hero-desc">
-            Stay on top of your investments with real-time tracking.
-        </p>
-        <button routerLink="/signup" class="cta-btn">Get Started</button>
-
-    </div>
-</section>
-
-<!-- About Us Section -->
-<section id="about" class="about reveal slide-left">
-    <div class="container about-content">
-        <div class="about-image">
-            <img src="https://cdn-icons-png.flaticon.com/512/2331/2331943.png" alt="Investment">
+<main>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>
+                    Invest Smarter,<br />
+                    <span class="gradient-text">Grow Faster</span>
+                </h1>
+                <p>
+                    Make informed investment decisions with our AI-powered analytics and
+                    personalized portfolio management.
+                </p>
+                <div class="hero-buttons">
+                    <button class="get-started-btn hover-glow" routerLink="/signup">
+                        Get Started
+                        <svg class="icon" style="margin-left: 0.5rem;" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <div class="glow-effect glow-cyan"></div>
+                <div class="glow-effect glow-magenta"></div>
+                <div class="portfolio-card-content gradient-border">
+                    <div class="card-header">
+                        <h3>Portfolio Growth</h3>
+                        <svg class="icon" style="color: #00bce6;" viewBox="0 0 24 24">
+                            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" d="M23 6l-9.5 9.5-5-5L1 18"></path>
+                            <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" d="M17 6h6v6"></path>
+                        </svg>
+                    </div>
+                    <div class="portfolio-items">
+                        <div class="portfolio-item">
+                            <div class="portfolio-dot" style="background-color: #00bce6;"></div>
+                            <div class="portfolio-progress">
+                                <div class="progress-bar"
+                                    style="width: 75%; background: linear-gradient(to right, #00bce6, #2962ff);"></div>
+                            </div>
+                            <span class="portfolio-value" style="color: #00bce6;">+24%</span>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="portfolio-dot" style="background-color: #2962ff;"></div>
+                            <div class="portfolio-progress">
+                                <div class="progress-bar"
+                                    style="width: 66%; background: linear-gradient(to right, #2962ff, #6c5ce7);"></div>
+                            </div>
+                            <span class="portfolio-value" style="color: #2962ff;">+18%</span>
+                        </div>
+                        <div class="portfolio-item">
+                            <div class="portfolio-dot" style="background-color: #d500f9;"></div>
+                            <div class="portfolio-progress">
+                                <div class="progress-bar"
+                                    style="width: 50%; background: linear-gradient(to right, #6c5ce7, #d500f9);"></div>
+                            </div>
+                            <span class="portfolio-value" style="color: #d500f9;">+12%</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="footer-content">
+                            <div>
+                                <p class="total-growth">Total Growth</p>
+                                <p class="growth-value">+32.5%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="about-text reveal">
-            <h2>About Us</h2>
-            <p>
-                We are committed to empowering users by making investment tracking simple,
-                intuitive, and powerful. Our platform bridges the gap between administrators
-                and users, providing a seamless way to manage and grow your portfolio.
+    </section>
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>
+                    Powerful Features for <span class="gradient-text">Smart Investors</span>
+                </h2>
+                <p>
+                    Our platform combines cutting-edge technology with financial
+                    expertise to help you make better investment decisions.
+                </p>
+            </div>
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card gradient-border">
+                    <div class="feature-icon"
+                        style="background: linear-gradient(to bottom right, rgba(0, 188, 230, 0.2), transparent);">
+                        <svg class="icon" style="color: #00bce6;" viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                            <line x1="9" y1="9" x2="9" y2="15" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"></line>
+                            <line x1="15" y1="9" x2="15" y2="15" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"></line>
+                            <line x1="9" y1="12" x2="15" y2="12" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"></line>
+                        </svg>
+                    </div>
+                    <h3>Portfolio Dashboard</h3>
+                    <p>Track all your investments in one place with our comprehensive dashboard and visualization tools.
+                    </p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="feature-card gradient-border">
+                    <div class="feature-icon"
+                        style="background: linear-gradient(to bottom right, rgba(41, 98, 255, 0.2), transparent);">
+                        <svg class="icon" style="color: #2962ff;" viewBox="0 0 24 24">
+                            <path d="M22 12.999V20a2 2 0 01-2 2H4a2 2 0 01-2-2v-7.001M12 2v8m-4.3-4.3L12 2l4.3 3.7"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                            <path d="M9.5 9a2.5 2.5 0 100 5 2.5 2.5 0 000-5z" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M14.526 17.5c0-1.78-2.097-3.25-4.763-3.5" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                    <h3>Smart Insights</h3>
+                    <p>Receive AI-powered recommendations and market analysis to optimize your investment strategy.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="feature-card gradient-border">
+                    <div class="feature-icon"
+                        style="background: linear-gradient(to bottom right, rgba(162, 57, 202, 0.2), transparent);">
+                        <svg class="icon" style="color: #a239ca;" viewBox="0 0 24 24">
+                            <path d="M20 7L9 18l-5-5" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                    <h3>Secure OTP Login</h3>
+                    <p>Advanced security features including two-factor authentication and biometric verification.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="feature-card gradient-border">
+                    <div class="feature-icon"
+                        style="background: linear-gradient(to bottom right, rgba(213, 0, 249, 0.2), transparent);">
+                        <svg class="icon" style="color: #d500f9;" viewBox="0 0 24 24">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Real-time Analytics</h3>
+                    <p>Stay informed with real-time market data and performance metrics for informed decision making.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<!-- Footer -->
+<footer id="contact">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">
+                    <img src="/assets/images/logo.png" alt="" srcset="" width="50">
+                    Invest<span class="gradient-text">Wise</span>
+                </div>
+                <p class="footer-about">
+                    Making smart investments accessible to everyone through technology
+                    and education.
+                </p>
+
+            </div>
+            <div >
+                <h4 class="footer-heading">Visit Us</h4>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.943165677663!2d73.0281450750529!3d19.11014908210146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c0fa95ff1789%3A0xed94f90522f1346b!2sLTIMindtree!5e0!3m2!1sen!2sin!4v1756921126843!5m2!1sen!2sin"
+                    width="450" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy;
+                <script>document.write(new Date().getFullYear())</script> InvestWise. All rights reserved.
             </p>
         </div>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer class="footer reveal fade">
-    <div class="container footer-content">
-
-        <div class="footer-links">
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-            </ul>
-        </div>
-        <div class="footer-map">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.943165677673!2d73.02814507520623!3d19.11014908210141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c0fa95ff1789%3A0xed94f90522f1346b!2sLTIMindtree!5e0!3m2!1sen!2sin!4v1756890946905!5m2!1sen!2sin"
-                width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        <p>© 2025 Investment Tracker. All rights reserved.</p>
     </div>
 </footer>

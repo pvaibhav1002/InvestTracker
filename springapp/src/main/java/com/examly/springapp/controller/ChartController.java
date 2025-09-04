@@ -39,7 +39,6 @@ public class ChartController {
 
     @PostMapping("/user/buy")
     public ResponseEntity<UserInvestment> buyInvestment(@RequestBody UserInvestment userInvestment) {
-        System.out.println(userInvestment);
         UserInvestment newUserInvestment = chartService.buyInvestment(userInvestment);
         if (newUserInvestment == null) {
             return ResponseEntity.status(500).build();

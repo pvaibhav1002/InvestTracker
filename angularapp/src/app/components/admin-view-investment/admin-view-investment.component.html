@@ -1,71 +1,57 @@
+<div class="view-container">
+  <h1>Manage Investments</h1>
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+  <div class="filter">
+    <label for="filterSearch">Search:</label>
+    <input type="text" id="filterSearch" #search (input)="filterSearch(search.value)">
 
-<h1>Manage Investments</h1>
-
-
-<div *ngIf="successMessage" class="success-message">
-  {{ successMessage }}
-</div>
-
-
-<div>
-  <label for="filterSearch">Search:</label>
-  <input type="text" id="filterSearch" #search (input)="filterSearch(search.value)">
-
-  <label for="filterCategory">Filter by Type:</label>
-  <select id="filterCategory" #typeFilter (change)="filterCategory(typeFilter.value)">
-    <option value="AllTypes">All Types</option>
-    <option value="Equity">Equity</option>
-    <option value="Mutual Fund">Mutual Fund</option>
-    <option value="Stocks">Stocks</option>
-    <option value="Real Estate">Real Estate</option>
-    <option value="Crypto">Crypto</option>
-  </select>
-
-  <label for="filterStatus">Filter by Status:</label>
-  <select id="filterStatus" #statusFilter (change)="filterStatus(statusFilter.value)">
-    <option value="AllStatus">All Status</option>
-    <option value="Active">Active</option>
-    <option value="Inactive">Inactive</option>
-  </select>
-</div>
-
-
-<table>
+    <label for="filterCategory">Filter by Type:</label>
+    <select id="filterCategory" #typeFilter (change)="filterCategory(typeFilter.value)">
+      <option value="AllTypes">All Types</option>
+      <option value="Equity">Equity</option>
+      <option value="Mutual Fund">Mutual Fund</option>
+      <option value="Stocks">Stocks</option>
+      <option value="Real Estate">Real Estate</option>
+      <option value="Crypto">Crypto</option>
+    </select>
+    <label for="filterStatus">Filter by Status:</label>
+    <select id="filterStatus" #statusFilter (change)="filterStatus(statusFilter.value)">
+      <option value="AllStatus">All Status</option>
+      <option value="Active">Active</option>
+      <option value="Inactive">Inactive</option>
+    </select>
+  </div>
+  <table>
     <thead>
-        <tr>
-          <th>S No.</th>
-          <th>ID</th>
-          <th (click)="sortByName()" (keydown)="onKeyDown($event)">Name</th>
-          <th>Description</th>
-          <th (click)="sortByType()" (keydown)="onKeyDown($event)">Type</th>
-          <th (click)="sortByPrice()" (keydown)="onKeyDown($event)">Price (INR)</th>
-          <th (click)="sortByQuantity()" (keydown)="onKeyDown($event)">Quantity</th>
-          <th (click)="sortByDate()" (keydown)="onKeyDown($event)">Posted Date</th>
-          <th (click)="sortByStatus()" (keydown)="onKeyDown($event)">Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-  <tbody>
-    <tr *ngFor="let investment of investments; index as i">
-      <td>{{ i + 1 }}</td>
-      <td>{{ investment.investmentId }}</td>
-      <td>{{ investment.name }}</td>
-      <td>{{ investment.description }}</td>
-      <td>{{ investment.type }}</td>
-      <td>{{ investment.price }}</td>
-      <td>{{ investment.quantity }}</td>
-      <td>{{ investment.postedDate }}</td>
-      <td>{{ investment.status }}</td>
-      <td>
-        <button [routerLink]="['/edit-investment', investment.investmentId]">Edit</button>
-        <button (click)="deleteInvestment(investment.investmentId)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-
-   
-  
+      <tr>
+        <th>ID</th>
+        <th (click)="sortByName()" (keydown)="onKeyDown($event)">Name</th>
+        <th style="width: 30%;">Description</th>
+        <th (click)="sortByType()" (keydown)="onKeyDown($event)">Type</th>
+        <th (click)="sortByPrice()" (keydown)="onKeyDown($event)">Price (INR)</th>
+        <th (click)="sortByQuantity()" (keydown)="onKeyDown($event)">Quantity</th>
+        <th (click)="sortByDate()" (keydown)="onKeyDown($event)">Posted Date</th>
+        <th (click)="sortByStatus()" (keydown)="onKeyDown($event)">Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let investment of investments">
+        <td>{{ investment.investmentId }}</td>
+        <td>{{ investment.name }}</td>
+        <td>{{ investment.description }}</td>
+        <td>{{ investment.type }}</td>
+        <td>{{ investment.price }}</td>
+        <td>{{ investment.quantity }}</td>
+        <td>{{ investment.postedDate }}</td>
+        <td>{{ investment.status }}</td>
+        <td>
+          <button class="edit" [routerLink]="['/edit-investment', investment.investmentId]">Edit</button>
+          <button class="delete" (click)="deleteInvestment(investment.investmentId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
