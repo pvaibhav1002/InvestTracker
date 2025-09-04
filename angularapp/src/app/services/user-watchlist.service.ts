@@ -20,5 +20,7 @@ export class UserWatchlistService {
     let watchlist={"investment":{"investmentId":investmentId},"userId":userId};
     return this.httpClient.post<any>(`${APP_URL}/watchlist`,watchlist);
   }
- 
+  deleteFromWatchlist(watchlistId:number): Observable<any> {
+    return this.httpClient.delete<any>(`${APP_URL}/watchlist/${watchlistId}`);
+  } 
 }

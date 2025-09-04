@@ -46,7 +46,7 @@ export class UserAddInquiryComponent implements OnInit {
       reasonOfInterest: '',
       inquiryDate: new Date().toISOString(),
       riskTolerance: '',
-      expectedReturn: 0,
+      expectedReturn: null,
       status: 'Pending',
       responseDate: '',
       adminResponse: '',

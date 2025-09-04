@@ -1,66 +1,83 @@
-<div class="inquiry-container">
-    <h2>Submit Your Inquiry</h2>
+<div class="add-container">
+    <div class="form-container" id="formContainer">
 
-    <form (ngSubmit)="onSubmit()" #inquiryForm="ngForm">
-        <label for="name">Your Name</label>
-        <input type="text" id="name" name="name" [(ngModel)]="name" required #nameRef="ngModel"
-            placeholder="Enter your name" />
-        <div *ngIf="nameRef.invalid && nameRef.touched">
-            <small>Your name is required.</small>
-        </div>
+        <form id="investmentForm" class="form" (ngSubmit)="onSubmit()" #inquiryForm="ngForm">
+            <h2 class="form-title">Submit Your Inquiry</h2>
+            <div class="form-group">
+                <input class="form-input" type="text" id="name" name="name" [(ngModel)]="name" required #nameRef="ngModel"
+                    placeholder="Enter your name" />
+                <div class="error-message" *ngIf="nameRef.invalid && nameRef.touched">
+                    <small>Your name is required.</small>
+                </div>
+            </div>
 
-        <label for="email">Your Email</label>
-        <input type="email" id="email" name="email" [(ngModel)]="email" required #emailRef="ngModel"
-            placeholder="Enter your email" />
-        <div *ngIf="emailRef.invalid && emailRef.touched">
-            <small>Valid email is required.</small>
-        </div>
+            <div class="form-group">
+                <input class="form-input" type="email" id="email" name="email" [(ngModel)]="email" required #emailRef="ngModel"
+                    placeholder="Enter your email" />
+                <div class="error-message" *ngIf="emailRef.invalid && emailRef.touched">
+                    <small>Valid email is required.</small>
+                </div>
+            </div>
 
-        <label for="investment">Investment</label>
-        <input type="text" id="investment" name="investment" [(ngModel)]="investmentName" #investment="ngModel"
-            placeholder="Enter investment" disabled />
+            <div class="form-group">
+                <input class="form-input" type="text" id="investment" name="investment" [(ngModel)]="investmentName" #investment="ngModel"
+                    placeholder="Enter investment" disabled />
+            </div>
 
-        <label for="riskTolerance">Risk Tolerance</label>
-        <select id="riskTolerance" name="riskTolerance" [(ngModel)]="newInvest.riskTolerance" required
-            #riskTolerance="ngModel">
-            <option value="">Select Risk Tolerance</option>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-        </select>
-        <div *ngIf="riskTolerance.invalid && riskTolerance.touched">
-            <small>Risk Tolerance is required.</small>
-        </div>
+            <div class="form-group">
+                <select class="form-input" id="riskTolerance" name="riskTolerance" [(ngModel)]="newInvest.riskTolerance" required
+                    #riskTolerance="ngModel">
+                    <option value="">Select Risk Tolerance</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+                <div class="error-message" *ngIf="riskTolerance.invalid && riskTolerance.touched">
+                    <small>Risk Tolerance is required.</small>
+                </div>
+            </div>
 
-        <label for="expectedReturn">Expected Return of Investment</label>
-        <input type="number" name="expectedReturn" id="expectedReturn" [(ngModel)]="newInvest.expectedReturn" required
-            #expectedReturn="ngModel">
-        <div *ngIf="expectedReturn.invalid && expectedReturn.touched">
-            <small *ngIf="expectedReturn.errors?.required">Expected Return is required.</small>
-        </div>
+            <div class="form-group">
 
-        <label for="interest">Reason for Interest</label>
-        <textarea id="interest" name="interest" [(ngModel)]="newInvest.reasonOfInterest" required minlength="10"
-            #interest="ngModel" placeholder="Enter your reason here..."></textarea>
-        <div *ngIf="interest.invalid && interest.touched">
-            <small *ngIf="interest.errors?.required">Reason for Interest is required.</small>
-            <small *ngIf="interest.errors?.minlength">Reason for Interest must be at least 10 characters.</small>
-        </div>
+                <input class="form-input" type="number" name="expectedReturn" id="expectedReturn" [(ngModel)]="newInvest.expectedReturn"
+                    required #expectedReturn="ngModel" placeholder="Expected ROI (%)">
+                <div class="error-message" *ngIf="expectedReturn.invalid && expectedReturn.touched">
+                    <small *ngIf="expectedReturn.errors?.required">Expected Return is required.</small>
+                </div>
+            </div>
 
-        <label for="questions">Any Specific Questions?</label>
-        <textarea id="questions" name="questions" [(ngModel)]="newInvest.questions" required #questions="ngModel"
-            placeholder="Enter your questions here..."></textarea>
-        <div *ngIf="questions.invalid && questions.touched">
-            <small *ngIf="questions.errors?.required">At least one question is required.</small>
-        </div>
+            <div class="form-group">
+                <textarea class="form-input" id="interest" name="interest" [(ngModel)]="newInvest.reasonOfInterest" required minlength="10"
+                    #interest="ngModel" placeholder="Reason Of Interest"></textarea>
+                <div class="error-message" *ngIf="interest.invalid && interest.touched">
+                    <small *ngIf="interest.errors?.required">Reason for Interest is required.</small>
+                    <small *ngIf="interest.errors?.minlength">Reason for Interest must be at least 10
+                        characters.</small>
+                </div>
+            </div>
 
-        <button type="submit" [disabled]="inquiryForm.invalid" (click)="sendInquiryConfirmation()">Submit Inquiry</button>
-    </form>
+            <div class="form-group">
+                <textarea class="form-input" id="questions" name="questions" [(ngModel)]="newInvest.questions" required
+                    #questions="ngModel" placeholder="Any Specific Questions?"></textarea>
+                <div class="error-message" *ngIf="questions.invalid && questions.touched">
+                    <small *ngIf="questions.errors?.required">At least one question is required.</small>
+                </div>
+            </div>
 
-    <div class="popup" *ngIf="showPopup">
-        <div class="popup-content">
-            <p>Inquiry submitted successfully!</p>
-            <button (click)="closePopup()">OK</button>
+            <div class="form-submit">
+                <button type="submit" class="submit-button" [disabled]="inquiryForm.invalid" (click)="sendInquiryConfirmation()">Submit
+                    Inquiry</button>
+            </div>
+            <div *ngIf="responseMessage" class="error-message">
+                    {{responseMessage}}
+                </div>
+        </form>
+    </div>
+
+    <div class="success-message" *ngIf="showPopup">
+        <div class="success-content-box">
+            <div class="success-text">Inquiry submitted successfully!</div>
+            <button class="close-button" (click)="closePopup()">Close</button>
         </div>
     </div>
 </div>

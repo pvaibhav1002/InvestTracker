@@ -39,7 +39,7 @@ public class ChartServiceImpl implements ChartService {
         dto.setDistributionByCapSize(getInvestmentDistributionByCapSize());
 
         List<AdminConsoleDTO.UserInvestmentSummary> userSummaries = new ArrayList<>();
-        for (User user : userRepo.findAll()) {
+        for (User user : userRepo.findByUserRole("User")) {
             Double totalInvested = userInvestmentRepo.getTotalInvestedByUser(user.getUserId());
             totalInvested = totalInvested != null ? totalInvested : 0.0;
             Double currentInvestment = userInvestmentRepo.getCurrentInvestmentByUser(user.getUserId());

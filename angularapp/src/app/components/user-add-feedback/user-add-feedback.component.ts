@@ -35,7 +35,7 @@ export class UserAddFeedbackComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       message: ['', Validators.required],
       category: ['', Validators.required],
-      investmentId: [null]
+      investmentId: [""]
     });
   }
 

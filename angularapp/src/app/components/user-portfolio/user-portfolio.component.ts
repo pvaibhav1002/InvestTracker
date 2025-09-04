@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartType } from 'chart.js';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChartService } from 'src/app/services/chart.service';
+import { PdfExportService } from 'src/app/services/pdf-export.service';
 
 @Component({
   selector: 'app-user-portfolio',
@@ -26,19 +27,21 @@ export class UserPortfolioComponent implements OnInit {
   doughnutChartColors: Array<any> = [
     {
       backgroundColor: [
-        '#007bff', // Blue
-        '#28a745', // Green
-        '#17a2b8', // Teal
-        '#ffc107', // Yellow
-        '#dc3545', // Red
-        '#6f42c1'  // Purple
-      ]
+        '#00bce6',
+        '#2962ff',
+        '#d500f9',
+        '#4dd0e1',
+        '#7c4dff',
+        '#1a237e'
+      ],
+      borderColor: '#0e1218',
+      borderWidth: 2,
     }
   ];
 
   doughnutChartType: ChartType = 'doughnut';
 
-  constructor(private chartService: ChartService, private authService: AuthService) {}
+  constructor(private chartService: ChartService, private authService: AuthService,private pdfExport: PdfExportService) {}
 
   ngOnInit(): void {
     this.chartService.getUserPortfolioData(this.authService.getAuthenticatedUserId()).subscribe(data => {
@@ -56,55 +59,7 @@ export class UserPortfolioComponent implements OnInit {
     });
   }
 
-  async exportToPDF() {
-    const { jsPDF } = await import('jspdf');
-    await import('jspdf-autotable');
-
-    const doc = new jsPDF({
-      unit: 'pt',
-      format: 'a4',
-      orientation: 'portrait'
-    });
-
-    const margin = 40;
-    let y = 50;
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(24);
-    doc.text('User Portfolio', 200, y);
-
-    doc.setFontSize(12);
-    y += 30;
-    doc.text(`Total Invested: Rs. ${this.portfolioData.totalInvested}`, margin, y);
-    doc.text(`Current Value: Rs. ${this.portfolioData.currentValue}`, margin + 200, y);
-
-    const profitOrLoss = this.portfolioData.profitOrLossAmount;
-    if (profitOrLoss >= 0) {
-      doc.setTextColor(40, 167, 69); // bootstrap green
-    } else {
-      doc.setTextColor(220, 53, 69); // bootstrap red
-    }
-    doc.text(`Profit/Loss: Rs. ${profitOrLoss}`, margin + 400, y);
-
-    y += 10;
-    doc.setTextColor(0, 0, 0); // reset to black
-    doc.setFont('helvetica', 'normal');
-
-    (doc as any).autoTable({
-      head: [['Investment Name', 'Cap Size', 'Sector', 'Type', 'Amount Invested', 'Current Value', 'Profit/Loss']],
-      body: this.portfolioData.investments.map(inv => [
-        inv.name || '',
-        inv.capSize || '',
-        inv.sector || '',
-        inv.type || '',
-        ((inv.purchasePrice * inv.quantityBought) || 0).toFixed(2),
-        ((inv.currentPrice * inv.quantityBought) || 0).toFixed(2),
-        (((inv.currentPrice * inv.quantityBought) || 0) - ((inv.purchasePrice * inv.quantityBought) || 0)).toFixed(2),
-      ]),
-      startY: y,
-      headStyles: { fillColor: [0, 123, 255] }
-    });
-
-    doc.save('UserPortfolio.pdf');
+  downloadPDF() {
+      this.pdfExport.exportUserPortfolio(this.portfolioData,this.authService.getAuthenticatedUsername());
   }
 }
