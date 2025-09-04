@@ -63,9 +63,6 @@ export class AdminEditInvestmentComponent implements OnInit {
       this.investment = data;
 
       this.investmentForm.patchValue(data);
-
-      console.log(data);
-
     });
 
   }

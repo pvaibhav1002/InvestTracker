@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
@@ -18,6 +17,7 @@ export class AdminViewInquiryComponent implements OnInit {
   inquiries: InvestmentInquiry[] = [];
   searchText: string = '';
   selectedInquiryId: number | null = null;
+  selectedInquiry: InvestmentInquiry | null = null;
   responseText: string = '';
   responseSubmitted: boolean = false;
   showResForm: boolean = false;
@@ -82,18 +82,13 @@ export class AdminViewInquiryComponent implements OnInit {
 
   }
 
-  showResponseForm(id: number): void {
-
-    this.showResForm = true;
-    this.selectedInquiryId = id;
-    const inquiry = this.inquiries.find(i => i.inquiryId === id);
-    this.responseText = inquiry?.adminResponse || '';
-
+  showResponseForm(inquiry:InvestmentInquiry): void {
+    this.selectedInquiry=inquiry;
   }
 
   submitResponse(): void {
 
-    const inquiry = this.inquiries.find(i => i.inquiryId === this.selectedInquiryId);
+    const inquiry = this.selectedInquiry;
 
     if (inquiry) {
       inquiry.adminResponse = this.responseText;
@@ -103,20 +98,22 @@ export class AdminViewInquiryComponent implements OnInit {
 
         next: () => {
 
-          this.emailservice.sendInquiryResponse(
+          // this.emailservice.sendInquiryResponse(
 
-            inquiry.user.email,
-            inquiry.user.username,
-            this.responseText
+          //   inquiry.user.email,
+          //   inquiry.user.username,
+          //   this.responseText
 
-          ).subscribe({
+          // ).subscribe({
 
-            next: () => console.log('Email sent successfully'),
-            error: (err) => console.error('Error sending email:', err)
+          //   next: () => console.log('Email sent successfully'),
+          //   error: (err) => console.error('Error sending email:', err)
 
-          });
+          // });
 
           this.responseSubmitted = true;
+          this.selectedInquiry=null
+          this.responseText = '';
           setTimeout(() => {
             this.responseSubmitted = false;
           }, 3000);
@@ -130,14 +127,11 @@ export class AdminViewInquiryComponent implements OnInit {
       });
 
     }
-    this.showResForm = false;
-    this.selectedInquiryId = null;
-    this.responseText = '';
 
   }
 
   cancel() {
-    this.showResForm = false;
+    this.selectedInquiry = null;
 
   }
   sortByDate() {

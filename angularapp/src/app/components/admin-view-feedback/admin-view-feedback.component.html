@@ -1,7 +1,10 @@
-<div class="container">
-  <h2>Feedback Received</h2>
+<div class="view-container">
+  <h1>Feedback Received</h1>
 
-  <div>
+  <div class="filter">
+    <label for="searchByText">Search By Text:</label>
+    <input type="text" name="searchByText" id="searchByText" [(ngModel)]="searchByText" (input)="searchBasedOnText()">
+
     <label for="categoryFilter">Filter by Category:</label>
     <select id="categoryFilter" #categoryFil (change)="filterByCategory(categoryFil.value)">
       <option value="All">All</option>
@@ -9,16 +12,11 @@
         {{ feedback.category }}
       </option>
     </select>
+
+    <button class="action-btn danger" (click)="sortByDate()">Sort By Date</button>
   </div>
 
-  <div>
-    <label for="searchByText">searchByText:</label>
-    <input type="text" name="searchByText" id="searchByText" [(ngModel)]="searchByText" (input)="searchBasedOnText()">
-  </div>
-
-  <button (click)="sortByDate()">sortByDate</button>
-
-  <table *ngIf="feedbacks.length>0" border="1">
+  <table *ngIf="feedbacks.length>0;else noFeedback" class="inquiry-table">
     <thead>
       <tr>
         <th>S.No</th>
@@ -26,7 +24,7 @@
         <th>User</th>
         <th>Investment</th>
         <th>Category</th>
-        <th>Feedback Message</th>
+        <th style="width: 23%;">Feedback Message</th>
         <th>Posted Date</th>
         <th>Actions</th>
       </tr>
@@ -41,8 +39,8 @@
         <td>{{ feedback.feedbackText }}</td>
         <td>{{ feedback.date | date:'dd/MM/yyyy' }}</td>
         <td>
-          <button class="btn btn-info" (click)="showUserDetails(feedback.user)">Show User Details</button>
-          <button class="btn btn-success" *ngIf="feedback.category === 'Assets'"
+          <button class="response" (click)="showUserDetails(feedback.user)">Show User Details</button>
+          <button class="delete" *ngIf="feedback.category === 'Assets'"
             (click)="showInvestmentDetails(feedback.investment)">View Investment
             Info</button>
         </td>
@@ -50,23 +48,27 @@
     </tbody>
   </table>
 
-  <p *ngIf="feedbacks.length==0">
-    No Feedback Found
-  </p>
+  <ng-template #noFeedback>
+    <p class="no-data">No Feedbacks found.</p>
+  </ng-template>
 
   <div class="modal" *ngIf="selectedUser">
-    <div>
+    <div class="modal-overlay" (click)="cancel()"></div>
+    <div class="modal-content">
       <h3>User Details</h3>
       <p><strong>User ID:</strong>{{selectedUser.userId}}</p>
       <p><strong>UserName:</strong> {{ selectedUser.username }}</p>
       <p><strong>Email:</strong> {{ selectedUser.email }}</p>
       <p><strong>Role:</strong> {{ selectedUser.userRole }}</p>
-      <button (click)="closeModal()">Close</button>
+      <div class="modal-buttons">
+        <button class="action-btn danger" (click)="closeModal()">Close</button>
+      </div>
     </div>
   </div>
 
   <div class="modal" *ngIf="selectedInvestment">
-    <div>
+    <div class="modal-overlay" (click)="cancel()"></div>
+    <div class="modal-content">
       <h3>Investment Info</h3>
       <p><strong>Name: </strong> {{ selectedInvestment.name }}</p>
       <p><strong>Type: </strong> {{ selectedInvestment.type }}</p>
@@ -74,7 +76,9 @@
       <p><strong>Quantity: </strong>{{selectedInvestment.quantity}}</p>
       <p><strong>Posted Date: </strong>{{selectedInvestment.postedDate}}</p>
       <p><strong>Status: </strong>{{selectedInvestment.status}}</p>
-      <button (click)="closeModal()">Close</button>
+      <div class="modal-buttons">
+        <button class="action-btn danger" (click)="closeModal()">Close</button>
+      </div>
     </div>
   </div>
 </div>
