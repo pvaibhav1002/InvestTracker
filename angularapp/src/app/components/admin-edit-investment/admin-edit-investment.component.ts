@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Investment } from 'src/app/models/investment.model';
- 
+
 import { InvestmentService } from 'src/app/services/investment.service';
 
 @Component({
@@ -27,12 +27,12 @@ export class AdminEditInvestmentComponent implements OnInit {
   investmentForm: FormGroup;
 
   updated: boolean = false;
-
+  errormessage: string = "";
   constructor(private readonly fb: FormBuilder, private readonly ar: ActivatedRoute, private readonly is: InvestmentService, private readonly router: Router) {
 
     this.investmentForm = this.fb.group({
 
-      name: ['', Validators.required], 
+      name: ['', Validators.required],
 
       description: ['', [Validators.required, Validators.minLength(15)]],
 
@@ -48,10 +48,10 @@ export class AdminEditInvestmentComponent implements OnInit {
 
       sector: ['', Validators.required],
 
-      postedDate: [''] 
+      postedDate: ['']
 
     });
- 
+
   }
 
   ngOnInit(): void {
@@ -82,11 +82,15 @@ export class AdminEditInvestmentComponent implements OnInit {
 
       });
 
+    } else {
+      this.errormessage = "All Data Required. Investment addition Failed!"
+      this.investmentForm.markAllAsTouched();
+      return;
     }
 
   }
- 
- 
+
+
   closeModal() {
 
     this.updated = false;
@@ -102,4 +106,3 @@ export class AdminEditInvestmentComponent implements OnInit {
   }
 
 }
- 

@@ -1,88 +1,129 @@
-/* You can add global styles to this file, and also import other style files */
-body{
-    margin: 0;
-    padding: 0;
-    /* background-color: #000000; */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-/* src/styles.css */
-.auth-links {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 20px;
-    background-color: #f8f9fa;
-    gap: 15px;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #e3f2fd;
-    padding: 10px 20px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .auth-links {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 20px;
-    background-color: #000000;
-    gap: 15px;
-  }
-  
-  .auth-links a {
-    font-weight: bold;
-    color: #007bff;
-  }
-  
-  .auth-links a:hover {
-    text-decoration: underline;
-  }
-  
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #000000;
-    padding: 10px 20px;
-    border-bottom: 1px solid #ccc;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-  }
-  
-  .site-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #007bff;
-  }
-  
-  .auth-links {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .auth-links .btn {
-    padding: 6px 12px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-  
-  .auth-links .btn:hover {
-    background-color: #0056b3;
-  }
 
-  .tradingview-widget-container {
-    height: 40px; /* Adjust height as needed */
-    overflow: hidden;
-    transform: scale(0.85); /* Shrinks the entire widget */
-    transform-origin: top left;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #f5f5f5;
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+
+/* Utilities */
+.gradient-text {
+  background: linear-gradient(to right, #00bce6, #2962ff, #d500f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-bg {
+  background: linear-gradient(to right, #00bce6, #2962ff, #d500f9);
+}
+
+.glassmorphism {
+  background: rgba(20, 25, 35, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(to right, #00bce6, #2962ff, #d500f9);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 188, 230, 0.4);
   }
-  
-  .tradingview-widget-container__widget {
-    height: 100%;
+  50% {
+    box-shadow: 0 0 20px 5px rgba(41, 98, 255, 0.6);
   }
-  
+  100% {
+    box-shadow: 0 0 0 0 rgba(213, 0, 249, 0.4);
+  }
+}
+
+.hover-glow:hover {
+  animation: pulse-glow 2s infinite;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(14, 18, 24, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #2a3040;
+  /* max-height: 100px; */
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+nav a {
+  color: #b0b7c3;
+  text-decoration: none;
+  transition: color 0.3s;
+  margin-left: 2rem;
+}
+
+nav a:hover {
+  background: linear-gradient(to right, #00bce6, #2962ff, #d500f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+
+.header-btn {
+  background: linear-gradient(to right, #00bce6, #2962ff, #d500f9);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  margin-left: 1rem;
+  border: none;
+}
+

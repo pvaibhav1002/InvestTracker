@@ -1,70 +1,105 @@
-<h1>Add Investment</h1>
+<body>
+    <div class="container">
+        <div class="form-container" id="formContainer">
+            <form id="investmentForm" class="form" [formGroup]="investmentForm"
+                (ngSubmit)="addNewInvestment(investmentForm)">
 
-<form [formGroup]="investmentForm" (ngSubmit)="addNewInvestment(investmentForm)">
+                <h2 class="form-title">Add Investment</h2>
 
-    <label for="name">Name:</label>
-    <input type="text" id="name" formControlName="name" />
-    <div *ngIf="f.name.touched && f.name.invalid">
-        <div *ngIf="f.name.errors?.required" style="color: red;">Name is required.</div>
-        <div *ngIf="f.name.errors?.minlength" style="color: red;">Name must be at least 5 characters.</div>
-    </div>
+                <!-- Name -->
+                <div class="form-group">
+                    <input type="text" id="name" formControlName="name" class="form-input" placeholder="Name" />
+                    <div class="error-message" *ngIf="f.name.touched && f.name.invalid">
+                        <small *ngIf="f.name.errors?.required">Name is required.</small>
+                        <small *ngIf="f.name.errors?.minlength">Name must be at least 5 characters.</small>
+                    </div>
+                </div>
 
-    <label for="description">Description:</label>
-    <textarea id="description" formControlName="description" cols="30" rows="5"></textarea>
-    <div *ngIf="f.description.touched && f.description.invalid">
-        <div *ngIf="f.description.errors?.required" style="color: red;">Description is required.</div>
-        <div *ngIf="f.description.errors?.minlength" style="color: red;">Description must be at least 15 characters.
+                <!-- Description -->
+                <div class="form-group">
+                    <textarea id="description" formControlName="description" cols="20" rows="5" class="form-input"
+                        placeholder="Description"></textarea>
+                    <div class="error-message" *ngIf="f.description.touched && f.description.invalid">
+                        <small *ngIf="f.description.errors?.required">Description is required.</small>
+                        <small *ngIf="f.description.errors?.minlength">Description must be at least 15
+                            characters.</small>
+                    </div>
+                </div>
+
+                <!-- Type -->
+                <div class="form-group">
+                    <select id="type" formControlName="type" class="form-input">
+                        <option value="" selected>Select Type</option>
+                        <option value="Equity">Equity</option>
+                        <option value="Mutual Fund">Mutual Fund</option>
+                        <option value="ETF">ETF</option>
+                        <option value="Bond">Bond</option>
+                        <option value="Real Estate">Real Estate</option>
+                    </select>
+                    <div class="error-message" *ngIf="f.type.touched && f.type.invalid">
+                        <small>Type is required.</small>
+                    </div>
+                </div>
+
+                <!-- Price -->
+                <div class="form-group">
+                    <input type="number" id="price" formControlName="price" class="form-input" placeholder="Price" />
+                    <div class="error-message" *ngIf="f.price.touched && f.price.invalid">
+                        <small *ngIf="f.price.errors?.required">Price is required.</small>
+                        <small *ngIf="f.price.errors?.min">Must be a positive number.</small>
+                    </div>
+                </div>
+
+                <!-- Quantity -->
+                <div class="form-group">
+                    <input type="number" id="quantity" formControlName="quantity" class="form-input"
+                        placeholder="Quantity" />
+                    <div class="error-message" *ngIf="f.quantity.touched && f.quantity.invalid">
+                        <small *ngIf="f.quantity.errors?.required">Quantity is required.</small>
+                        <small *ngIf="f.quantity.errors?.min">Must be a positive number.</small>
+                    </div>
+                </div>
+
+                <!-- Cap Size -->
+                <div class="form-group">
+                    <select id="capSize" formControlName="capSize" class="form-input">
+                        <option value="" selected>Select Cap Size</option>
+                        <option value="Large Cap">Large Cap</option>
+                        <option value="Mid Cap">Mid Cap</option>
+                        <option value="Small Cap">Small Cap</option>
+                    </select>
+                    <div class="error-message" *ngIf="f.capSize.touched && f.capSize.invalid">
+                        <small>Cap Size is required.</small>
+                    </div>
+                </div>
+
+                <!-- Sector -->
+                <div class="form-group">
+                    <input type="text" id="sector" formControlName="sector" class="form-input" placeholder="Sector" />
+                    <div class="error-message" *ngIf="f.sector.touched && f.sector.invalid">
+                        <small>Sector is required.</small>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="form-submit">
+                    <button id="submitButton" class="submit-button" type="submit" >
+                        Add Investment
+                    </button>
+                </div>
+
+                <div *ngIf="errormessage" class="error-message">
+                    {{errormessage}}
+                </div>
+            </form>
+        </div>
+
+        <!-- Success Message -->
+        <div *ngIf="addedInvestment" class="success-message" id="successMessage">
+            <div class="success-content-box">
+                <div class="success-text">Investment added successfully!</div>
+                <button id="closeButton" class="close-button" (click)="closeAddSuccessPage()">Close</button>
+            </div>
         </div>
     </div>
-
-    <label for="type">Type:</label>
-    <select id="type" formControlName="type">
-        <option value="">Select Type</option>
-        <option value="Equity">Equity</option>
-        <option value="Mutual Fund">Mutual Fund</option>
-        <option value="ETF">ETF</option>
-        <option value="Bond">Bond</option>
-        <option value="Real Estate">Real Estate</option>
-    </select>
-    <div *ngIf="f.type.touched && f.type.invalid">
-        <div *ngIf="f.type.errors?.required" style="color: red;">Type is required.</div>
-    </div>
-
-    <label for="price">Price:</label>
-    <input type="number" id="price" formControlName="price" />
-    <div *ngIf="f.price.touched && f.price.invalid">
-        <div *ngIf="f.price.errors?.required" style="color: red;">Price is required.</div>
-        <div *ngIf="f.price.errors?.min" style="color: red;">Must be a positive number.</div>
-    </div>
-
-    <label for="quantity">Quantity:</label>
-    <input type="number" id="quantity" formControlName="quantity" />
-    <div *ngIf="f.quantity.touched && f.quantity.invalid">
-        <div *ngIf="f.quantity.errors?.required" style="color: red;">Quantity is required.</div>
-        <div *ngIf="f.quantity.errors?.min" style="color: red;">Must be a positive number.</div>
-    </div>
-
-    <label for="capSize">Cap Size:</label>
-    <select id="capSize" formControlName="capSize">
-        <option value="">Select Cap Size</option>
-        <option value="Large Cap">Large Cap</option>
-        <option value="Mid Cap">Mid Cap</option>
-        <option value="Small Cap">Small Cap</option>
-    </select>
-    <div *ngIf="f.capSize.touched && f.capSize.invalid">
-        <div *ngIf="f.capSize.errors?.required" style="color: red;">Cap Size is required.</div>
-    </div>
-
-    <label for="sector">Sector:</label>
-    <input type="text" id="sector" formControlName="sector" />
-    <div *ngIf="f.sector.touched && f.sector.invalid">
-        <div *ngIf="f.sector.errors?.required" style="color: red;">Sector is required.</div>
-    </div>
-
-    <button type="submit" [disabled]="investmentForm.invalid">Add Investment</button>
-</form>
-
-<div *ngIf="addedInvestment">
-    <div>Investment added successfully!</div>
-    <button (click)="closeAddSuccessPage()">CLOSE</button>
-</div>
+</body>

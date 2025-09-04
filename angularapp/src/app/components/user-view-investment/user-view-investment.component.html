@@ -1,4 +1,4 @@
-<h1>Explore Investments</h1>
+<!-- <h1>Explore Investments</h1>
 <input placeholder="Search in Name and Type..." type="text" name="searchText" id="searchText" [(ngModel)]="searchText"
     (input)="filterByNameAndType()"><br><br>
 
@@ -29,13 +29,11 @@ Filter By Type:
         <button (click)="addToWatchlist(investment.investmentId)">Add to watchList</button>
         <button [routerLink]="['/user-add-inquiry',investment.investmentId]">Inquire</button>
         <button (click)="openBuyModal(investment)">Buy</button>
-        <!-- Investment details and buttons -->
       </div>
     </div>
   </div>
 
 
-<!-- Modal -->
 <div class="modal" *ngIf="showModal">
     <div class="modal-overlay" (click)="closeModal()"></div>
     <div class="modal-content">
@@ -51,4 +49,4 @@ Filter By Type:
             </div>
         </form>
     </div>
-</div>
+</div> -->
