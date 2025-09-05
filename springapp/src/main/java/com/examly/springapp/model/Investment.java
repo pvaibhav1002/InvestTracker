@@ -113,4 +113,12 @@ public class Investment {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Investment [investmentId=" + investmentId + ", name=" + name + ", description=" + description
+                + ", type=" + type + ", price=" + price + ", quantity=" + quantity + ", postedDate=" + postedDate
+                + ", capSize=" + capSize + ", sector=" + sector + ", status=" + status + "]";
+    }
+
 }

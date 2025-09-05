@@ -1,22 +1,21 @@
-<div class="container">
-    <h2>Yours Inquiries</h2>
+<div class="view-container">
+    <h1>Yours Inquiries</h1>
 
-    <input [(ngModel)]="searchText" class="form-control mb-3" placeholder="Search..." (input)="filterText()">
+    <div class="filter">
+        <label for="searchByText">Search By Text:</label>
+        <input [(ngModel)]="searchText" type="text" placeholder="Search..." (input)="filterText()">
 
-
-    <div>
+        <label >Risk Tolerance</label>
         <select [(ngModel)]="filterTolerance" class="form-select" (change)="applyFilters()">
-            <option value="">Risk Tolerance</option>
+            <option value="">All</option>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
             <option value="Low">Low</option>
         </select>
-    </div>
-
-
-    <div>
+        
+        <label >Status</label>
         <select [(ngModel)]="filterStatus" class="form-select" (change)="applyFilters()">
-            <option value="">All Status</option>
+            <option value="">All </option>
             <option value="Pending">Pending</option>
             <option value="Resolved">Resolved</option>
         </select>
@@ -24,7 +23,7 @@
 
     <div *ngIf="invests.length < 0">You have not submitted any inquiries yet.</div>
 
-    <table class="table" border="1">
+    <table class="table">
         <thead>
             <tr>
                 <th>Investment</th>

@@ -24,6 +24,7 @@ export class AuthService {
     return this.http.post<any>(`${APP_URL}/login`, login).pipe(
       map(
         data => {
+          // console.log(data);
           localStorage.setItem(TOKEN, `Bearer ${data.token}`);
           return data;
         }
@@ -70,6 +71,10 @@ export class AuthService {
  
   getAuthenticatedUserRole(): string | null {
     return this.getDecodedToken()?.role || null;
+  }
+  
+  getAuthenticatedUserEmail(): string | null {
+    return this.getDecodedToken()?.sub || null;
   }
  
   isTokenExpired(): boolean {

@@ -14,18 +14,15 @@ export class AdminAddInvestmentComponent {
   investmentForm: FormGroup;
   addedInvestment: boolean = false;
   investmentData: any;
+  errormessage: string;
   date: Date = new Date();
 
   constructor(
-
     private readonly investmentService: InvestmentService,
     private readonly fb: FormBuilder,
     private readonly router: Router
-
   ) {
-
     this.investmentForm = fb.group({
-
       name: ['', [Validators.required, Validators.minLength(5)]],
       description: ['', [Validators.required, Validators.minLength(15)]],
       type: ['', Validators.required],
@@ -39,7 +36,11 @@ export class AdminAddInvestmentComponent {
   }
 
   addNewInvestment(form: FormGroup) {
-
+    if (!form.valid) {
+      this.errormessage = "All Data Required. Investment addition Failed!"
+      form.markAllAsTouched();
+      return;
+    }
     this.investmentData = {
       name: form.value.name,
       description: form.value.description,
@@ -50,12 +51,11 @@ export class AdminAddInvestmentComponent {
       capSize: form.value.capSize,
       sector: form.value.sector,
       status: 'Active'
-
     };
 
     this.investmentService.addInvestment(this.investmentData).subscribe(() => {
       this.addedInvestment = true;
-
+      
     });
 
   }
@@ -64,9 +64,9 @@ export class AdminAddInvestmentComponent {
     this.addedInvestment = false;
     this.router.navigate(['/admin-view-investment']);
   }
+
   get f() {
     return this.investmentForm.controls;
 
   }
-
 }

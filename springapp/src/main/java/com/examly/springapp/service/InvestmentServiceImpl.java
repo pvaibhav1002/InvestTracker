@@ -8,16 +8,29 @@ import org.springframework.stereotype.Service;
 
 import com.examly.springapp.exception.DuplicateInvestmentException;
 import com.examly.springapp.exception.InvestmentException;
+import com.examly.springapp.model.Feedback;
 import com.examly.springapp.model.Investment;
+import com.examly.springapp.model.UserInvestment;
+import com.examly.springapp.model.Watchlist;
+import com.examly.springapp.repository.FeedbackRepo;
 import com.examly.springapp.repository.InvestmentRepo;
+import com.examly.springapp.repository.UserInvestmentRepo;
+import com.examly.springapp.repository.WatchlistRepo;
 
 @Service
 public class InvestmentServiceImpl implements InvestmentService {
     InvestmentRepo investmentRepo;
+    UserInvestmentRepo userInvestmentRepo;
+    WatchlistRepo watchlistRepo;
+    FeedbackRepo feedbackRepo;
 
     @Autowired
-    public InvestmentServiceImpl(InvestmentRepo investmentRepo) {
+    public InvestmentServiceImpl(InvestmentRepo investmentRepo, UserInvestmentRepo userInvestmentRepo,
+            WatchlistRepo watchlistRepo, FeedbackRepo feedbackRepo) {
         this.investmentRepo = investmentRepo;
+        this.userInvestmentRepo = userInvestmentRepo;
+        this.watchlistRepo = watchlistRepo;
+        this.feedbackRepo = feedbackRepo;
     }
 
     @Override
@@ -39,6 +52,16 @@ public class InvestmentServiceImpl implements InvestmentService {
         Optional<Investment> optInvest = investmentRepo.findById(investmentId);
         if (optInvest.isPresent()) {
             Investment invest = optInvest.get();
+
+            List<UserInvestment> userInvestments = userInvestmentRepo.findByInvestment(invest);
+            userInvestmentRepo.deleteAll(userInvestments);
+
+            List<Watchlist> watchlistEntries = watchlistRepo.findByInvestment(invest);
+            watchlistRepo.deleteAll(watchlistEntries);
+
+            List<Feedback> feedbackEntries = feedbackRepo.findByInvestment_InvestmentId(investmentId);
+            feedbackRepo.deleteAll(feedbackEntries);
+
             investmentRepo.delete(invest);
             return true;
         }
@@ -73,7 +96,7 @@ public class InvestmentServiceImpl implements InvestmentService {
     public List<Investment> searchInvestments(String keyword) {
         return investmentRepo
                 .findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrTypeContainingIgnoreCase(
-                        keyword, keyword,keyword);
+                        keyword, keyword, keyword);
     }
 
     @Override

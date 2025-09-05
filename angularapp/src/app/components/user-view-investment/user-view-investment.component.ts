@@ -15,8 +15,22 @@ export class UserViewInvestmentComponent implements OnInit {
   originalInvestments: Investment[];
   ascPrice: boolean = true;
   ascQuantity: boolean = true;
-  types = ['All', 'Equity', 'Mutual Fund', 'Stocks', 'Crypto', 'Real Estate'];
+  types = ['All', 'Equity', 'Mutual Fund', 'ETF', 'Bond', 'Real Estate'];
   searchText: string = '';
+  showQuantityModal: boolean = false;
+  
+  
+  showModal: boolean = false;
+  selectedInvestment: Investment | null = null;
+  buyQuantity: number;
+  buyError: string = '';
+  buySuccess: string = '';
+  constructor(private investmentService: InvestmentService, private userwatchlistservice: UserWatchlistService, private authservice: AuthService) { }
+  
+  ngOnInit(): void {
+    this.getAllInvestments();
+  }
+
 
   getAllInvestments() {
     this.investmentService.getAllInvestments().subscribe((data) => {
@@ -25,18 +39,86 @@ export class UserViewInvestmentComponent implements OnInit {
     })
   }
 
-  constructor(private investmentService: InvestmentService, private userwatchlistservice: UserWatchlistService, private authservice: AuthService) { }
+
+  openBuyModal(investment: Investment) {
+    this.selectedInvestment = investment;
+    this.buyError = '';
+    this.buySuccess = '';
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+    this.selectedInvestment = null;
+    this.buyError = '';
+    this.buySuccess = '';
+  }
+
+  confirmBuy() {
+    if (!this.selectedInvestment || this.buyQuantity <= 0) {
+      this.buyError = 'Please enter a valid quantity.';
+      return;
+    }
+
+
+    const userInvestment = {
+      "quantityBought": this.buyQuantity,
+      "purchasePrice": this.selectedInvestment.price,
+      "user": {
+        "userId": this.authservice.getAuthenticatedUserId()
+      },
+      "investment": {
+        "investmentId":this.selectedInvestment.investmentId
+      }
+    };
+
+
+    this.investmentService.buyInvestment(userInvestment).subscribe({
+      next: () => {
+        this.buySuccess = 'Investment purchased successfully!';
+        this.buyError = '';
+        setTimeout(() => this.closeModal(), 1500);
+      },
+      error: () => {
+        this.buyError = 'Failed to purchase investment.';
+        this.buySuccess = '';
+      }
+    });
+  }
 
   addToWatchlist(investmentId: number) {
-    this.userwatchlistservice.addToWatchlist(investmentId, this.authservice.getAuthenticatedUserId()).subscribe((data) => {
-      alert('Investment Added to Watchlist!');
+    this.userwatchlistservice.addToWatchlist(investmentId, this.authservice.getAuthenticatedUserId()).subscribe({
+      next: () => {
+        this.buySuccess = 'Investment added to watchlist!';
+        this.buyError = '';
+        setTimeout(() => this.buySuccess = '', 1500);
+      },
+      error: () => {
+        this.buyError = 'Investment already in watchlist.';
+        this.buySuccess = '';
+        setTimeout(() => this.buyError = '', 1500);
+      }
     })
   }
 
-
-  ngOnInit(): void {
-    this.getAllInvestments();
+  userController = {
+    "user": {
+      "userId": this.authservice.getAuthenticatedUserId()
+    },
+    "investment": {
+      "investmentId": null
+    },
+    "quantityBought": null,
+    "purchasePrice": null,
+    "purchaseDate": null
   }
+
+  buyInvestent(investmentId: number) {
+    this.userController.investment.investmentId = investmentId;
+    this.userController.quantityBought = 0; // reset default
+    this.showQuantityModal = true;
+  }
+
 
   filterByNameAndType() {
     this.investments = this.originalInvestments;

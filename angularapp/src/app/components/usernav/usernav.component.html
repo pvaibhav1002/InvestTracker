@@ -1,21 +1,23 @@
-<nav class="navbar">
-
-    <div class="navbar-left">
-        <a routerLink="/" class="logo">InvestTrack</a>
+<header>
+  <div class="nav-container">
+    <div class="logo" routerLink="/">
+      <img src="/assets/images/logo.png" alt="" srcset="" width="50">
+      Invest<span class="gradient-text">Wise</span>
     </div>
 
-
-    <div class="navbar-center">
+    <div class="container-home">
+      <nav class="container">
+        <a routerLink="/home">Home</a>
         <a routerLink="/user-view-investment">View Investments</a>
         <a routerLink="/user-add-feedback">Give Feedback</a>
-        <a routerLink="/user-view-inquiry">My inquiries</a>
+        <a routerLink="/user-view-inquiry">My Inquiries</a>
         <a routerLink="/user-view-feedback">My Feedback</a>
         <a routerLink="/user-view-watchlist">My Watchlist</a>
         <a routerLink="/user-view-portfolio">My Portfolio</a>
+        <div class="header-buttons">
+          <button  class="header-btn hover-glow" (click)="onLogout()">Logout</button>
+        </div>
+      </nav>
     </div>
-
-
-    <div class="navbar-right">
-        <button (click)="onLogout()">Logout</button>
-    </div>
-</nav>
+  </div>
+</header>

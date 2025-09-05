@@ -1,6 +1,59 @@
-<h2>Your Watchlist</h2>
-<div *ngIf="investments.length>0">
-    <div *ngFor="let investment of investments">
-        {{investment.name}} - {{investment.price}}
+<div class="view-container">
+
+    <h1>Your Watchlist</h1>
+
+    <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
     </div>
+
+    <div class="filter">
+        <input placeholder="Search in Name and Type..." type="text" [(ngModel)]="searchText"
+            (input)="filterByNameAndType()">
+
+        <label for="filterByType">Filter by Type:</label>
+        <select #type (change)="filterByType(type.value)">
+            <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+        </select>
+
+        <button class="action-btn transparent" (click)="sortByPrice()">Sort By Price</button>
+        <button class="action-btn transparent" (click)="sortByQuantity()">Sort By Quantity</button>
+    </div>
+    <div *ngIf="watchlists.length > 0; else noData">
+        <table class="watchlist-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Cap Size</th>
+                    <th>Sector</th>
+                    <th>Price (₹)</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let watchlist of watchlists">
+                    <tr *ngIf="watchlist.investment.status === 'Active'">
+                        <td>{{ watchlist.investment.name }}</td>
+                        <td>{{ watchlist.investment.description }}</td>
+                        <td>{{ watchlist.investment.type }}</td>
+                        <td>{{ watchlist.investment.capSize }}</td>
+                        <td>{{ watchlist.investment.sector }}</td>
+                        <td>{{ watchlist.investment.price | number: '.2-2' }}</td>
+                        <td>{{ watchlist.investment.quantity }}</td>
+                        <td>
+                            <button class="action-btn primary" (click)="deleteWatchlist(watchlist.id)">Remove from Watchlist</button>
+                        </td>
+
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+
+    <ng-template #noData>
+        <p>No investments in your watchlist yet.</p>
+    </ng-template>
+
 </div>

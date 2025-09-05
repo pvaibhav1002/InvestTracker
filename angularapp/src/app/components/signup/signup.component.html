@@ -1,94 +1,101 @@
-<div *ngIf="!formSubmitted" class="container">
-    <h2>Registration Form</h2>
-    <form #registration="ngForm" (ngSubmit)="register(registration)">
-        <div class="form-group">
-            <input type="text" name="username" placeholder="Username" [(ngModel)]="user.username" required
-                #usernameField="ngModel" />
-            <div *ngIf="usernameField.invalid && usernameField.touched">
-                <small *ngIf="usernameField.errors?.required">Username is required.</small>
-            </div>
+<body>
+
+    <div class="app-container">
+        <div *ngIf="!formSubmitted" class="form-container" id="registrationForm">
+            <h2>Registration Form</h2>
+            <form #registration="ngForm" (ngSubmit)="register(registration)">
+                <div class="form-group">
+                    <input type="text" name="username" placeholder="Username" [(ngModel)]="user.username" required
+                        #usernameField="ngModel" />
+                    <div class="error-text" *ngIf="usernameField.invalid && usernameField.touched">
+                        <small *ngIf="usernameField.errors?.required">Username is required.</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Email" [(ngModel)]="user.email" required email
+                        #emailField="ngModel" />
+                    <div class="error-text" *ngIf="emailField.invalid && emailField.touched">
+                        <small *ngIf="emailField.errors?.required">Email is required.</small>
+                        <small *ngIf="emailField.errors?.email">Invalid email format.</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="mobileNumber" placeholder="Mobile Number" [(ngModel)]="user.mobileNumber"
+                        required pattern="^[0-9]{10}$" #mobileField="ngModel" />
+                    <div class="error-text" *ngIf="mobileField.invalid && mobileField.touched">
+                        <small *ngIf="mobileField.errors?.required">Mobile number is required.</small>
+                        <small *ngIf="mobileField.errors?.pattern">Enter a valid 10-digit mobile number.</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Password" [(ngModel)]="user.password" required
+                        pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                        #passwordField="ngModel" />
+                    <div class="error-text" *ngIf="passwordField.invalid && passwordField.touched">
+                        <small *ngIf="passwordField.errors?.required">Password is required.</small>
+                        <small *ngIf="passwordField.errors?.pattern">
+                            Password must be at least 8 characters long and include uppercase, lowercase, number, and
+                            special
+                            character.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" name="confirmPassword" placeholder="Confirm Password"
+                        [(ngModel)]="confirmPassword" required #confirmPasswordField="ngModel" />
+                    <div class="error-text" *ngIf="confirmPasswordField.invalid && confirmPasswordField.touched">
+                        <small *ngIf="confirmPasswordField.errors?.required">Confirm password is required.</small>
+                    </div>
+                    <div class="error-text" *ngIf="user.password !== confirmPassword && confirmPasswordField.touched">
+                        <small>Passwords do not match.</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <select name="userRole" [(ngModel)]="user.userRole" required #roleField="ngModel">
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="Admin">Admin</option>
+                        <option value="User">User</option>
+                    </select>
+                    <div class="error-text" *ngIf="roleField.invalid && roleField.touched">
+                        <small>Role is required.</small>
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button type="submit" class="btn">Signup</button>
+
+                    <p class="login-link">Already have an account? <a routerLink="/login">Login</a></p>
+
+                    <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+                    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+                </div>
+            </form>
         </div>
 
-        <div class="form-group">
-            <input type="email" name="email" placeholder="Email" [(ngModel)]="user.email" required email
-                #emailField="ngModel" />
-            <div *ngIf="emailField.invalid && emailField.touched">
-                <small *ngIf="emailField.errors?.required">Email is required.</small>
-                <small *ngIf="emailField.errors?.email">Invalid email format.</small>
+        <div *ngIf="formSubmitted" class="form-container" id="otpVerification">
+            <div class="form-container">
+                <h2>Verify OTP</h2>
+                <form #otpForm="ngForm" (ngSubmit)="verifyOtp(otpForm)">
+                    <div class="form-group">
+                        <input type="text" name="submittedOtp" [(ngModel)]="submittedOtp" placeholder="Enter OTP"
+                            #otpField="ngModel" required />
+                        <div class="error-text" *ngIf="otpField.invalid && otpField.touched">
+                            <small *ngIf="otpField.errors?.required">OTP is required.</small>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button type="submit" class="btn">Verify</button>
+                        <button type="button" (click)="resendOTP()" class="btn btn-secondary">Resend OTP</button>
+                        <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
+                        <p *ngIf="errorMessage" class="success-message">{{ errorMessage }}</p>
+                    </div>
+                </form>
             </div>
         </div>
-
-        <div class="form-group">
-            <input type="text" name="mobileNumber" placeholder="Mobile Number" [(ngModel)]="user.mobileNumber" required
-                pattern="^[0-9]{10}$" #mobileField="ngModel" />
-            <div *ngIf="mobileField.invalid && mobileField.touched">
-                <small *ngIf="mobileField.errors?.required">Mobile number is required.</small>
-                <small *ngIf="mobileField.errors?.pattern">Enter a valid 10-digit mobile number.</small>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <input type="password" name="password" placeholder="Password" [(ngModel)]="user.password" required
-                pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                #passwordField="ngModel" />
-            <div *ngIf="passwordField.invalid && passwordField.touched">
-                <small *ngIf="passwordField.errors?.required">Password is required.</small>
-                <small *ngIf="passwordField.errors?.pattern">
-                    Password must be at least 8 characters long and include uppercase, lowercase, number, and special
-                    character.
-                </small>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <input type="password" name="confirmPassword" placeholder="Confirm Password" [(ngModel)]="confirmPassword"
-                required #confirmPasswordField="ngModel" />
-            <div *ngIf="confirmPasswordField.invalid && confirmPasswordField.touched">
-                <small *ngIf="confirmPasswordField.errors?.required">Confirm password is required.</small>
-            </div>
-            <div *ngIf="user.password !== confirmPassword && confirmPasswordField.touched">
-                <small>Passwords do not match.</small>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <select name="userRole" [(ngModel)]="user.userRole" required #roleField="ngModel">
-                <option value="" disabled selected>Select Role</option>
-                <option value="Admin">Admin</option>
-                <option value="User">User</option>
-            </select>
-            <div *ngIf="roleField.invalid && roleField.touched">
-                <small>Role is required.</small>
-            </div>
-        </div>
-
-        <div class="button">
-            <button type="submit" class="btn btn-success">Signup</button>
-
-            <p>Already have an account? <a routerLink="/login">Login</a></p>
-
-            <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
-            <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-        </div>
-
-
-    </form>
-</div>
-
-<div *ngIf="formSubmitted">
-    <h2>Verify OTP</h2>
-    <form #otpForm="ngForm" (ngSubmit)="verifyOtp(otpForm)">
-        <div class="form-group">
-            <input type="text" name="submittedOtp" [(ngModel)]="submittedOtp" placeholder="Enter OTP"
-                #otpField="ngModel" required />
-            <div *ngIf="otpField.invalid && otpField.touched">
-                <small *ngIf="otpField.errors?.required">OTP is required.</small>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Verify</button>
-    </form>
-    <button (click)="resendOTP()" class="btn btn-primary">Resend OTP</button>
-
-    <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
-    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-</div>
+    </div>
+</body>

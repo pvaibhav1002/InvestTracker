@@ -1,77 +1,79 @@
-<div class="row">
-    <div class="col-md-4">
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-header">Total Users</div>
-            <div class="card-body">
-                <h5 class="card-title">{{ totalUsers }}</h5>
-            </div>
-        </div>
+<div class="dashboard-container">
+  <div class="download">
+    <button (click)="downloadPDF()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22">
+        <g fill="none" fill-rule="evenodd" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"
+          stroke-width="3">
+          <path d="M1 16v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3M6 11l4 4 4-4M10 1v14"></path>
+        </g>
+      </svg>Download Report</button>
+  </div>
+  <div class="dashboard-summary">
+    <div class="summary-card bg-primary">
+      <div class="summary-header">Total Users</div>
+      <div class="summary-body">
+        <h5>{{ totalUsers }}</h5>
+      </div>
     </div>
-    <div class="col-md-4">
-        <div class="card text-white bg-success mb-3">
-            <div class="card-header">Total Investments</div>
-            <div class="card-body">
-                <h5 class="card-title">{{ totalInvestments }}</h5>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-white bg-info mb-3">
-            <div class="card-header">Total Invested Amount</div>
-            <div class="card-body">
-                <h5 class="card-title">₹{{ totalInvestedAmount | number:'1.2-2' }}</h5>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="dashboard">
-    <div class="card">
-    <h3>Doughnut — Distribution by Type</h3>
-    <div class="card-body">
-    <canvas #typeChart baseChart [data]="TypeData" [labels]="TypeLabels" [chartType]="doughnutChartType"
-    
-                    [colors]="doughnutChartColors">
-    </canvas>
+    <div class="summary-card bg-success">
+      <div class="summary-header">Total Investments</div>
+      <div class="summary-body">
+        <h5>{{ totalInvestments }}</h5>
+      </div>
     </div>
+
+    <div class="summary-card bg-info">
+      <div class="summary-header">Total Invested Amount</div>
+      <div class="summary-body">
+        <h5>₹{{ totalInvestedAmount | number:'1.2-2' }}</h5>
+      </div>
     </div>
-    <div class="card">
-    <h3>Doughnut — Distribution by Sector</h3>
-    <div class="card-body">
-    <canvas  #sectorChart baseChart [data]="SectorData" [labels]="SectorLabels" [chartType]="doughnutChartType"
-    
-                    [colors]="doughnutChartColors">
-    </canvas>
+  </div>
+
+  <div class="dashboard-charts">
+    <div class="chart-card">
+      <h3>Doughnut — Distribution by Type</h3>
+      <div class="chart-body">
+        <canvas #typeChart baseChart [data]="TypeData" [labels]="TypeLabels" [chartType]="doughnutChartType"
+          [colors]="doughnutChartColors"></canvas>
+      </div>
     </div>
+
+    <div class="chart-card">
+      <h3>Doughnut — Distribution by Sector</h3>
+      <div class="chart-body">
+        <canvas #sectorChart baseChart [data]="SectorData" [labels]="SectorLabels" [chartType]="doughnutChartType"
+          [colors]="doughnutChartColors"></canvas>
+      </div>
     </div>
-    <div class="card">
-    <h3>Doughnut — Distribution by Cap Size</h3>
-    <div class="card-body">
-    <canvas  #capSizeChart baseChart [data]="CapSizeData" [labels]="CapSizeLabels" [chartType]="doughnutChartType"
-    
-                    [colors]="doughnutChartColors">
-    </canvas>
+
+    <div class="chart-card">
+      <h3>Doughnut — Distribution by Cap Size</h3>
+      <div class="chart-body">
+        <canvas #capSizeChart baseChart [data]="CapSizeData" [labels]="CapSizeLabels" [chartType]="doughnutChartType"
+          [colors]="doughnutChartColors"></canvas>
+      </div>
     </div>
-    </div>
-    </div>
-    <div class="table-responsive">
-    <table class="table table-bordered table-striped">
-    <thead class="thead-dark">
-    <tr>
-    <th>Username</th>
-    <th>Total Invested (₹)</th>
-    <th>Current Investment (₹)</th>
-    <th>Current Profit (₹)</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let user of userSummaries">
-    <td>{{ user.username }}</td>
-    <td>{{ user.totalInvested | number:'1.2-2' }}</td>
-    <td>{{ user.currentInvestment | number:'1.2-2' }}</td>
-    <td>{{ user.currentProfit | number:'1.2-2' }}</td>
-    </tr>
-    </tbody>
+  </div>
+
+  <div class="user-summary-table">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Total Invested (₹)</th>
+          <th>Current Investment (₹)</th>
+          <th>Current Profit (₹)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userSummaries">
+          <td>{{ user.username }}</td>
+          <td>{{ user.totalInvested | number:'1.2-2' }}</td>
+          <td>{{ user.currentInvestment | number:'1.2-2' }}</td>
+          <td [ngStyle]="{'color': user.currentProfit >= 0 ? '#8bfe96' :  '#ff0000','font-weight': '600'}">{{ user.currentProfit | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
     </table>
-    </div>
-     
+  </div>
+</div>

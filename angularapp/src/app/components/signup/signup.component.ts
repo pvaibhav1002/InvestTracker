@@ -36,6 +36,7 @@ export class SignupComponent implements OnInit {
 
   register(form: NgForm) {
     if (form.invalid) {
+      this.successMessage="";
       this.errorMessage = "All fields are required.";
       return;
     }
@@ -43,10 +44,12 @@ export class SignupComponent implements OnInit {
     const passwordRegex =/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     if (!passwordRegex.test(this.user.password)) {
+      this.successMessage="";
       this.errorMessage ="Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.";
       return;
     }
     if (this.user.password !== this.confirmPassword) {
+      this.successMessage="";
       this.errorMessage = "Passwords do not match.";
       return;
     }
@@ -58,14 +61,17 @@ export class SignupComponent implements OnInit {
         this.authService.otp(this.useremail).subscribe({
           next: (otpData: string) => {
             this.expectedOtp = otpData;
+            console.log(otpData);
           },
           error: () => {
+            this.successMessage="";
             this.errorMessage = "Failed to send OTP.";
 
           }
         });
       },
       error: () => {
+        this.successMessage="";
         this.errorMessage = 'Registration failed. Please try again.';
       }
     });
@@ -75,8 +81,10 @@ export class SignupComponent implements OnInit {
     this.authService.otp(this.useremail).subscribe({
       next: (otpData: string) => {
         this.expectedOtp = otpData;
+        console.log(otpData);
       },
       error: () => {
+        this.successMessage="";
         this.errorMessage = "Failed to send OTP.";
       }
     });
@@ -90,6 +98,7 @@ export class SignupComponent implements OnInit {
         }, 2000);
       });
     } else {
+      this.successMessage="";
       this.errorMessage = "Invalid OTP. Please try again.";
     }
   }
