@@ -31,11 +31,11 @@ export class UserAddFeedbackComponent implements OnInit {
     private emailService: EmailService
   ) {
     this.feedbackForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      name: [authService.getAuthenticatedUsername(), Validators.required],
+      email: [authService.getAuthenticatedUserEmail(), [Validators.required, Validators.email]],
       message: ['', Validators.required],
       category: ['', Validators.required],
-      investmentId: [null]
+      investmentId: [""]
     });
   }
 

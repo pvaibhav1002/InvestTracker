@@ -17,14 +17,16 @@ export class UserViewInvestmentComponent implements OnInit {
   ascQuantity: boolean = true;
   types = ['All', 'Equity', 'Mutual Fund', 'ETF', 'Bond', 'Real Estate'];
   searchText: string = '';
-
+  showQuantityModal: boolean = false;
+  
+  
   showModal: boolean = false;
   selectedInvestment: Investment | null = null;
   buyQuantity: number;
   buyError: string = '';
   buySuccess: string = '';
   constructor(private investmentService: InvestmentService, private userwatchlistservice: UserWatchlistService, private authservice: AuthService) { }
-
+  
   ngOnInit(): void {
     this.getAllInvestments();
   }
@@ -85,11 +87,37 @@ export class UserViewInvestmentComponent implements OnInit {
   }
 
   addToWatchlist(investmentId: number) {
-    this.userwatchlistservice.addToWatchlist(investmentId, this.authservice.getAuthenticatedUserId()).subscribe((data) => {
-      alert('Investment Added to Watchlist!');
+    this.userwatchlistservice.addToWatchlist(investmentId, this.authservice.getAuthenticatedUserId()).subscribe({
+      next: () => {
+        this.buySuccess = 'Investment added to watchlist!';
+        this.buyError = '';
+        setTimeout(() => this.buySuccess = '', 1500);
+      },
+      error: () => {
+        this.buyError = 'Investment already in watchlist.';
+        this.buySuccess = '';
+        setTimeout(() => this.buyError = '', 1500);
+      }
     })
   }
 
+  userController = {
+    "user": {
+      "userId": this.authservice.getAuthenticatedUserId()
+    },
+    "investment": {
+      "investmentId": null
+    },
+    "quantityBought": null,
+    "purchasePrice": null,
+    "purchaseDate": null
+  }
+
+  buyInvestent(investmentId: number) {
+    this.userController.investment.investmentId = investmentId;
+    this.userController.quantityBought = 0; // reset default
+    this.showQuantityModal = true;
+  }
 
 
   filterByNameAndType() {

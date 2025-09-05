@@ -72,6 +72,10 @@ export class AuthService {
   getAuthenticatedUserRole(): string | null {
     return this.getDecodedToken()?.role || null;
   }
+  
+  getAuthenticatedUserEmail(): string | null {
+    return this.getDecodedToken()?.sub || null;
+  }
  
   isTokenExpired(): boolean {
     const exp = this.getDecodedToken()?.exp;

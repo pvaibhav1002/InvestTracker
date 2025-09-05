@@ -1,7 +1,7 @@
-<div class="container">
-  <h2>My Feedback</h2>
+<div class="view-container">
+  <h1>My Feedback</h1>
 
-  <div>
+  <div class="filter">
     <label for="categoryFilter">Filter by Category:</label>
     <select id="categoryFilter" #category (change)="applyCategoryFilter(category.value)">
       <option value="All">All</option>
@@ -9,18 +9,16 @@
         {{ feedback.category }}
       </option>
     </select>
-  </div>
 
-  <div>
-    <label for="searchText">searchByText:</label>
+    <label for="searchText">Search By Text:</label>
     <input type="text" name="searchText" id="searchText" [(ngModel)]="searchText" (input)="searchBasedOnText()">
   </div>
 
-  <table *ngIf="userFeedbacks.length > 0" border="1">
+  <table *ngIf="userFeedbacks.length > 0" class="inquiry-table">
     <thead>
       <tr>
         <th>S.No</th>
-        <th>Feedback Message</th>
+        <th style="width: 50%;">Feedback Message</th>
         <th>Date</th>
         <th>Category</th>
         <th>Investment</th>
@@ -32,7 +30,7 @@
         <td>{{ feedback.feedbackText}}</td>
         <td>{{ feedback.date}}</td>
         <td>{{ feedback.category }}</td>
-        <td>{{feedback.investment?.name}}</td>
+        <td>{{feedback.investment?.name||"N/A"}}</td>
       </tr>
     </tbody>
   </table>

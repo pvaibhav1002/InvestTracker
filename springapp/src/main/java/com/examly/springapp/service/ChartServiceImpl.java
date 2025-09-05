@@ -15,20 +15,20 @@ import com.examly.springapp.model.UserPortfolioDTO;
 import com.examly.springapp.repository.InvestmentRepo;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.repository.UserInvestmentRepo;
- 
+
 @Service
 public class ChartServiceImpl implements ChartService {
     private UserRepo userRepo;
     private InvestmentRepo investmentRepo;
     private UserInvestmentRepo userInvestmentRepo;
- 
+
     @Autowired
     public ChartServiceImpl(UserRepo userRepo, InvestmentRepo investmentRepo, UserInvestmentRepo userInvestmentRepo) {
         this.userRepo = userRepo;
         this.investmentRepo = investmentRepo;
         this.userInvestmentRepo = userInvestmentRepo;
     }
- 
+
     public AdminConsoleDTO getAdminConsoleData() {
         AdminConsoleDTO dto = new AdminConsoleDTO();
         dto.setTotalUsers(userRepo.countByUserRole("User"));
@@ -37,9 +37,9 @@ public class ChartServiceImpl implements ChartService {
         dto.setDistributionByType(getInvestmentDistributionByType());
         dto.setDistributionBySector(getInvestmentDistributionBySector());
         dto.setDistributionByCapSize(getInvestmentDistributionByCapSize());
- 
+
         List<AdminConsoleDTO.UserInvestmentSummary> userSummaries = new ArrayList<>();
-        for (User user : userRepo.findAll()) {
+        for (User user : userRepo.findByUserRole("User")) {
             Double totalInvested = userInvestmentRepo.getTotalInvestedByUser(user.getUserId());
             totalInvested = totalInvested != null ? totalInvested : 0.0;
             Double currentInvestment = userInvestmentRepo.getCurrentInvestmentByUser(user.getUserId());
@@ -57,7 +57,7 @@ public class ChartServiceImpl implements ChartService {
         dto.setUserSummaries(userSummaries);
         return dto;
     }
- 
+
     private Map<String, Long> getInvestmentDistributionByType() {
         Map<String, Long> distribution = new HashMap<>();
         List<Object[]> results = investmentRepo.countInvestmentsByType();
@@ -68,7 +68,7 @@ public class ChartServiceImpl implements ChartService {
         }
         return distribution;
     }
- 
+
     private Map<String, Long> getInvestmentDistributionBySector() {
         Map<String, Long> distribution = new HashMap<>();
         List<Object[]> results = investmentRepo.countInvestmentsBySector();
@@ -79,7 +79,7 @@ public class ChartServiceImpl implements ChartService {
         }
         return distribution;
     }
- 
+
     private Map<String, Long> getInvestmentDistributionByCapSize() {
         Map<String, Long> distribution = new HashMap<>();
         List<Object[]> results = investmentRepo.countInvestmentsByCapSize();
