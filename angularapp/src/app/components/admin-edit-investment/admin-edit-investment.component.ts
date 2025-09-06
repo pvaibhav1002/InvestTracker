@@ -82,7 +82,6 @@ export class AdminEditInvestmentComponent implements OnInit {
     } else {
       this.errormessage = "All Data Required. Investment addition Failed!"
       this.investmentForm.markAllAsTouched();
-      return;
     }
 
   }

@@ -41,7 +41,7 @@ export class UserPortfolioComponent implements OnInit {
 
   doughnutChartType: ChartType = 'doughnut';
 
-  constructor(private chartService: ChartService, private authService: AuthService,private pdfExport: PdfExportService) {}
+  constructor(private readonly chartService: ChartService, private readonly authService: AuthService,private readonly pdfExport: PdfExportService) {}
 
   ngOnInit(): void {
     this.chartService.getUserPortfolioData(this.authService.getAuthenticatedUserId()).subscribe(data => {

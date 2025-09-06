@@ -1,7 +1,3 @@
-
-
-
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -15,7 +11,7 @@ export class ErrorComponent implements OnInit {
   countdown: number = 5;
   userRole: string = '';
 
-  constructor(private router: Router) { }
+  constructor(private readonly router: Router) { }
 
   ngOnInit(): void {
     this.userRole = localStorage.getItem('userRole') || '';
@@ -31,7 +27,7 @@ export class ErrorComponent implements OnInit {
   }
 
   redirectUser(): void {
-  if(this.userRole === 'Admin') {
+    if (this.userRole === 'Admin') {
       this.router.navigate(['/admin-console']);
     }
     else if (this.userRole === 'User') {

@@ -10,7 +10,7 @@ import { APP_URL } from 'src/global';
 export class FeedbackService {
   
    
-  constructor(private httptClient:HttpClient) { }
+  constructor(private readonly httptClient:HttpClient) { }
  
   sendFeedback(feedback:Feedback):Observable<Feedback>{
     return this.httptClient.post<Feedback>(`${APP_URL}/feedback`,feedback);

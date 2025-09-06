@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
 import { AuthService } from 'src/app/services/auth.service';
  
@@ -21,7 +20,7 @@ export class UserViewInquiryComponent implements OnInit {
   originalInvests: InvestmentInquiry[] = [];
  
  
-  constructor(private investInquiryService: InvestmentInquiryService, private authService: AuthService) { }
+  constructor(private readonly investInquiryService: InvestmentInquiryService, private readonly authService: AuthService) { }
  
   ngOnInit(): void {
     this.userId = this.authService.getAuthenticatedUserId();

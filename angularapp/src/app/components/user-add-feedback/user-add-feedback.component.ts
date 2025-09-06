@@ -23,12 +23,12 @@ export class UserAddFeedbackComponent implements OnInit {
   responseMessage: string = '';
 
   constructor(
-    private fb: FormBuilder,
-    private fs: FeedbackService,
-    private router: Router,
-    private investmentService: InvestmentService,
-    private authService: AuthService,
-    private emailService: EmailService
+    private readonly fb: FormBuilder,
+    private readonly fs: FeedbackService,
+    private readonly router: Router,
+    private readonly investmentService: InvestmentService,
+    private readonly authService: AuthService,
+    private readonly emailService: EmailService
   ) {
     this.feedbackForm = this.fb.group({
       name: [authService.getAuthenticatedUsername(), Validators.required],

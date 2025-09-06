@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { InvestmentInquiry } from 'src/app/models/investment-inquiry.model';
 
-import { EmailService } from 'src/app/services/email.service';
 import { InvestmentInquiryService } from 'src/app/services/investment-inquiry.service';
 
 
@@ -27,7 +26,7 @@ export class AdminViewInquiryComponent implements OnInit {
   originalInquiries: InvestmentInquiry[] = [];
 
 
-  constructor(private inquiryService: InvestmentInquiryService,private emailservice:EmailService) { }
+  constructor(private readonly inquiryService: InvestmentInquiryService) { }
  
 
   ngOnInit(): void {
@@ -99,20 +98,6 @@ export class AdminViewInquiryComponent implements OnInit {
       this.inquiryService.updateInquiry(inquiry.inquiryId, inquiry).subscribe({
 
         next: () => {
-
-          // this.emailservice.sendInquiryResponse(
-
-          //   inquiry.user.email,
-          //   inquiry.user.username,
-          //   this.responseText
-
-          // ).subscribe({
-
-          //   next: () => console.log('Email sent successfully'),
-          //   error: (err) => console.error('Error sending email:', err)
-
-          // });
-
           this.responseSubmitted = true;
           this.selectedInquiry=null
           this.responseText = '';
@@ -137,7 +122,8 @@ export class AdminViewInquiryComponent implements OnInit {
 
   }
   sortByDate() {
-    this.inquiries = this.originalInquiries.sort((inquiry1, inquiry2) => inquiry1.inquiryDate.localeCompare(inquiry2.inquiryDate));
+    const sortedinquries = this.originalInquiries.sort((inquiry1, inquiry2) => inquiry1.inquiryDate.localeCompare(inquiry2.inquiryDate));
+    this.inquiries=sortedinquries;
   }
   applyFilters(): void {
     this.inquiries = this.originalInquiries.filter(inquiry => {

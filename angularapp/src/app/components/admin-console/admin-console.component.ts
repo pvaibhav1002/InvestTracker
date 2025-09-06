@@ -46,7 +46,7 @@ export class AdminConsoleComponent implements OnInit {
 
   constructor(
     private readonly chartDto: ChartService,
-    private pdfExport: PdfExportService
+    private readonly pdfExport: PdfExportService
   ) {}
 
   ngOnInit() {

@@ -2,21 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EmailRequest } from '../models/email.model';
 import { Observable } from 'rxjs';
+import { APP_URL } from 'src/global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmailService {
-  private baseUrl = 'https://8080-ffcccaeabffbbdcbfebfaedaabcebeddbadd.premiumproject.examly.io/api/email';
 
-  constructor(private http: HttpClient) {}
-
-  // sendEmail(emailData: EmailRequest): Observable<string> {
-  //   return this.http.post<string>(`${this.baseUrl}/send`, emailData);
-  // }
+  constructor(private readonly http: HttpClient) {}
 
   sendEmail(emailData: EmailRequest): Observable<string> {
-    return this.http.post<string> (`${this.baseUrl}/send`, emailData, { responseType: 'text' as 'json' });
+    return this.http.post<string> (`${APP_URL}/send`, emailData, { responseType: 'text' as 'json' });
   }
   
   sendFeedbackConfirmation(to: string, name: string): Observable<string> {

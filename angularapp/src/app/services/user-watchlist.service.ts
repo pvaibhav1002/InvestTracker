@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserWatchlistService { 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private readonly httpClient: HttpClient) { }
  
   getAllInvestments(): Observable<Investment[]> {
     return this.httpClient.get<Investment[]>(`${APP_URL}/investments`);
