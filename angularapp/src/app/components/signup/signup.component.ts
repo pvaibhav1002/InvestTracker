@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
     accountStatus: false
   };
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private readonly authService: AuthService, private readonly router: Router) { }
 
   ngOnInit(): void {
     this.formSubmitted = false;

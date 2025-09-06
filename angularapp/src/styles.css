@@ -26,7 +26,6 @@ body {
 }
 
 
-/* Utilities */
 .gradient-text {
   background: linear-gradient(to right, #00bce6, #2962ff, #d500f9);
   -webkit-background-clip: text;
@@ -91,7 +90,6 @@ header {
   background-color: rgba(14, 18, 24, 0.436);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid #2a3040;
-  /* max-height: 100px; */
 }
 
 header .container {
@@ -157,7 +155,6 @@ nav a:hover {
   margin: 2rem 0;
 }
 
-/* Summary Cards */
 .summary-card {
   padding: 1.5rem;
   border-radius: 1rem;
@@ -176,7 +173,6 @@ nav a:hover {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 
-/* Gradient Backgrounds */
 .bg-primary {
   background: linear-gradient(135deg, #00bce6, #2962ff);
 }
@@ -202,7 +198,6 @@ nav a:hover {
   color: white;
 }
 
-/* Charts Section */
 .dashboard-charts {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -234,7 +229,6 @@ nav a:hover {
   color: transparent;
 }
 
-/* Table */
 .user-summary-table {
   margin-top: 2rem;
   overflow-x: auto;
@@ -293,7 +287,6 @@ button:hover {
 }
 
 
-/* Responsive */
 @media (max-width: 1024px) {
   .dashboard-summary,
   .dashboard-charts {

@@ -12,7 +12,7 @@ export class UsernavComponent implements OnInit {
   username: string = '';
   userRole: string = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private readonly authService: AuthService, private readonly router: Router) { }
 
   ngOnInit(): void {
 

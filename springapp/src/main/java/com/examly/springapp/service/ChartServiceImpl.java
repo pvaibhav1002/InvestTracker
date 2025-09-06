@@ -184,11 +184,11 @@ public class ChartServiceImpl implements ChartService {
         Investment investment = investmentRepo.findById(request.getInvestment().getInvestmentId())
                 .orElseThrow(() -> new RuntimeException("Investment not found"));
         if (request.getQuantityBought() <= 0) {
-            throw new RuntimeException("Quantity must be greater than zero");
+            throw new IllegalStateException("Quantity must be greater than zero");
         }
  
         if (investment.getQuantity() < request.getQuantityBought()) {
-            throw new RuntimeException("Not enough quantity available");
+            throw new IllegalStateException("Not enough quantity available");
         }
  
         investment.setQuantity(investment.getQuantity() - request.getQuantityBought());

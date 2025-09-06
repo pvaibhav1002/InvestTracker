@@ -8,7 +8,7 @@ import { APP_URL } from 'src/global';
 })
 
 export class ChartService {
-  constructor(private httptClient:HttpClient) { }
+  constructor(private readonly httptClient:HttpClient) { }
 
   getAdminConsoleData():Observable<any>{
     return this.httptClient.get<any>(`${APP_URL}/admin/console`);

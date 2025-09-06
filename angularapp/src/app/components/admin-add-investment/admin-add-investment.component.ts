@@ -39,6 +39,7 @@ export class AdminAddInvestmentComponent {
     if (!form.valid) {
       this.errormessage = "All Data Required. Investment addition Failed!"
       form.markAllAsTouched();
+      setTimeout(()=>{this.errormessage = ""},2000)
       return;
     }
     this.investmentData = {

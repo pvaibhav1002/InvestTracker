@@ -18,17 +18,16 @@ export class UserAddInquiryComponent implements OnInit {
   newInvest: InvestmentInquiry;
   responseMessage: string = '';
 
-  // Add these fields to capture user info for email
-  name: string = '';
-  email: string = '';
+  name: string = this.authService.getAuthenticatedUsername();
+  email: string = this.authService.getAuthenticatedUserEmail();
 
   constructor(
-    private emailService: EmailService,
-    private investmentInquiryService: InvestmentInquiryService,
-    private authService: AuthService,
-    private investmentService: InvestmentService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private readonly emailService: EmailService,
+    private readonly investmentInquiryService: InvestmentInquiryService,
+    private readonly authService: AuthService,
+    private readonly investmentService: InvestmentService,
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {

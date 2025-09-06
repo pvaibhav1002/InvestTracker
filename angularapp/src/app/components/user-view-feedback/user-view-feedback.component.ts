@@ -12,7 +12,7 @@ export class UserViewFeedbackComponent implements OnInit {
   filteredFeedbacks: any[] = [];
   searchText: string = '';
 
-  constructor(private feedbackService: FeedbackService, private authService: AuthService) { }
+  constructor(private readonly feedbackService: FeedbackService, private readonly authService: AuthService) { }
 
   ngOnInit(): void {
     this.getUserFeedbacks();
@@ -44,9 +44,12 @@ export class UserViewFeedbackComponent implements OnInit {
   }
 
   searchBasedOnText() {
-    this.filteredFeedbacks = this.userFeedbacks.filter((feed) => {
-      let a = feed.feedbackText.toLowerCase().includes(this.searchText.toLowerCase()) || feed.category.toLowerCase().includes(this.searchText.toLowerCase()) ||
-        feed.investment?.name.toLowerCase().includes(this.searchText.toLowerCase());
+    const searchLower = this.searchText.toLowerCase();
+    this.filteredFeedbacks = this.userFeedbacks.filter(feed => {
+      let a = feed.feedbackText.toLowerCase().includes(searchLower) ||
+        feed.category.toLowerCase().includes(searchLower) ||
+        (feed.investment?.name ?? '').toLowerCase().includes(searchLower) ||
+        (feed.user?.username ?? '').toLowerCase().includes(searchLower);
       return a;
     });
   }

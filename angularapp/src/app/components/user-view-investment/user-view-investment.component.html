@@ -24,7 +24,7 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Description</th>
+          <th style="width: 40%;">Description</th>
           <th>Type</th>
           <th>Price (₹)</th>
           <th>Quantity</th>
@@ -52,7 +52,7 @@
   
   
   <div class="modal" *ngIf="showModal">
-      <div class="modal-overlay" (click)="closeModal()"></div>
+      <div class="modal-overlay" onkeypress="" (click)="closeModal()"></div>
       <div class="modal-content">
           <h3>Buy Investment</h3>
           <form (ngSubmit)="confirmBuy()" #buyForm="ngForm">

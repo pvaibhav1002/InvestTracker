@@ -20,7 +20,7 @@ export class AdminViewInvestmentComponent implements OnInit {
   ascPrice: boolean = true;
   ascDate: boolean = true;
 
-  constructor(private investmentService: InvestmentService) { }
+  constructor(private readonly investmentService: InvestmentService) { }
 
   ngOnInit(): void {
     this.getAllInvestments();
