@@ -1,5 +1,4 @@
 <body>
-
     <div class="app-container">
         <div *ngIf="!formSubmitted" class="form-container" id="registrationForm">
             <h2>Registration Form</h2>
@@ -77,7 +76,7 @@
             </form>
         </div>
 
-        <div *ngIf="formSubmitted" class="form-container" id="otpVerification">
+        <div *ngIf="formSubmitted" id="otpVerification">
             <div class="form-container">
                 <h2>Verify OTP</h2>
                 <form #otpForm="ngForm" (ngSubmit)="verifyOtp(otpForm)">

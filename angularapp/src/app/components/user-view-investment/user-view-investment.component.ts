@@ -93,7 +93,7 @@ export class UserViewInvestmentComponent implements OnInit {
         this.buyError = '';
         setTimeout(() => this.buySuccess = '', 1500);
       },
-      error: () => {
+      error: (err) => {
         this.buyError = 'Investment already in watchlist.';
         this.buySuccess = '';
         setTimeout(() => this.buyError = '', 1500);

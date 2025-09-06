@@ -3,19 +3,26 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #ffffff;
-  background-color:  #121212;
-  /* min-height: 100vh; */
+  background-color: #121212;
 }
+
 .app-container {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  /* padding: 20px; */
+
 }
+
 .form-container {
   background-color: #bebebe2f;
   backdrop-filter: blur(5px);
@@ -27,16 +34,19 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.5s ease-in-out;
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 h2 {
   text-align: center;
   margin-bottom: 30px;
@@ -44,11 +54,14 @@ h2 {
   font-size: 28px;
   font-weight: 600;
 }
+
 .form-group {
   margin-bottom: 20px;
   position: relative;
 }
-input, select {
+
+input,
+select {
   width: 100%;
   padding: 15px;
   border: 1px solid #333333;
@@ -58,14 +71,19 @@ input, select {
   font-size: 16px;
   transition: all 0.3s;
 }
-input:focus, select:focus {
+
+input:focus,
+select:focus {
   outline: none;
   border-color: #00bce6;
   box-shadow: 0 0 0 2px rgba(0, 188, 230, 0.2);
 }
-input.error, select.error {
+
+input.error,
+select.error {
   border-color: #ff5252;
 }
+
 .error-text {
   display: block;
   color: #ff5252;
@@ -73,10 +91,12 @@ input.error, select.error {
   margin-top: 5px;
   animation: shake 0.5s;
 }
+
 .button-container {
   margin-top: 30px;
   text-align: center;
 }
+
 .btn {
   background: linear-gradient(75deg, #00bce6, #2962ff 50.31%, #d500f9);
   color: white;
@@ -94,55 +114,67 @@ input.error, select.error {
   text-align: center;
   display: inline-block;
 }
+
 .btn:hover {
   background: linear-gradient(45deg, #2962ff, #d500f9);
   transform: translateY(-2px);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
+
 .btn:active {
   transform: translateY(0);
 }
+
 .btn-secondary {
   background: transparent;
   border: 1px solid #00bce6;
   color: #00bce6;
   margin-top: 10px;
 }
+
 .btn-secondary:hover {
   background: rgba(0, 188, 230, 0.1);
 }
+
 .login-link {
   margin-top: 20px;
   font-size: 14px;
   color: #aaa;
 }
+
 .login-link a {
   color: #00bce6;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s;
 }
+
 .login-link a:hover {
   color: #d500f9;
   text-decoration: underline;
 }
-.success-message, .error-message {
+
+.success-message,
+.error-message {
   margin-top: 20px;
   padding: 10px;
   border-radius: 4px;
   font-size: 14px;
   animation: fadeIn 0.5s;
 }
+
 .success-message {
   background-color: rgba(76, 175, 80, 0.1);
   color: #4caf50;
   border-left: 3px solid #4caf50;
 }
+
 .error-message {
   background-color: rgba(255, 82, 82, 0.1);
   color: #ff5252;
   border-left: 3px solid #ff5252;
 }
+
 .otp-container {
   display: flex;
   justify-content: center;

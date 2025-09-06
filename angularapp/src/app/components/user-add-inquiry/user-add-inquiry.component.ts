@@ -19,8 +19,8 @@ export class UserAddInquiryComponent implements OnInit {
   responseMessage: string = '';
 
   // Add these fields to capture user info for email
-  name: string = '';
-  email: string = '';
+  name: string = this.authService.getAuthenticatedUsername();
+  email: string = this.authService.getAuthenticatedUserEmail();
 
   constructor(
     private emailService: EmailService,

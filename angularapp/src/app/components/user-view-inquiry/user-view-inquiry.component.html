@@ -5,7 +5,7 @@
         <label for="searchByText">Search By Text:</label>
         <input [(ngModel)]="searchText" type="text" placeholder="Search..." (input)="filterText()">
 
-        <label >Risk Tolerance</label>
+        <label for="" >Risk Tolerance</label>
         <select [(ngModel)]="filterTolerance" class="form-select" (change)="applyFilters()">
             <option value="">All</option>
             <option value="High">High</option>
@@ -13,11 +13,11 @@
             <option value="Low">Low</option>
         </select>
         
-        <label >Status</label>
+        <label for="" >Status</label>
         <select [(ngModel)]="filterStatus" class="form-select" (change)="applyFilters()">
             <option value="">All </option>
             <option value="Pending">Pending</option>
-            <option value="Resolved">Resolved</option>
+            <option value="Responded">Responded</option>
         </select>
     </div>
 

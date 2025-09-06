@@ -8,7 +8,7 @@ body {
   color: white;
   line-height: 1.6;
   background-color: #1a202c;
-  height: 100vh;
+  height: 100%;
 }
 
 .add-container {
@@ -93,7 +93,6 @@ input:disabled{
   cursor: pointer;
   padding: 10px 20px;
   font-weight: 500;
-  cursor: pointer;
   transition: all 0.2s ease;
   /* width: 45%; */
 }

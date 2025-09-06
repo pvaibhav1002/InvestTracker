@@ -94,7 +94,7 @@ export class AdminViewInquiryComponent implements OnInit {
 
     if (inquiry) {
       inquiry.adminResponse = this.responseText;
-      inquiry.status = 'Resolved';
+      inquiry.status = 'Responded';
       inquiry.responseDate = new Date().toISOString();
       this.inquiryService.updateInquiry(inquiry.inquiryId, inquiry).subscribe({
 
