@@ -28,12 +28,18 @@ export class AdminConsoleComponent implements OnInit {
   doughnutChartColors: Array<any> = [
     {
       backgroundColor: [
-        '#00bce6',
-        '#2962ff',
         '#d500f9',
-        '#4dd0e1',
         '#7c4dff',
-        '#1a237e'
+        '#00bce6',
+        '#328e9a',
+        '#304ffe',
+        '#1f2ba9',
+        '#001756',
+        '#6200ea',
+        '#8e24aa',
+        '#b388ff',
+        '#31009c',
+        '#798dff'
       ],
       borderColor: '#0e1218',
       borderWidth: 2,
@@ -47,7 +53,7 @@ export class AdminConsoleComponent implements OnInit {
   constructor(
     private readonly chartDto: ChartService,
     private readonly pdfExport: PdfExportService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.chartDto.getAdminConsoleData().subscribe(data => {
@@ -70,13 +76,13 @@ export class AdminConsoleComponent implements OnInit {
   }
 
   downloadPDF() {
-      const adminConsoleData = {
-        totalUsers: this.totalUsers,
-        totalInvestments: this.totalInvestments,
-        totalInvestedAmount: this.totalInvestedAmount,
-        userSummaries: this.userSummaries
-      };
+    const adminConsoleData = {
+      totalUsers: this.totalUsers,
+      totalInvestments: this.totalInvestments,
+      totalInvestedAmount: this.totalInvestedAmount,
+      userSummaries: this.userSummaries
+    };
 
-      this.pdfExport.exportAdminConsole(adminConsoleData);
+    this.pdfExport.exportAdminConsole(adminConsoleData);
   }
 }

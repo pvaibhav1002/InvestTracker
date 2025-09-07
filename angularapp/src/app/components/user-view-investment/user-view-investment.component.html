@@ -1,68 +1,73 @@
 <div class="view-container">
-    <h1>Explore Investments</h1>
-  
-    <div *ngIf="buySuccess" class="success-message">
-      {{ buySuccess }}
-    </div>
-  
-    <div class="filter">
-      <input placeholder="Search in Name and Type..."
-             type="text"
-             [(ngModel)]="searchText"
-             (input)="filterByNameAndType()">
-  
-      <label for="filterByType">Filter by Type:</label>
-      <select #type (change)="filterByType(type.value)">
-        <option *ngFor="let type of types" [value]="type">{{ type }}</option>
-      </select>
-  
-      <button class="action-btn transparent" (click)="sortByPrice()">Sort By Price</button>
-      <button class="action-btn transparent" (click)="sortByQuantity()">Sort By Quantity</button>
-    </div>
-  
-    <table class="investment-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th style="width: 40%;">Description</th>
-          <th>Type</th>
-          <th>Price (₹)</th>
-          <th>Quantity</th>
-          <th>Actions</th>
+  <h1>Explore Investments</h1>
+
+  <div *ngIf="successMessage" class="success-hover">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="error-hover">
+    {{ errorMessage }}
+  </div>
+
+  <div class="filter">
+    <input placeholder="Search in Name and Type..." type="text" [(ngModel)]="searchText"
+      (input)="filterByNameAndType()">
+
+    <label for="filterByType">Filter by Type:</label>
+    <select #type (change)="filterByType(type.value)">
+      <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+    </select>
+
+    <button class="action-btn transparent" (click)="sortByPrice()">Sort By Price</button>
+    <button class="action-btn transparent" (click)="sortByQuantity()">Sort By Quantity</button>
+  </div>
+
+  <table class="investment-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th style="width: 40%;">Description</th>
+        <th>Type</th>
+        <th>Price (₹)</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let investment of investments">
+        <tr *ngIf="investment.status === 'Active'">
+          <td>{{ investment.name }}</td>
+          <td>{{ investment.description }}</td>
+          <td>{{ investment.type }}</td>
+          <td>{{ investment.price | number: '.2-5' }}</td>
+          <td>{{ investment.quantity }}</td>
+          <td>
+            <button class="action-btn primary" (click)="addToWatchlist(investment.investmentId)">Add to
+              Watchlist</button>
+            <button class="action-btn secondary" [routerLink]="['/user-add-inquiry', investment.investmentId]">Inquire
+              About Stock</button> <br>
+            <button class="action-btn tertiary" (click)="openBuyModal(investment)">Add to Portfolio</button>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-          <ng-container *ngFor="let investment of investments">
-              <tr  *ngIf="investment.status === 'Active'">
-                <td>{{ investment.name }}</td>
-                <td>{{ investment.description }}</td>
-                <td>{{ investment.type }}</td>
-                <td>{{ investment.price | number: '.2-5' }}</td>
-                <td>{{ investment.quantity }}</td>
-                <td>
-                  <button class="action-btn primary" (click)="addToWatchlist(investment.investmentId)">Add to Watchlist</button>
-                  <button class="action-btn secondary" [routerLink]="['/user-add-inquiry', investment.investmentId]">Inquire About Stock</button> <br>
-                  <button class="action-btn tertiary" (click)="openBuyModal(investment)">Add to Portfolio</button>
-                </td>
-              </tr>
-          </ng-container>
-      </tbody>
-    </table>
-  </div>
-  
-  
-  <div class="modal" *ngIf="showModal">
-      <div class="modal-overlay" onkeypress="" (click)="closeModal()"></div>
-      <div class="modal-content">
-          <h3>Buy Investment</h3>
-          <form (ngSubmit)="confirmBuy()" #buyForm="ngForm">
-              <input class="modal-textarea" type="number" id="quantity" name="quantity" [(ngModel)]="buyQuantity" required min="1" placeholder="Enter Quantity"/>
-              <div *ngIf="buyError" class="error">{{ buyError }}</div>
-              <div *ngIf="buySuccess" class="success">{{ buySuccess }}</div>
-              <div class="modal-buttons">
-                  <button class="action-btn tertiary" type="submit" [disabled]="!buyForm.form.valid">Confirm Buy</button>
-                  <button class="action-btn secondary" type="button" (click)="closeModal()">Cancel</button>
-              </div>
-          </form>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="modal" *ngIf="showModal">
+  <div class="modal-overlay" onkeypress="" (click)="closeModal()"></div>
+  <div class="modal-content">
+    <h3>Buy Investment</h3>
+    <form (ngSubmit)="confirmBuy()" #buyForm="ngForm">
+      <input class="modal-textarea" type="number" id="quantity" name="quantity" #quantityInput="ngModel" [(ngModel)]="buyQuantity" required
+      placeholder="Enter Quantity" />
+      <div class="error" *ngIf="quantityInput.invalid && (quantityInput.touched||quantityInput.dirty)">
+        <small *ngIf="quantityInput.errors?.required">Quantity is required.</small>
       </div>
+      <div class="modal-buttons">
+        <button class="action-btn tertiary" type="submit" [disabled]="!buyForm.form.valid">Confirm Buy</button>
+        <button class="action-btn secondary" type="button" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
   </div>
+</div>

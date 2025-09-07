@@ -31,7 +31,7 @@ export class UserWatchlistComponent implements OnInit {
 
   deleteWatchlist(watchlistid: number) {
     this.userwatchlistService.deleteFromWatchlist(watchlistid).subscribe(() => {
-      this.successMessage = "Deleted Successfully"
+      this.successMessage = "Successfully removed from watchlist"
       this.originalWatchlist = this.originalWatchlist.filter(watch => watch.id != watchlistid);
       this.watchlists = this.originalWatchlist;
     })
@@ -76,4 +76,4 @@ export class UserWatchlistComponent implements OnInit {
     this.ascPrice = !this.ascPrice;
   }
 
-}
+} 

@@ -136,6 +136,9 @@ export class AdminViewInvestmentComponent implements OnInit {
 
     this.investmentService.deleteInvestment(investmentId).subscribe((data) => {
       this.successMessage = 'Investment deleted successfully!';
+      setTimeout(() => {
+        this.successMessage = '';
+      }, 5000);
       this.getAllInvestments()
     });
   }

@@ -9,30 +9,36 @@
   </div>
   <div class="dashboard-summary">
     <div class="summary-card bg-primary">
-      <div class="summary-header">Total Users</div>
-      <div class="summary-body">
-        <h5>{{ totalUsers }}</h5>
+      <div class="overlay-admin">
+        <div class="summary-header">Total Users</div>
+        <div class="summary-body">
+          <h5>{{ totalUsers }}</h5>
+        </div>
       </div>
     </div>
 
     <div class="summary-card bg-success">
-      <div class="summary-header">Total Investments</div>
-      <div class="summary-body">
-        <h5>{{ totalInvestments }}</h5>
+      <div class="overlay-admin">
+        <div class="summary-header">Total Investments</div>
+        <div class="summary-body">
+          <h5>{{ totalInvestments }}</h5>
+        </div>
       </div>
     </div>
 
     <div class="summary-card bg-info">
-      <div class="summary-header">Total Invested Amount</div>
-      <div class="summary-body">
-        <h5>₹{{ totalInvestedAmount | number:'1.2-2' }}</h5>
+      <div class="overlay-admin">
+        <div class="summary-header">Total Invested Amount</div>
+        <div class="summary-body">
+          <h5>₹{{ totalInvestedAmount | number:'1.2-2' }}</h5>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="dashboard-charts">
     <div class="chart-card">
-      <h3>Doughnut — Distribution by Type</h3>
+      <h3>Distribution by Type</h3>
       <div class="chart-body">
         <canvas #typeChart baseChart [data]="TypeData" [labels]="TypeLabels" [chartType]="doughnutChartType"
           [colors]="doughnutChartColors"></canvas>
@@ -40,7 +46,7 @@
     </div>
 
     <div class="chart-card">
-      <h3>Doughnut — Distribution by Sector</h3>
+      <h3>Distribution by Sector</h3>
       <div class="chart-body">
         <canvas #sectorChart baseChart [data]="SectorData" [labels]="SectorLabels" [chartType]="doughnutChartType"
           [colors]="doughnutChartColors"></canvas>
@@ -48,7 +54,7 @@
     </div>
 
     <div class="chart-card">
-      <h3>Doughnut — Distribution by Cap Size</h3>
+      <h3>Distribution by Cap Size</h3>
       <div class="chart-body">
         <canvas #capSizeChart baseChart [data]="CapSizeData" [labels]="CapSizeLabels" [chartType]="doughnutChartType"
           [colors]="doughnutChartColors"></canvas>
@@ -71,7 +77,8 @@
           <td>{{ user.username }}</td>
           <td>{{ user.totalInvested | number:'1.2-2' }}</td>
           <td>{{ user.currentInvestment | number:'1.2-2' }}</td>
-          <td [ngStyle]="{'color': user.currentProfit >= 0 ? '#8bfe96' :  '#ff0000','font-weight': '600'}">{{ user.currentProfit | number:'1.2-2' }}</td>
+          <td [ngStyle]="{'color': user.currentProfit >= 0 ? '#8bfe96' :  '#ff0000','font-weight': '600'}">{{
+            user.currentProfit | number:'1.2-2' }}</td>
         </tr>
       </tbody>
     </table>

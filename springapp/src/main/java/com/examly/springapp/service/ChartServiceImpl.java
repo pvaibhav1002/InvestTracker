@@ -1,26 +1,20 @@
 package com.examly.springapp.service;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
+import com.examly.springapp.model.*;
+import com.examly.springapp.repository.InvestmentRepo;
+import com.examly.springapp.repository.UserInvestmentRepo;
+import com.examly.springapp.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.examly.springapp.model.AdminConsoleDTO;
-import com.examly.springapp.model.Investment;
-import com.examly.springapp.model.User;
-import com.examly.springapp.model.UserInvestment;
-import com.examly.springapp.model.UserPortfolioDTO;
-import com.examly.springapp.repository.InvestmentRepo;
-import com.examly.springapp.repository.UserRepo;
-import com.examly.springapp.repository.UserInvestmentRepo;
+
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class ChartServiceImpl implements ChartService {
-    private UserRepo userRepo;
-    private InvestmentRepo investmentRepo;
-    private UserInvestmentRepo userInvestmentRepo;
+    private final UserRepo userRepo;
+    private final InvestmentRepo investmentRepo;
+    private final UserInvestmentRepo userInvestmentRepo;
 
     @Autowired
     public ChartServiceImpl(UserRepo userRepo, InvestmentRepo investmentRepo, UserInvestmentRepo userInvestmentRepo) {
@@ -45,13 +39,7 @@ public class ChartServiceImpl implements ChartService {
             Double currentInvestment = userInvestmentRepo.getCurrentInvestmentByUser(user.getUserId());
             currentInvestment = currentInvestment != null ? currentInvestment : 0.0;
             double currentProfit = currentInvestment - totalInvested;
-            AdminConsoleDTO.UserInvestmentSummary summary = new AdminConsoleDTO.UserInvestmentSummary(
-                    user.getUserId(),
-                    user.getUsername(),
-                    user.isAccountStatus(),
-                    totalInvested,
-                    currentInvestment,
-                    currentProfit);
+            AdminConsoleDTO.UserInvestmentSummary summary = new AdminConsoleDTO.UserInvestmentSummary(user.getUserId(), user.getUsername(), user.isAccountStatus(), totalInvested, currentInvestment, currentProfit);
             userSummaries.add(summary);
         }
         dto.setUserSummaries(userSummaries);
@@ -90,7 +78,7 @@ public class ChartServiceImpl implements ChartService {
         }
         return distribution;
     }
- 
+
     public UserPortfolioDTO getUserPortfolioData(Long userId) {
         Double totalInvested = userInvestmentRepo.getTotalInvestedByUser(userId);
         Double currentValue = userInvestmentRepo.getCurrentInvestmentByUser(userId);
@@ -101,39 +89,22 @@ public class ChartServiceImpl implements ChartService {
         Map<String, Long> distributionByType = getInvestmentDistributionByTypeForUser(userId);
         Map<String, Long> distributionBySector = getInvestmentDistributionBySectorForUser(userId);
         Map<String, Long> distributionByCapSize = getInvestmentDistributionByCapSizeForUser(userId);
- 
+
         List<UserInvestment> userInvestments = userInvestmentRepo.findByUserUserId(userId);
-        List<UserPortfolioDTO.InvestmentSummary> investmentSummaries = userInvestments.stream()
-                .map(ui -> {
-                    Investment inv = ui.getInvestment();
-                    double investedAmount = ui.getPurchasePrice() * ui.getQuantityBought();
-                    double currentAmount = inv.getPrice() * ui.getQuantityBought();
-                    double profitOrLoss = currentAmount - investedAmount;
- 
-                    return new UserPortfolioDTO.InvestmentSummary(
-                            inv.getInvestmentId(),
-                            inv.getName(),
-                            inv.getType(),
-                            inv.getSector(), // ✅ add sector
-                            inv.getCapSize(), // ✅ add capSize
-                            ui.getQuantityBought(),
-                            ui.getPurchasePrice(),
-                            inv.getPrice(),
-                            profitOrLoss);
-                })
-                .toList();
- 
-        return new UserPortfolioDTO(
-                totalInvested,
-                currentValue,
-                profitOrLossAmount,
-                profitOrLossLabel,
-                distributionByType,
-                distributionBySector,
-                distributionByCapSize,
-                investmentSummaries);
+        List<UserPortfolioDTO.InvestmentSummary> investmentSummaries = userInvestments.stream().map(ui -> {
+            Investment inv = ui.getInvestment();
+            double investedAmount = ui.getPurchasePrice() * ui.getQuantityBought();
+            double currentAmount = inv.getPrice() * ui.getQuantityBought();
+            double profitOrLoss = currentAmount - investedAmount;
+
+            return new UserPortfolioDTO.InvestmentSummary(inv.getInvestmentId(), inv.getName(), inv.getType(), inv.getSector(), // ✅ add sector
+                    inv.getCapSize(), // ✅ add capSize
+                    ui.getQuantityBought(), ui.getPurchasePrice(), inv.getPrice(), profitOrLoss);
+        }).toList();
+
+        return new UserPortfolioDTO(totalInvested, currentValue, profitOrLossAmount, profitOrLossLabel, distributionByType, distributionBySector, distributionByCapSize, investmentSummaries);
     }
- 
+
     private String getProfitOrLossLabel(Double profitOrLossAmount) {
         if (profitOrLossAmount > 0) {
             return "Profit";
@@ -143,7 +114,7 @@ public class ChartServiceImpl implements ChartService {
             return "No Change";
         }
     }
- 
+
     public Map<String, Long> getInvestmentDistributionByTypeForUser(Long userId) {
         Map<String, Long> distribution = new HashMap<>();
         List<Object[]> results = userInvestmentRepo.countInvestmentsByTypeForUser(userId);
@@ -154,7 +125,7 @@ public class ChartServiceImpl implements ChartService {
         }
         return distribution;
     }
- 
+
     public Map<String, Long> getInvestmentDistributionBySectorForUser(Long userId) {
         Map<String, Long> distribution = new HashMap<>();
         List<Object[]> results = userInvestmentRepo.countInvestmentsBySectorForUser(userId);
@@ -165,7 +136,7 @@ public class ChartServiceImpl implements ChartService {
         }
         return distribution;
     }
- 
+
     public Map<String, Long> getInvestmentDistributionByCapSizeForUser(Long userId) {
         Map<String, Long> distribution = new HashMap<>();
         List<Object[]> results = userInvestmentRepo.countInvestmentsByCapSizeForUser(userId);
@@ -176,32 +147,53 @@ public class ChartServiceImpl implements ChartService {
         }
         return distribution;
     }
- 
- 
+
+
     public UserInvestment buyInvestment(UserInvestment request) {
-        User user = userRepo.findById(request.getUser().getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        Investment investment = investmentRepo.findById(request.getInvestment().getInvestmentId())
-                .orElseThrow(() -> new RuntimeException("Investment not found"));
+        User user = userRepo.findById(request.getUser().getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
+        Investment investment = investmentRepo.findById(request.getInvestment().getInvestmentId()).orElseThrow(() -> new RuntimeException("Investment not found"));
         if (request.getQuantityBought() <= 0) {
             throw new IllegalStateException("Quantity must be greater than zero");
         }
- 
+
         if (investment.getQuantity() < request.getQuantityBought()) {
             throw new IllegalStateException("Not enough quantity available");
         }
- 
+
+        int quantityToBuy = request.getQuantityBought();
+        double currentPrice = investment.getPrice();
+
         investment.setQuantity(investment.getQuantity() - request.getQuantityBought());
         investmentRepo.save(investment);
- 
-        UserInvestment userInvestment = new UserInvestment();
-        userInvestment.setUser(user);
-        userInvestment.setInvestment(investment);
-        userInvestment.setQuantityBought(request.getQuantityBought());
-        userInvestment.setPurchaseDate(LocalDate.now());
-        userInvestment.setPurchasePrice(investment.getPrice());
- 
+
+        Optional<UserInvestment> existingInvestmentOpt = userInvestmentRepo.findByUserAndInvestment(user, investment);
+
+
+        UserInvestment userInvestment;
+        if (existingInvestmentOpt.isPresent()) {
+            userInvestment = existingInvestmentOpt.get();
+
+            int existingQuantity = userInvestment.getQuantityBought();
+            double existingPrice = userInvestment.getPurchasePrice();
+
+            int totalQuantity = existingQuantity + quantityToBuy;
+
+            double weightedPrice = ((existingQuantity * existingPrice) + (quantityToBuy * currentPrice)) / totalQuantity;
+
+
+            userInvestment.setQuantityBought(totalQuantity);
+            userInvestment.setPurchasePrice(weightedPrice);
+            userInvestment.setPurchaseDate(LocalDate.now());
+        } else {
+            userInvestment = new UserInvestment();
+            userInvestment.setUser(user);
+            userInvestment.setInvestment(investment);
+            userInvestment.setQuantityBought(quantityToBuy);
+            userInvestment.setPurchaseDate(LocalDate.now());
+            userInvestment.setPurchasePrice(currentPrice);
+        }
+
         return userInvestmentRepo.save(userInvestment);
     }
- 
+
 }

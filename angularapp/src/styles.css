@@ -19,7 +19,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 1rem;
   font-size: 16px;
@@ -85,11 +85,24 @@ body {
 
 header {
   position: sticky;
-  top: 0;
+  top: 1rem;
   z-index: 50;
-  background-color: rgba(14, 18, 24, 0.436);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #2a3040;
+  width: 90%;
+  margin: auto;
+  border-radius: 10px;
+  backdrop-filter: blur(30px);
+  background-color: #f5f5f52e;
+  box-shadow: 0px 0px 10px rgba(227, 228, 237, 0.37);
+  border: 2px solid rgba(255, 255, 255, 0.18);
+}
+
+.overlay {
+  position: sticky;
+  top: 0;
+  background-color: black;
+  width: 100%;
+  height: 1rem;
+  z-index: 51;
 }
 
 header .container {
@@ -101,6 +114,7 @@ header .container {
 }
 
 header .logo {
+  cursor: pointer;
   font-size: 2rem;
   font-weight: 700;
 }
@@ -130,7 +144,7 @@ nav a:hover {
   cursor: pointer;
   font-family: Arial, sans-serif;
   font-weight: 500;
-  
+
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
 }
@@ -139,11 +153,12 @@ nav a:hover {
 .login {
   clip-path: polygon(0 0, 95% 0, 75% 100%, 0% 100%);
 }
+
 .signup {
   clip-path: polygon(25% 0, 100% 0, 100% 100%, 5% 100%);
 }
 
-.dashboard-container{
+.dashboard-container {
   max-width: 100%;
   padding: 1rem 2rem;
 }
@@ -156,15 +171,12 @@ nav a:hover {
 }
 
 .summary-card {
-  padding: 1.5rem;
   border-radius: 1rem;
-  color: white;
+  color: rgb(216, 216, 216);
   text-align: center;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -185,11 +197,51 @@ nav a:hover {
   background: linear-gradient(135deg, #d500f9, #00bce6);
 }
 
+.success-hover {
+  position: fixed;
+  top: 8rem;
+  right: 1rem;
+  background-color: #28a74697;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  z-index: 1000;
+  animation: fadeOut 0.5s ease-in-out 4.5s forwards;
+  border-left: 3px solid #28a746;
+}
+
+.error-hover {
+  position: fixed;
+  top: 8rem;
+  right: 1rem;
+  background-color: #ff52527c;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  z-index: 1000;
+  animation: fadeOut 0.5s ease-in-out 4.5s forwards;
+  border-left: 3px solid #ff5252;
+}
+
+/* Fade out animation */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+    visibility: hidden;
+  }
+}
+
 .summary-header {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
   color: #e0e0e0;
+
 }
 
 .summary-body h5 {
@@ -227,6 +279,7 @@ nav a:hover {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  text-align: center;
 }
 
 .user-summary-table {
@@ -277,7 +330,8 @@ button {
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
-.download{
+
+.download {
   display: flex;
   justify-content: flex-end;
 }
@@ -288,6 +342,7 @@ button:hover {
 
 
 @media (max-width: 1024px) {
+
   .dashboard-summary,
   .dashboard-charts {
     grid-template-columns: 1fr;

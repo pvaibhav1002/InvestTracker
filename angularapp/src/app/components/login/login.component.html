@@ -1,6 +1,9 @@
 <body>
-
   <div class="app-container">
+    <div *ngIf="errorMessage" class="error-hover">
+      {{ errorMessage }}
+    </div>
+
     <form #loginForm="ngForm" (ngSubmit)="login()" class="form-container">
       <h2>Log In</h2>
 

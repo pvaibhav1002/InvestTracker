@@ -1,25 +1,19 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #ffffff;
-    background-color: #121212;
+    padding: 5rem 0;
+    /* background-color: #121212; */
 }
 
 .app-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
 }
 
 .form-container {
-    background-color: #bebebe2f;    
-    border: 1px solid white;
+    background-color: #b2b2b22f;    
+    border: 2px solid rgb(91, 90, 90);
     border-radius: 8px;
     padding: 30px;
     width: 100%;
@@ -57,12 +51,16 @@ input,
 select {
     width: 100%;
     padding: 15px;
-    border: 1px solid #333333;
+    border: 1px solid #a6a6a6;
     border-radius: 6px;
-    background-color: #232323;
+    background-color: #171717;
     color: #ffffff;
     font-size: 16px;
     transition: all 0.3s;
+}
+
+input::placeholder{
+    color: #b9b9b9;
 }
 
 input:focus,
@@ -149,26 +147,6 @@ select.error {
     text-decoration: underline;
 }
 
-.success-message,
-.error-message {
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    animation: fadeIn 0.5s;
-}
-
-.success-message {
-    background-color: rgba(76, 175, 80, 0.1);
-    color: #4caf50;
-    border-left: 3px solid #4caf50;
-}
-
-.error-message {
-    background-color: rgba(255, 82, 82, 0.1);
-    color: #ff5252;
-    border-left: 3px solid #ff5252;
-}
 
 .otp-container {
     display: flex;

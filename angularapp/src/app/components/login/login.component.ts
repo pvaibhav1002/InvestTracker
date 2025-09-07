@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/login.model';
@@ -11,19 +11,30 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
 
-  loginForm: NgForm;
+  @ViewChild('loginForm') loginForm!: NgForm;
   loginInfo: Login = { email: '', password: '' };
   errorMessage = '';
 
   constructor(private readonly authService: AuthService, private readonly router: Router) { }
 
   login() {
-    this.authService.login(this.loginInfo).subscribe(res => {
-      if (!res) {
-        this.errorMessage = "Invalid credentials or role mismatch.";
-        return;
-      }
-      this.router.navigate(['/']);
+    if (this.loginForm.invalid) {
+      Object.values(this.loginForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
+      return;
+    }
+    this.authService.login(this.loginInfo).subscribe({
+      next: (res) => {
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        this.errorMessage = "Invalid credentials.";
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 5000);
+      },
+
     });
   }
 }
