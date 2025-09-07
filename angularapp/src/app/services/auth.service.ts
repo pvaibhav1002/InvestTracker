@@ -14,7 +14,7 @@ export const TOKEN = 'token';
 })
 export class AuthService {
  
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
  
   register(user: User): Observable<User> {
     return this.http.post<User>(`${APP_URL}/register`, user);
@@ -24,7 +24,6 @@ export class AuthService {
     return this.http.post<any>(`${APP_URL}/login`, login).pipe(
       map(
         data => {
-          // console.log(data);
           localStorage.setItem(TOKEN, `Bearer ${data.token}`);
           return data;
         }
@@ -45,7 +44,7 @@ export class AuthService {
     return tokenWithBearer ? tokenWithBearer.replace('Bearer ', '') : null;
   }
  
-  getDecodedToken(): any | null {
+  getDecodedToken(): any {
     const token = this.getAuthenticatedToken();
     if (!token) return null;
  
@@ -62,15 +61,19 @@ export class AuthService {
   }
  
   getAuthenticatedUserId(): number | null {
-    return this.getDecodedToken()?.userId || null;
+    return this.getDecodedToken()?.userId ?? null;
   }
  
   getAuthenticatedUsername(): string | null {
-    return this.getDecodedToken()?.username || null;
+    return this.getDecodedToken()?.username ?? null;
   }
  
   getAuthenticatedUserRole(): string | null {
-    return this.getDecodedToken()?.role || null;
+    return this.getDecodedToken()?.role ?? null;
+  }
+  
+  getAuthenticatedUserEmail(): string | null {
+    return this.getDecodedToken()?.sub ?? null;
   }
  
   isTokenExpired(): boolean {
@@ -81,7 +84,7 @@ export class AuthService {
  
   isLoggedin(): boolean {
     let username = this.getAuthenticatedUsername();
-    return !(username == null);
+    return username != null;
   }
  
  

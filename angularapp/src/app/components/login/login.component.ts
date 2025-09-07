@@ -9,13 +9,13 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   loginForm: NgForm;
   loginInfo: Login = { email: '', password: '' };
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private readonly authService: AuthService, private readonly router: Router) { }
 
   login() {
     this.authService.login(this.loginInfo).subscribe(res => {
@@ -23,18 +23,7 @@ export class LoginComponent implements OnInit {
         this.errorMessage = "Invalid credentials or role mismatch.";
         return;
       }
-      let role = this.authService.getAuthenticatedUserRole();
-      console.log(role)
-      if (role === 'Admin') {
-        this.router.navigate(['/']);
-      } else if (role === 'User') {
-        this.router.navigate(['/']);
-      }
-
+      this.router.navigate(['/']);
     });
   }
-
-  ngOnInit(): void {
-  }
-
 }

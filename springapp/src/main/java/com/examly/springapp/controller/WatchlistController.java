@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.examly.springapp.model.Investment;
 import com.examly.springapp.model.Watchlist;
 import com.examly.springapp.service.WatchlistService;
 
@@ -23,6 +22,7 @@ public class WatchlistController {
     public WatchlistController(WatchlistService watchlistService) {
         this.watchlistService = watchlistService;
     }
+
     @PostMapping()
     public ResponseEntity<Watchlist> addToWatchlist(@RequestBody Watchlist watchlist) {
         Watchlist newWatchlist = watchlistService.addToWatchlist(watchlist);
@@ -31,6 +31,7 @@ public class WatchlistController {
         }
         return ResponseEntity.status(201).body(newWatchlist);
     }
+
     @GetMapping("/{userId}")
     public ResponseEntity<List<Watchlist>> getWatchlist(@PathVariable Long userId) {
         List<Watchlist> watchlist = watchlistService.getUserWatchlist(userId);
@@ -39,13 +40,12 @@ public class WatchlistController {
         }
         return ResponseEntity.status(200).body(watchlist);
     }
+
     @DeleteMapping("/{watchlistId}")
     public ResponseEntity<Boolean> deleteWatchlistById(@PathVariable Long watchlistId) {
         if (!watchlistService.deleteWatchlistById(watchlistId)) {
             return ResponseEntity.status(204).body(false);
         }
-        
-        System.out.println("Hello");
         return ResponseEntity.status(200).body(true);
     }
 }

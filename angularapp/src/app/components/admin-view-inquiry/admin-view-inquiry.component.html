@@ -57,7 +57,7 @@
 
   <!-- Modal for Admin Response -->
   <div class="modal" *ngIf="selectedInquiry">
-    <div class="modal-overlay" (click)="cancel()"></div>
+    <div class="modal-overlay" onkeypress="" (click)="cancel()"></div>
     <div class="modal-content">
       <h4>Inquiry Details:</h4>
       <p>Reason of Interest: {{ selectedInquiry.reasonOfInterest }}</p>

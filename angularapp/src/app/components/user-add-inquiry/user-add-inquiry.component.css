@@ -159,12 +159,6 @@ body {
   box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.3);
 }
 
-.error-message {
-  margin-top: 0.5rem;
-  color: #f56565;
-  font-size: 0.75rem;
-}
-
 .error-message small {
   display: block;
 }

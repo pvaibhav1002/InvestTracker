@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InvestmentService {
-  constructor(private httpClient: HttpClient) { }
+  constructor(private readonly httpClient: HttpClient) { }
  
   getAllInvestments(): Observable<Investment[]> {
     return this.httpClient.get<Investment[]>(`${APP_URL}/investments`);
@@ -31,7 +31,7 @@ export class InvestmentService {
   }
 
   buyInvestment(userInvestment:any){
-    return this.httpClient.post<any>(`${APP_URL}/api/user/buy`,userInvestment);
+    return this.httpClient.post<any>(`${APP_URL}/user/buy`,userInvestment);
   }
 
 }

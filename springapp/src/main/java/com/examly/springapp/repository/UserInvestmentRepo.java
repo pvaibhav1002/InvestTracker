@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import com.examly.springapp.model.Investment;
 import com.examly.springapp.model.UserInvestment;
 
 @Repository
@@ -29,5 +31,7 @@ public interface UserInvestmentRepo extends JpaRepository<UserInvestment, Long> 
 
     @Query("SELECT ui.investment.capSize, COUNT(ui) FROM UserInvestment ui WHERE ui.user.userId = :userId GROUP BY ui.investment.capSize")
     List<Object[]> countInvestmentsByCapSizeForUser(@Param("userId") Long userId);
+
+    List<UserInvestment> findByInvestment(Investment investment);
 
 }

@@ -9,7 +9,7 @@ import { APP_URL } from 'src/global';
 })
 export class InvestmentInquiryService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private readonly httpClient:HttpClient) { }
 
   addInquiry(inquiry:InvestmentInquiry):Observable<InvestmentInquiry>{
     return this.httpClient.post<InvestmentInquiry>(`${APP_URL}/inquiries`,inquiry);

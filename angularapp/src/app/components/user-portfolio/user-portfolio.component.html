@@ -23,7 +23,7 @@
     <div class="summary-card bg-info">
       <div class="summary-header">{{ portfolioData.profitOrLossLabel }}</div>
       <div class="summary-body">
-        <h5>₹{{ portfolioData.profitOrLossAmount | number:'1.2-2' }}</h5>
+        <h5 [ngStyle]="{'color':portfolioData.profitOrLossAmount<0?'#f74848':'green'}">₹{{ portfolioData.profitOrLossAmount | number:'1.2-2' }}</h5>
       </div>
     </div>
   </div>
@@ -74,7 +74,7 @@
           <td>{{ investment.type }}</td>
           <td>{{ investment.purchasePrice*investment.quantityBought | number:'1.2-2' }}</td>
           <td>{{ investment.currentPrice*investment.quantityBought | number:'1.2-2' }}</td>
-          <td [ngStyle]="{'color':((investment.currentPrice*investment.quantityBought)-(investment.purchasePrice*investment.quantityBought))>0?'red':'green'}">{{
+          <td [ngStyle]="{'color':investment.currentPrice<investment.purchasePrice?'red':'green'}">{{
             (investment.currentPrice*investment.quantityBought)-(investment.purchasePrice*investment.quantityBought) |
             number:'1.2-2' }}</td>
           <td> {{ investment.currentPrice > investment.purchasePrice ? 'Profit' :investment.currentPrice < investment.purchasePrice ? 'Loss' : 'No Change' }} </td>

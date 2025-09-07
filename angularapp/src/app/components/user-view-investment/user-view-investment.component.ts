@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Investment } from 'src/app/models/investment.model';
 import { InvestmentService } from 'src/app/services/investment.service';
-import { UserWatchlistComponent } from '../user-watchlist/user-watchlist.component';
 import { UserWatchlistService } from 'src/app/services/user-watchlist.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -18,15 +17,15 @@ export class UserViewInvestmentComponent implements OnInit {
   types = ['All', 'Equity', 'Mutual Fund', 'ETF', 'Bond', 'Real Estate'];
   searchText: string = '';
   showQuantityModal: boolean = false;
-  
-  
+
+
   showModal: boolean = false;
   selectedInvestment: Investment | null = null;
   buyQuantity: number;
   buyError: string = '';
   buySuccess: string = '';
-  constructor(private investmentService: InvestmentService, private userwatchlistservice: UserWatchlistService, private authservice: AuthService) { }
-  
+  constructor(private readonly investmentService: InvestmentService, private readonly userwatchlistservice: UserWatchlistService, private readonly authservice: AuthService) { }
+
   ngOnInit(): void {
     this.getAllInvestments();
   }
@@ -68,7 +67,7 @@ export class UserViewInvestmentComponent implements OnInit {
         "userId": this.authservice.getAuthenticatedUserId()
       },
       "investment": {
-        "investmentId":this.selectedInvestment.investmentId
+        "investmentId": this.selectedInvestment.investmentId
       }
     };
 
@@ -87,8 +86,17 @@ export class UserViewInvestmentComponent implements OnInit {
   }
 
   addToWatchlist(investmentId: number) {
-    this.userwatchlistservice.addToWatchlist(investmentId, this.authservice.getAuthenticatedUserId()).subscribe((data) => {
-      console.log('Investment Added to Watchlist!');
+    this.userwatchlistservice.addToWatchlist(investmentId, this.authservice.getAuthenticatedUserId()).subscribe({
+      next: () => {
+        this.buySuccess = 'Investment added to watchlist!';
+        this.buyError = '';
+        setTimeout(() => this.buySuccess = '', 1500);
+      },
+      error: (err) => {
+        this.buyError = 'Investment already in watchlist.';
+        this.buySuccess = '';
+        setTimeout(() => this.buyError = '', 1500);
+      }
     })
   }
 

@@ -9,9 +9,6 @@ export class PdfExportService {
   date: Date = new Date()
   constructor() { }
   async exportUserPortfolio(portfolioData: any, username: string) {
-    const { jsPDF } = await import('jspdf');
-    await import('jspdf-autotable');
-
     const doc = new jsPDF({
       unit: 'pt',
       format: 'a4',
@@ -49,9 +46,9 @@ export class PdfExportService {
         inv.capSize || '',
         inv.sector || '',
         inv.type || '',
-        ((inv.purchasePrice * inv.quantityBought) || 0).toFixed(2),
-        ((inv.currentPrice * inv.quantityBought) || 0).toFixed(2),
-        (((inv.currentPrice * inv.quantityBought) || 0) - ((inv.purchasePrice * inv.quantityBought) || 0)).toFixed(2),
+        ((inv.purchasePrice * inv.quantityBought) ?? 0).toFixed(2),
+        ((inv.currentPrice * inv.quantityBought) ?? 0).toFixed(2),
+        (((inv.currentPrice * inv.quantityBought) ?? 0) - ((inv.purchasePrice * inv.quantityBought) ?? 0)).toFixed(2),
       ]),
       startY: y,
       headStyles: { fillColor: [0, 123, 255] }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Investment } from 'src/app/models/investment.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserWatchlistService } from 'src/app/services/user-watchlist.service';
 
@@ -16,7 +15,7 @@ export class UserWatchlistComponent implements OnInit {
   types = ['All', 'Equity', 'Mutual Fund', 'ETF', 'Bond', 'Real Estate'];
   searchText: string = '';
   successMessage: string = "";
-  constructor(private userwatchlistService: UserWatchlistService, private authService: AuthService) { }
+  constructor(private readonly userwatchlistService: UserWatchlistService, private readonly authService: AuthService) { }
 
   ngOnInit(): void {
     this.loadWatchlist();
@@ -33,6 +32,8 @@ export class UserWatchlistComponent implements OnInit {
   deleteWatchlist(watchlistid: number) {
     this.userwatchlistService.deleteFromWatchlist(watchlistid).subscribe(() => {
       this.successMessage = "Deleted Successfully"
+      this.originalWatchlist = this.originalWatchlist.filter(watch => watch.id != watchlistid);
+      this.watchlists = this.originalWatchlist;
     })
   }
 
@@ -41,7 +42,7 @@ export class UserWatchlistComponent implements OnInit {
     this.watchlists = this.watchlists.filter((invest) => {
       let a = invest.name.toLowerCase().includes(this.searchText.toLowerCase());
       let b = invest.type.toLowerCase().includes(this.searchText.toLowerCase());
-      return a || b;
+      return (a ?? '') || (b ?? '');
     })
 
   }
