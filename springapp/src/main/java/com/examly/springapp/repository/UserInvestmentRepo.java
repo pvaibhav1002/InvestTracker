@@ -1,6 +1,9 @@
 package com.examly.springapp.repository;
 
 import java.util.List;
+import java.util.Optional;
+
+import com.examly.springapp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +14,6 @@ import com.examly.springapp.model.UserInvestment;
 
 @Repository
 public interface UserInvestmentRepo extends JpaRepository<UserInvestment, Long> {
-
     @Query("SELECT ui FROM UserInvestment ui WHERE ui.user.userId = :userId")
     List<UserInvestment> findByUserUserId(@Param("userId") Long userId);
 
@@ -35,4 +37,5 @@ public interface UserInvestmentRepo extends JpaRepository<UserInvestment, Long> 
 
     List<UserInvestment> findByInvestment(Investment investment);
 
+    Optional<UserInvestment> findByUserAndInvestment(User user, Investment investment);
 }

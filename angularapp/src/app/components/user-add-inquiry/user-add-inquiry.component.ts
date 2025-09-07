@@ -56,20 +56,11 @@ export class UserAddInquiryComponent implements OnInit {
   onSubmit(): void {
     this.investmentInquiryService.addInquiry(this.newInvest).subscribe({
       next: () => {
-        this.sendInquiryConfirmation(); 
         this.showPopup = true;
       },
       error: (err) => {
         console.error('Error submitting inquiry:', err);
       }
-    });
-  }
-
-
-  sendInquiryConfirmation(): void {
-    this.emailService.sendInquiryConfirmation(this.email, this.name).subscribe({
-      next: (res) => this.responseMessage = res,
-      error: () => this.responseMessage = 'Failed to send confirmation email'
     });
   }
 

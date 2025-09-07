@@ -9,42 +9,48 @@
   </div>
   <div class="dashboard-summary">
     <div class="summary-card bg-primary">
-      <div class="summary-header">Total Invested</div>
-      <div class="summary-body">
-        <h5>₹{{ portfolioData.totalInvested | number:'1.2-2' }}</h5>
+        <div class="overlay-admin">
+        <div class="summary-header">Total Invested</div>
+        <div class="summary-body">
+          <h5>₹{{ portfolioData.totalInvested | number:'1.2-2' }}</h5>
+        </div>
       </div>
     </div>
     <div class="summary-card bg-success">
-      <div class="summary-header">Total Invested</div>
-      <div class="summary-body">
-        <h5>₹{{ portfolioData.currentValue | number:'1.2-2' }}</h5>
+      <div class="overlay-admin">
+        <div class="summary-header">Total Invested</div>
+        <div class="summary-body">
+          <h5>₹{{ portfolioData.currentValue | number:'1.2-2' }}</h5>
+        </div>
       </div>
     </div>
     <div class="summary-card bg-info">
-      <div class="summary-header">{{ portfolioData.profitOrLossLabel }}</div>
-      <div class="summary-body">
-        <h5 [ngStyle]="{'color':portfolioData.profitOrLossAmount<0?'#f74848':'green'}">₹{{ portfolioData.profitOrLossAmount | number:'1.2-2' }}</h5>
+      <div class="overlay-admin">
+        <div class="summary-header">{{ portfolioData.profitOrLossLabel }}</div>
+        <div class="summary-body">
+          <h5>₹{{ portfolioData.profitOrLossAmount | number:'1.2-2' }}</h5>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="dashboard-charts">
     <div class="chart-card">
-      <h3>Doughnut — Distribution by Type</h3>
+      <h3>Distribution by Type</h3>
       <div class="chart-body">
         <canvas baseChart [data]="portfolioData.TypeData" [labels]="portfolioData.TypeLabels"
           [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
       </div>
     </div>
     <div class="chart-card">
-      <h3>Doughnut — Distribution by Sector</h3>
+      <h3>Distribution by Sector</h3>
       <div class="chart-body">
         <canvas baseChart [data]="portfolioData.SectorData" [labels]="portfolioData.SectorLabels"
           [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>
       </div>
     </div>
     <div class="chart-card">
-      <h3>Doughnut — Distribution by Cap Size</h3>
+      <h3>Distribution by Cap Size</h3>
       <div class="chart-body">
         <canvas baseChart [data]="portfolioData.CapSizeData" [labels]="portfolioData.CapSizeLabels"
           [chartType]="doughnutChartType" [colors]="doughnutChartColors"></canvas>

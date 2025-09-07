@@ -72,14 +72,16 @@ export class AdminViewFeedbackComponent implements OnInit {
   searchByText: string = '';
 
   searchBasedOnText() {
-    this.filterFeedbacks = this.feedbacks;
-    this.filterFeedbacks = this.feedbacks.filter((feed) => {
-      let a = (feed.user.username?.toLowerCase().includes(this.searchByText.toLowerCase()) ?? false) ||
-        (feed.investment?.name?.toLowerCase().includes(this.searchByText.toLowerCase()) ?? false) ||
-        (feed.category?.toLowerCase().includes(this.searchByText.toLowerCase()) ?? false) ||
-        (feed.feedbackText?.toLowerCase().includes(this.searchByText.toLowerCase()) ?? false);
-      return a;
+    const searchText = this.searchByText.toLowerCase();
+    this.filterFeedbacks = this.feedbacks.filter(feed => {
+      const usernameMatch = feed.user.username?.toLowerCase().includes(searchText) ?? false;
+      const investmentNameMatch = feed.investment?.name?.toLowerCase().includes(searchText) ?? false;
+      const categoryMatch = feed.category?.toLowerCase().includes(searchText) ?? false;
+      const feedbackTextMatch = feed.feedbackText?.toLowerCase().includes(searchText) ?? false;
+
+      return usernameMatch || investmentNameMatch || categoryMatch || feedbackTextMatch;
     });
   }
+
 }
 

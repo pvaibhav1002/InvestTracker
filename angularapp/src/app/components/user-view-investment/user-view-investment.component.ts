@@ -3,6 +3,7 @@ import { Investment } from 'src/app/models/investment.model';
 import { InvestmentService } from 'src/app/services/investment.service';
 import { UserWatchlistService } from 'src/app/services/user-watchlist.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-view-investment',
@@ -21,9 +22,10 @@ export class UserViewInvestmentComponent implements OnInit {
 
   showModal: boolean = false;
   selectedInvestment: Investment | null = null;
-  buyQuantity: number;
-  buyError: string = '';
-  buySuccess: string = '';
+  buyQuantity: number=0;
+  errorMessage: string = '';
+  errorTimeout: any;
+  successMessage: string = '';
   constructor(private readonly investmentService: InvestmentService, private readonly userwatchlistservice: UserWatchlistService, private readonly authservice: AuthService) { }
 
   ngOnInit(): void {
@@ -41,21 +43,36 @@ export class UserViewInvestmentComponent implements OnInit {
 
   openBuyModal(investment: Investment) {
     this.selectedInvestment = investment;
-    this.buyError = '';
-    this.buySuccess = '';
+    this.errorMessage = '';
+    this.successMessage = '';
     this.showModal = true;
   }
 
   closeModal() {
     this.showModal = false;
     this.selectedInvestment = null;
-    this.buyError = '';
-    this.buySuccess = '';
+    this.errorMessage = '';
+    this.successMessage = '';
   }
 
   confirmBuy() {
     if (!this.selectedInvestment || this.buyQuantity <= 0) {
-      this.buyError = 'Please enter a valid quantity.';
+      this.errorMessage = 'Please enter a valid quantity.';
+      this.successMessage = '';
+      clearTimeout(this.errorTimeout);
+      this.errorTimeout = setTimeout(() => {
+        this.errorMessage = '';
+      }, 5000);
+      return;
+    }
+
+    if (this.selectedInvestment.quantity < this.buyQuantity) {
+      this.errorMessage = 'Buy quantity cannot exceed available quantity.';
+      this.successMessage = '';
+      clearTimeout(this.errorTimeout);
+      this.errorTimeout = setTimeout(() => {
+        this.errorMessage = '';
+      }, 5000);
       return;
     }
 
@@ -74,13 +91,13 @@ export class UserViewInvestmentComponent implements OnInit {
 
     this.investmentService.buyInvestment(userInvestment).subscribe({
       next: () => {
-        this.buySuccess = 'Investment purchased successfully!';
-        this.buyError = '';
+        this.successMessage = 'Investment purchased successfully!';
+        this.errorMessage = '';
         setTimeout(() => this.closeModal(), 1500);
       },
       error: () => {
-        this.buyError = 'Failed to purchase investment.';
-        this.buySuccess = '';
+        this.errorMessage = 'Failed to purchase investment.';
+        this.successMessage = '';
       }
     });
   }
@@ -88,14 +105,14 @@ export class UserViewInvestmentComponent implements OnInit {
   addToWatchlist(investmentId: number) {
     this.userwatchlistservice.addToWatchlist(investmentId, this.authservice.getAuthenticatedUserId()).subscribe({
       next: () => {
-        this.buySuccess = 'Investment added to watchlist!';
-        this.buyError = '';
-        setTimeout(() => this.buySuccess = '', 1500);
+        this.successMessage = 'Investment added to watchlist!';
+        this.errorMessage = '';
+        setTimeout(() => this.successMessage = '', 5000);
       },
       error: (err) => {
-        this.buyError = 'Investment already in watchlist.';
-        this.buySuccess = '';
-        setTimeout(() => this.buyError = '', 1500);
+        this.errorMessage = 'Investment already in watchlist.';
+        this.successMessage = '';
+        setTimeout(() => this.errorMessage = '', 5000);
       }
     })
   }

@@ -33,7 +33,7 @@ export class PdfExportService {
     } else {
       doc.setTextColor(220, 53, 69); // bootstrap red
     }
-    doc.text(`Profit/Loss: Rs. ${profitOrLoss}`, margin + 400, y);
+    doc.text(`Profit/Loss: Rs. ${profitOrLoss}`, margin + 370, y);
 
     y += 30;
     doc.setTextColor(0, 0, 0); // reset to black
@@ -46,9 +46,12 @@ export class PdfExportService {
         inv.capSize || '',
         inv.sector || '',
         inv.type || '',
-        ((inv.purchasePrice * inv.quantityBought) ?? 0).toFixed(2),
-        ((inv.currentPrice * inv.quantityBought) ?? 0).toFixed(2),
-        (((inv.currentPrice * inv.quantityBought) ?? 0) - ((inv.purchasePrice * inv.quantityBought) ?? 0)).toFixed(2),
+        ((inv.purchasePrice ?? 0) * (inv.quantityBought ?? 0)).toFixed(2),
+        ((inv.currentPrice ?? 0) * (inv.quantityBought ?? 0)).toFixed(2),
+        (
+          ((inv.currentPrice ?? 0) * (inv.quantityBought ?? 0)) -
+          ((inv.purchasePrice ?? 0) * (inv.quantityBought ?? 0))
+        ).toFixed(2)
       ]),
       startY: y,
       headStyles: { fillColor: [0, 123, 255] }
