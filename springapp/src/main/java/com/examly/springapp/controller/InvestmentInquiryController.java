@@ -23,10 +23,11 @@ public class InvestmentInquiryController {
     public InvestmentInquiryController(InvestmentInquiryService investmentInquiryService) {
         this.investmentInquiryService = investmentInquiryService;
     }
-
+    
     @PostMapping
     @PreAuthorize("hasRole('User')")
     public ResponseEntity<InvestmentInquiry> addInvestmentInquiry(@RequestBody InvestmentInquiry investmentinquiry) {
+        System.out.println("heregdsfaytdfsuatdfatsd");
         InvestmentInquiry newInvest = investmentInquiryService.createInquiry(investmentinquiry);
         if (newInvest == null) {
             return ResponseEntity.status(403).build();

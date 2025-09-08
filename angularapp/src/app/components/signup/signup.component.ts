@@ -36,11 +36,14 @@ export class SignupComponent implements OnInit {
 
   register(form: NgForm) {
     if (form.invalid) {
-      this.successMessage="";
-      this.errorMessage = "All fields are required.";
+      Object.values(form.controls).forEach(control => {
+        control.markAsTouched();
+        this.successMessage="";
+        this.errorMessage = "All fields are required.";
+      });
       return;
     }
-
+    
     const passwordRegex =/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     if (!passwordRegex.test(this.user.password)) {

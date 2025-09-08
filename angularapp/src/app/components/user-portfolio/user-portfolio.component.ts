@@ -27,12 +27,18 @@ export class UserPortfolioComponent implements OnInit {
   doughnutChartColors: Array<any> = [
     {
       backgroundColor: [
-        '#00bce6',
-        '#2962ff',
         '#d500f9',
-        '#4dd0e1',
         '#7c4dff',
-        '#1a237e'
+        '#00bce6',
+        '#328e9a',
+        '#304ffe',
+        '#1f2ba9',
+        '#001756',
+        '#6200ea',
+        '#8e24aa',
+        '#b388ff',
+        '#31009c',
+        '#798dff'
       ],
       borderColor: '#0e1218',
       borderWidth: 2,

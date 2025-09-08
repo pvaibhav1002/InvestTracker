@@ -1,4 +1,5 @@
 package com.examly.springapp.service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,13 +18,15 @@ public class InvestmentInquiryServiceImpl implements InvestmentInquiryService {
     InvestmentInquiryRepo investmentInquiryRepo;
     InvestmentRepo investmentRepo;
     UserRepo userRepo;
+    Emailservice emailservice;
 
     @Autowired
     public InvestmentInquiryServiceImpl(InvestmentInquiryRepo investmentInquiryRepo, UserRepo userRepo,
-            InvestmentRepo investmentRepo) {
+            InvestmentRepo investmentRepo,Emailservice emailservice) {
         this.investmentInquiryRepo = investmentInquiryRepo;
         this.userRepo = userRepo;
         this.investmentRepo = investmentRepo;
+        this.emailservice= emailservice;
     }
 
     @Override
@@ -107,6 +110,7 @@ public class InvestmentInquiryServiceImpl implements InvestmentInquiryService {
             investInq.setReasonOfInterest(updatedInvestmentInquiry.getReasonOfInterest());
             investInq.setRiskTolerance(updatedInvestmentInquiry.getRiskTolerance());
             investInq.setExpectedReturn(updatedInvestmentInquiry.getExpectedReturn());
+            emailservice.sendInquiryResponse(updatedInvestmentInquiry.getUser().getEmail(), updatedInvestmentInquiry.getUser().getUsername(), updatedInvestmentInquiry.getAdminResponse());
             return investmentInquiryRepo.save(investInq);
         }
         return null;
