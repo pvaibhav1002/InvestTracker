@@ -176,3 +176,12 @@ select.error {
   align-items: center;
   height: 100%;
 }
+
+#otpVerification{
+  min-width: 540px;
+}
+
+#otpVerification button{
+  width: 45%;
+  margin: 0 0.5rem  ;
+}

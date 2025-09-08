@@ -1,9 +1,9 @@
 package com.examly.springapp.service;
 
 import java.security.SecureRandom;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -14,22 +14,14 @@ import com.examly.springapp.repository.UserRepo;
 public class EmailServiceImpl implements Emailservice {
     private JavaMailSender emailSender;
     private UserRepo userRepo;
-    private String from = "do.not.reply.investtrack@gmail.com";
+     @Value("${spring.mail.username}")
+    private String from ;
     private static final SecureRandom RANDOM = new SecureRandom();
 
     @Autowired
     public EmailServiceImpl(JavaMailSender emailSender, UserRepo userRepo) {
         this.emailSender = emailSender;
         this.userRepo = userRepo;
-    }
-
-    public void sendSimpleMessage(String to, String subject, String text) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from);
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(text);
-        emailSender.send(message);
     }
 
     public String sendSimpleOtp(String to) {
@@ -58,28 +50,21 @@ public class EmailServiceImpl implements Emailservice {
         }
         return false;
     }
-    public void sendInquiryConfirmation(String to, String userName) {
-        String subject = "Inquiry Submitted Successfully";
-        String text = "Dear " + userName
-                + ",\n\nThank you for your inquiry. We have received your request and will get back to you shortly.\n\nBest regards,\nInvestTrack Team";
+
+    public void sendInquiryResponse(String to, String userName, String responseText) {
+        String subject = "Admin Response to Inquiry";
+        String text = "Dear " + userName + ",\n\n"
+                + "Thank you for reaching out to us with your inquiry.\n\n"
+                + "Admin Response:\n" + responseText + "\n\n"
+                + "If you have any further questions or need additional assistance, please feel free to contact us.\n\n"
+                + "Best regards,\n"
+                + "Admin Team";
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);
         emailSender.send(message);
-    }
-
-    public void sendPriceUpdateToAllUsers(String updatedPriceInfo) {
-        List<User> users = userRepo.findAll();
-        String subject = "Important: Price Update Notification";
-        String text = "Dear User,\n\nWe would like to inform you that the price has been updated:\n"
-                + updatedPriceInfo + "\n\nThank you for staying with us.\nInvestTrack Team";
-        for (User user : users) {
-            if (user.getEmail() != null && !user.getEmail().isEmpty()) {
-                sendSimpleMessage(user.getEmail(), subject, text);
-            }
-        }
     }
 
 }

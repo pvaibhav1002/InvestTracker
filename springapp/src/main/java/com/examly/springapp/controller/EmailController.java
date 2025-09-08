@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.examly.springapp.model.EmailRequest;
 import com.examly.springapp.service.Emailservice;
 
 @RestController
@@ -17,13 +16,6 @@ public class EmailController {
     @Autowired
     public EmailController(Emailservice emailService) {
         this.emailService = emailService;
-    }
-
-    @PostMapping("/send")
-    public ResponseEntity<String> sendEmail(@RequestBody EmailRequest emailRequest) {
-        emailService.sendSimpleMessage(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getText());
-        return ResponseEntity.status(200).body("Email sent successfully");
-
     }
 
     @PostMapping("/otp")
@@ -43,13 +35,5 @@ public class EmailController {
         }
         return ResponseEntity.ok(Map.of("status", "Account Activated"));
     }
-
-    @PostMapping("/priceUpdate")
-    public ResponseEntity<String> notifyPriceUpdate(@RequestBody String updatedPriceInfo) {
-        emailService.sendPriceUpdateToAllUsers(updatedPriceInfo);
-        return ResponseEntity.ok("Price update emails sent to all users.");
-    }
-    
-    
 
 }
