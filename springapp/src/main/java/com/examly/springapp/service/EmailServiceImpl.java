@@ -14,8 +14,8 @@ import com.examly.springapp.repository.UserRepo;
 public class EmailServiceImpl implements Emailservice {
     private JavaMailSender emailSender;
     private UserRepo userRepo;
-     @Value("${spring.mail.username}")
-    private String from ;
+    @Value("${spring.mail.username}")
+    private String from;
     private static final SecureRandom RANDOM = new SecureRandom();
 
     @Autowired
