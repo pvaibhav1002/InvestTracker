@@ -21,9 +21,9 @@
         </select>
     </div>
 
-    <div *ngIf="invests.length < 0">You have not submitted any inquiries yet.</div>
+    <div *ngIf="invests.length <= 0" style="text-align: center;margin-top: 10px;">You have not submitted any inquiries yet.</div>
 
-    <table class="table">
+    <table class="table" *ngIf="invests.length > 0">
         <thead>
             <tr>
                 <th>Investment</th>
