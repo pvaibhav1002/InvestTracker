@@ -76,4 +76,4 @@ export class UserWatchlistComponent implements OnInit {
     this.ascPrice = !this.ascPrice;
   }
 
-}
+} 

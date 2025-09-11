@@ -91,6 +91,7 @@ export class UserViewInvestmentComponent implements OnInit {
 
     this.investmentService.buyInvestment(userInvestment).subscribe({
       next: () => {
+        this.selectedInvestment.quantity=this.selectedInvestment.quantity-this.buyQuantity;
         this.successMessage = 'Investment purchased successfully!';
         this.errorMessage = '';
         setTimeout(() => this.closeModal(), 1500);

@@ -11,6 +11,4 @@ public interface FeedbackService {
     Feedback deleteFeedback(Long feedbackId);
     List<Feedback>getFeedbacksByUserId(Long userId);
     List<Feedback> getFeedbacksByInvestmentId(Long investmentId);
-
-
 }

@@ -79,7 +79,7 @@
         <div *ngIf="formSubmitted" id="otpVerification">
             <div class="form-container">
                 <h2>Verify OTP</h2>
-                <form #otpForm="ngForm" (ngSubmit)="verifyOtp(otpForm)">
+                <form #otpForm="ngForm" (ngSubmit)="verifyOtp()">
                     <div class="form-group">
                         <input type="text" name="submittedOtp" [(ngModel)]="submittedOtp" placeholder="Enter OTP"
                             #otpField="ngModel" required />
@@ -87,7 +87,7 @@
                             <small *ngIf="otpField.errors?.required">OTP is required.</small>
                         </div>
                     </div>
-                    <div class="button-container">
+                    <div class="btn-container">
                         <button type="submit" class="btn">Verify</button>
                         <button type="button" (click)="resendOTP()" class="btn btn-secondary">Resend OTP</button>
                         <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>

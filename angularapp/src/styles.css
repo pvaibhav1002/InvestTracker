@@ -114,6 +114,7 @@ header .container {
 }
 
 header .logo {
+  cursor: pointer;
   font-size: 2rem;
   font-weight: 700;
 }

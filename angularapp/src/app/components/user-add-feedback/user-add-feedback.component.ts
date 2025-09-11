@@ -73,23 +73,9 @@ export class UserAddFeedbackComponent implements OnInit {
 
     if (this.feedbackForm.valid) {
       this.fs.sendFeedback(this.feedback).subscribe(() => {
-        this.sendFeedbackConfirmation(); // Send confirmation email
         this.router.navigate(['/user-view-feedback']);
       });
     }
-  }
-
-  sendFeedbackConfirmation(): void {
-    const emailRequest = {
-      to: this.email,
-      subject: 'Feedback Submitted Successfully',
-      text: `Dear ${this.name},\n\nThank you for your feedback. We appreciate your input and will review it shortly.\n\nBest regards,\nInvestTrack Team`
-    };
-
-    this.emailService.sendEmail(emailRequest).subscribe({
-      next: (res) => this.responseMessage = res,
-      error: () => this.responseMessage = 'Failed to send confirmation email'
-    });
   }
 
   cancel(): void {
