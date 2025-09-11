@@ -1,22 +1,18 @@
-<header *ngIf="!isLoggedIn">
-    <div class="container">
+<div class="overlay"></div>
+<header>
+    <div *ngIf="!isLoggedIn" class="container">
         <div class="logo" routerLink="/">
             <img src="/assets/images/logo.png" alt="" srcset="" width="50">
             Invest<span class="gradient-text">Wise</span>
         </div>
         <div class="container-home" *ngIf="!isLoggedIn">
-            <nav class="container">
-                <div class="header-buttons">
-                    <button class="header-btn hover-glow login" routerLink="/login">Log In</button>
-                    <button class="header-btn hover-glow signup" routerLink="/signup">Sign Up</button>
-                </div>
-            </nav>
+            <button class="header-btn hover-glow login" routerLink="/login">Log In</button>
+            <button class="header-btn hover-glow signup" routerLink="/signup">Sign Up</button>
         </div>
     </div>
+    <div *ngIf="isLoggedIn">
+        <app-usernav *ngIf="isUser"></app-usernav>
+        <app-adminnav *ngIf="isAdmin"></app-adminnav>
+    </div>
 </header>
-<div *ngIf="isLoggedIn">
-    <app-usernav *ngIf="isUser"></app-usernav>
-    <app-adminnav *ngIf="isAdmin"></app-adminnav>
-
-</div>
 <router-outlet></router-outlet>

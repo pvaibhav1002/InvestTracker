@@ -27,7 +27,7 @@ public class WatchlistController {
     public ResponseEntity<Watchlist> addToWatchlist(@RequestBody Watchlist watchlist) {
         Watchlist newWatchlist = watchlistService.addToWatchlist(watchlist);
         if (newWatchlist == null) {
-            return ResponseEntity.status(404).build();
+            return ResponseEntity.status(400).build();
         }
         return ResponseEntity.status(201).body(newWatchlist);
     }

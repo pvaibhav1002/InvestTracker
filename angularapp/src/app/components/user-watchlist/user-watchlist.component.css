@@ -1,6 +1,6 @@
 .view-container {
     font-size: 1rem;
-    background-color: #090b0f;
+    background-color: black;
     height: 100vh;
     padding: 1rem 1rem;
   }
@@ -16,17 +16,6 @@
     color: transparent;
   }
   
-  .success-message {
-    background-color: rgba(40, 167, 69, 0.2);
-    color: #28a745;
-    padding: 1rem;
-    margin: 1rem auto;
-    border-radius: 0.5rem;
-    max-width: 600px;
-    text-align: center;
-    font-weight: 500;
-    z-index: 1000;
-  }
   
   label {
     display: block;

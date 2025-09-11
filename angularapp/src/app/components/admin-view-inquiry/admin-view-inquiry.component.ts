@@ -18,7 +18,7 @@ export class AdminViewInquiryComponent implements OnInit {
   selectedInquiryId: number | null = null;
   selectedInquiry: InvestmentInquiry | null = null;
   responseText: string = '';
-  responseSubmitted: boolean = false;
+  responseSubmitted: string = '';
   showResForm: boolean = false;
   filterStatus: string = '';
   filterRisk: string = '';
@@ -26,27 +26,10 @@ export class AdminViewInquiryComponent implements OnInit {
 
 
   constructor(private readonly inquiryService: InvestmentInquiryService) { }
- 
+
 
   ngOnInit(): void {
     this.fetchAllInquiries();
-
-  }
-
-  updateStatus(inquiry: InvestmentInquiry): void {
-
-    this.inquiryService.updateInquiry(inquiry.inquiryId, inquiry).subscribe({
-      next: () => {
-        console.log('Status updated successfully');
-
-      },
-
-      error: (err) => {
-        console.error('Error updating status:', err);
-
-      }
-
-    });
 
   }
 
@@ -82,8 +65,8 @@ export class AdminViewInquiryComponent implements OnInit {
 
   }
 
-  showResponseForm(inquiry:InvestmentInquiry): void {
-    this.selectedInquiry=inquiry;
+  showResponseForm(inquiry: InvestmentInquiry): void {
+    this.selectedInquiry = inquiry;
   }
 
   submitResponse(): void {
@@ -97,17 +80,15 @@ export class AdminViewInquiryComponent implements OnInit {
       this.inquiryService.updateInquiry(inquiry.inquiryId, inquiry).subscribe({
 
         next: () => {
-          this.responseSubmitted = true;
-          this.selectedInquiry=null
+          this.responseSubmitted = 'Response submitted successfully!';
+          this.selectedInquiry = null
           this.responseText = '';
           setTimeout(() => {
-            this.responseSubmitted = false;
-          }, 3000);
-
+            this.responseSubmitted = '';
+          }, 5000);
         },
         error: (err) => {
           console.error('Error updating inquiry:', err);
-
         }
 
       });
@@ -122,7 +103,7 @@ export class AdminViewInquiryComponent implements OnInit {
   }
   sortByDate() {
     const sortedinquries = this.originalInquiries.sort((inquiry1, inquiry2) => inquiry1.inquiryDate.localeCompare(inquiry2.inquiryDate));
-    this.inquiries=sortedinquries;
+    this.inquiries = sortedinquries;
   }
   applyFilters(): void {
     this.inquiries = this.originalInquiries.filter(inquiry => {
@@ -134,7 +115,13 @@ export class AdminViewInquiryComponent implements OnInit {
   }
   deleteInquiry(id: number): void {
 
-    this.inquiryService.deleteInquiry(id).subscribe((data) => { });
+    this.inquiryService.deleteInquiry(id).subscribe((data) => {
+      this.responseSubmitted = 'Inquiry deleted  successfully!';
+      setTimeout(() => {
+        this.responseSubmitted = '';
+      }, 5000);
+      this.inquiries=this.inquiries.filter(inquiry=>inquiry.inquiryId!=id);
+    });
 
   }
 

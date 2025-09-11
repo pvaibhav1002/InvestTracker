@@ -30,8 +30,7 @@ export class AppComponent implements OnInit {
     this.isAdmin = this.authService.isAdmin();
     const currentUrl = this.router.url;
     const publicRoutes = ['/', '/home', '/login', '/signup']
-
-    if (!this.isLoggedIn && this.authService.isTokenExpired()) {
+    if (!this.isLoggedIn || this.authService.isTokenExpired()) {
       localStorage.clear();
       if (!publicRoutes.includes(currentUrl)) {
         this.router.navigate(['/login']);

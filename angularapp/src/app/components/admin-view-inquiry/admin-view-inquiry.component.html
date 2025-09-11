@@ -1,7 +1,8 @@
 <div class="view-container">
   <h1 class="page-title">Admin Inquiry Panel</h1>
-
-
+  <div *ngIf="responseSubmitted" class="success-hover mt-2">
+    {{responseSubmitted}}
+  </div>
   <div class="filter">
     <label for="searchText">Search:</label>
     <input type="text" [(ngModel)]="searchText" class="filter-input" placeholder="Search inquiries..."
@@ -71,9 +72,6 @@
       <div class="modal-buttons">
         <button (click)="submitResponse()" class="action-btn secondary">Submit Response</button>
         <button (click)="cancel()" class="action-btn danger">Cancel</button>
-      </div>
-      <div *ngIf="responseSubmitted" class="success-message mt-2">
-        Response submitted successfully!
       </div>
     </div>
   </div>
